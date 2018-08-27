@@ -7,10 +7,10 @@
  * @var string $content Content
  */
 
-use app\themes\adminlteiframe\assets\php\components\IndexIframeAsset;
+use myzero1\theme\adminlteiframe\assets\php\components\IndexIframeAsset;
 use yii\helpers\Html;
 
-app\themes\adminlteiframe\giimodal\GiiAsset::register($this);
+myzero1\theme\adminlteiframe\giimodal\GiiAsset::register($this);
 
 $bundle = IndexIframeAsset::register($this);
 // var_dump(Yii::$app->user->identity);exit;
@@ -26,7 +26,7 @@ $profile = [
     'profileUrl' => '#',
 ];
 
-$skin = \Yii::$app->assetManager->bundles['app\themes\adminlteiframe\assets\php\components\IndexIframeAsset']->skin;
+$skin = \Yii::$app->assetManager->bundles['myzero1\theme\adminlteiframe\assets\php\components\IndexIframeAsset']->skin;
 
 ?>
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace app\themes\adminlteiframe\widgets;
+namespace myzero1\theme\adminlteiframe\widgets;
 
 /**
  * Alert widget renders a message from session flash. All flash messages are displayed

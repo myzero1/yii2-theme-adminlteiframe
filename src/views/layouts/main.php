@@ -7,8 +7,8 @@
  * @var string $content Content
  */
 
-use myzero1app\themes\adminlteiframe\assets\php\AdminlteIframeAsset;
-use myzero1app\themes\adminlteiframe\widgets\Alert;
+use myzero1myzero1\theme\adminlteiframe\assets\php\AdminlteIframeAsset;
+use myzero1myzero1\theme\adminlteiframe\widgets\Alert;
 use yii\helpers\Html;
 use yii\widgets\Breadcrumbs;
 
@@ -23,7 +23,7 @@ $profile = [
     'profileUrl' => '#',
 ];
 
-$skin = \Yii::$app->assetManager->bundles['myzero1app\themes\adminlteiframe\assets\php\AdminlteIframeAsset']->skin;
+$skin = \Yii::$app->assetManager->bundles['myzero1myzero1\theme\adminlteiframe\assets\php\AdminlteIframeAsset']->skin;
 
 $this->title = Yii::$app->name;
 

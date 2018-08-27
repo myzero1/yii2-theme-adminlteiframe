@@ -17,7 +17,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model <?= ltrim($generator->modelClass, '\\') ?> */
 
-app\themes\adminlteiframe\giimodal\GiiAsset::register($this);
+myzero1\theme\adminlteiframe\giimodal\GiiAsset::register($this);
 
 $this->title = $model-><?= $generator->getNameAttribute() ?>;
 $this->params['breadcrumbs'][] = ['label' => <?= $generator->generateString(Inflector::pluralize(Inflector::camel2words(StringHelper::basename($generator->modelClass)))) ?>, 'url' => ['index']];

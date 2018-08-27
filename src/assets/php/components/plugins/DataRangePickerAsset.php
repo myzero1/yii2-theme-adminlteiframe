@@ -1,6 +1,6 @@
 <?php
 
-namespace app\themes\adminlteiframe\assets\php\components\plugins;
+namespace myzero1\theme\adminlteiframe\assets\php\components\plugins;
 
 use yii\web\AssetBundle;
 
@@ -10,7 +10,7 @@ use yii\web\AssetBundle;
 
 class DataRangePickerAsset extends AssetBundle
 {
-    public $sourcePath = '@app/themes/adminlteiframe/assets/static/plugins/daterangepicker';
+    public $sourcePath = '@myzero1/theme/adminlteiframe/assets/static/plugins/daterangepicker';
     //public $baseUrl = '@web';
     public $css = [
         'daterangepicker.css',

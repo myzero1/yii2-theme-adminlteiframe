@@ -16,7 +16,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model <?= ltrim($generator->modelClass, '\\') ?> */
 
-app\themes\adminlteiframe\giimodal\GiiAsset::register($this);
+myzero1\theme\adminlteiframe\giimodal\GiiAsset::register($this);
 
 $this->title = Yii::t('yii', 'Create') . ' ' . <?= $generator->generateString(Inflector::camel2words(StringHelper::basename($generator->modelClass))) ?>;
 $this->params['breadcrumbs'][] = ['label' => <?= $generator->generateString(Inflector::pluralize(Inflector::camel2words(StringHelper::basename($generator->modelClass)))) ?>, 'url' => ['index']];

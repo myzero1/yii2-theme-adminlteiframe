@@ -1,6 +1,6 @@
 <?php
 
-namespace myzero1app\themes\adminlteiframe\assets\php\components\plugins;
+namespace myzero1myzero1\theme\adminlteiframe\assets\php\components\plugins;
 
 use yii\web\AssetBundle;
 
@@ -10,7 +10,7 @@ use yii\web\AssetBundle;
 
 class JqueryAsset extends AssetBundle
 {
-    public $sourcePath = '@myzero1app/themes/adminlteiframe/assets/static/plugins/jQuery';
+    public $sourcePath = '@myzero1myzero1/theme/adminlteiframe/assets/static/plugins/jQuery';
     //public $baseUrl = '@web';
     public $css = [
         // 'css/bootstrap.min.css',

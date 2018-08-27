@@ -1,6 +1,6 @@
 <?php
 
-namespace app\themes\adminlteiframe\assets\php\components;
+namespace myzero1\theme\adminlteiframe\assets\php\components;
 
 use yii\web\AssetBundle;
 
@@ -10,7 +10,7 @@ use yii\web\AssetBundle;
 
 class ListIframeAsset extends AssetBundle
 {
-    public $sourcePath = '@app/themes/adminlteiframe/assets/static/adminlteiframe';
+    public $sourcePath = '@myzero1/theme/adminlteiframe/assets/static/adminlteiframe';
     //public $baseUrl = '@web';
     public $css = [
         'css/font-awesome.min.css',
@@ -33,11 +33,11 @@ class ListIframeAsset extends AssetBundle
     public $depends = [
         'yii\web\JqueryAsset',
         'yii\bootstrap\BootstrapPluginAsset',
-        'app\themes\adminlteiframe\assets\php\components\plugins\SwitchAsset',
-        // 'app\themes\adminlteiframe\assets\php\components\plugins\BootstrapDatePickerAsset',
-        'app\themes\adminlteiframe\assets\php\components\plugins\DataRangePickerAsset',
-        // 'app\themes\adminlteiframe\assets\php\components\plugins\DataTablesAsset',
-        'app\themes\adminlteiframe\assets\php\components\plugins\LayUiAsset',
+        'myzero1\theme\adminlteiframe\assets\php\components\plugins\SwitchAsset',
+        // 'myzero1\theme\adminlteiframe\assets\php\components\plugins\BootstrapDatePickerAsset',
+        'myzero1\theme\adminlteiframe\assets\php\components\plugins\DataRangePickerAsset',
+        // 'myzero1\theme\adminlteiframe\assets\php\components\plugins\DataTablesAsset',
+        'myzero1\theme\adminlteiframe\assets\php\components\plugins\LayUiAsset',
     ];
 
     public $skin = ''; // blue,orange
