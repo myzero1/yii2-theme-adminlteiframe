@@ -222,6 +222,24 @@
 
 /*for adminlteiframe-form*/
 
+
+@media screen and (min-width: 600px) {
+    .adminlteiframe-form .form-group{
+        width: 300px;
+    }
+    .adminlteiframe-form .form-group:nth-of-type(odd){
+        float: left;
+    }
+    .adminlteiframe-form .form-group:nth-of-type(even){
+        float: right;
+    }
+}
+
+.adminlteiframe-form{
+    overflow: hidden;
+    padding-top: 10px;
+}
+
 .adminlteiframe-form .form-group {
     position: relative;
 }

@@ -39,6 +39,7 @@ use yii\data\ActiveDataProvider;
 use <?= ltrim($generator->baseControllerClass, '\\') ?>;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\Url;
 
 /**
  * <?= $controllerClass ?> implements the CRUD actions for <?= $modelClass ?> model.
@@ -114,19 +115,8 @@ class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->bas
         $model = new <?= $modelClass ?>();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            if (Yii::$app->request->isAjax) {
-                // return $this->redirect(['index']);
-                Yii::$app->getSession()->setFlash('success', '保存成功');
-                Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-                return [
-                    'code' => 0,
-                    'url' => \yii\helpers\Url::to(['index']),
-                    'msg' => '',
-                    'data' => '',
-                ];
-            } else {
-                return $this->redirect(['view', <?= $urlParams ?>]);
-            }
+            Yii::$app->getSession()->setFlash('success', '添加成功');
+            return $this->redirectParent(['index']);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -145,19 +135,8 @@ class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->bas
         $model = $this->findModel(<?= $actionParams ?>);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            if (Yii::$app->request->isAjax) {
-                // return $this->redirect(['index']);
-                Yii::$app->getSession()->setFlash('success', '保存成功');
-                Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-                return [
-                    'code' => 0,
-                    'url' => \yii\helpers\Url::to(['index']),
-                    'msg' => '',
-                    'data' => '',
-                ];
-            } else {
-                return $this->redirect(['view', <?= $urlParams ?>]);
-            }
+            Yii::$app->getSession()->setFlash('success', '修改成功');
+            return $this->redirectParent(['index']);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -175,15 +154,8 @@ class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->bas
     {
         $this->findModel(<?= $actionParams ?>)->delete();
 
-        // return $this->redirect(['index']);
-        Yii::$app->getSession()->setFlash('success', '保存成功');
-        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-        return [
-            'code' => 0,
-            'url' => \yii\helpers\Url::to(['index']),
-            'msg' => '',
-            'data' => '',
-        ];
+        Yii::$app->getSession()->setFlash('success', '删除成功');
+        return $this->redirect(['index']);
     }
 
     /**
@@ -212,21 +184,33 @@ class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->bas
      */
     protected function findModel(<?= $actionParams ?>)
     {
-<?php
-if (count($pks) === 1) {
-    $condition = '$id';
-} else {
-    $condition = [];
-    foreach ($pks as $pk) {
-        $condition[] = "'$pk' => \$$pk";
-    }
-    $condition = '[' . implode(', ', $condition) . ']';
-}
-?>
+        <?php
+        if (count($pks) === 1) {
+            $condition = '$id';
+        } else {
+            $condition = [];
+            foreach ($pks as $pk) {
+                $condition[] = "'$pk' => \$$pk";
+            }
+            $condition = '[' . implode(', ', $condition) . ']';
+        }
+        ?>
         if (($model = <?= $modelClass ?>::findOne(<?= $condition ?>)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+
+    /**
+     * redirect parent window.
+     * @param array ['user/delete',['id'=>1]]
+     * @return string
+     */
+    protected function redirectParent(array $params)
+    {
+        return sprintf('<script type="text/javascript">parent.location.href="%s"</script>',Url::to($params));
+    }
+
 }

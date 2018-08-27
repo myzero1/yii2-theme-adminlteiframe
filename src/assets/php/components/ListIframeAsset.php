@@ -37,7 +37,7 @@ class ListIframeAsset extends AssetBundle
         // 'myzero1\theme\adminlteiframe\assets\php\components\plugins\BootstrapDatePickerAsset',
         'myzero1\theme\adminlteiframe\assets\php\components\plugins\DataRangePickerAsset',
         // 'myzero1\theme\adminlteiframe\assets\php\components\plugins\DataTablesAsset',
-        'myzero1\theme\adminlteiframe\assets\php\components\plugins\LayUiAsset',
+        'myzero1\theme\adminlteiframe\assets\php\components\plugins\LayerAsset',
     ];
 
     public $skin = ''; // blue,orange

@@ -26,7 +26,7 @@ use yii\widgets\ActiveForm;
 
 <div class="<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-form">
 
-    <?= "<?php" ?> $form = ActiveForm::begin(['id'=> 'gii-modal-' . $this->context->action->id, 'enableClientValidation'=>true, 'options' => ['data-ajax' => true, 'class' => 'adminlteiframe-form']]) ?>
+    <?= "<?php" ?> $form = ActiveForm::begin(['id'=> 'layer-form-' . $this->context->action->id, 'options' => ['class' => 'adminlteiframe-form']]) ?>
 
 <?php foreach ($generator->getColumnNames() as $attribute) {
     if (in_array($attribute, $safeAttributes)) {

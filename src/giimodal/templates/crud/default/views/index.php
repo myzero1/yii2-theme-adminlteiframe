@@ -41,13 +41,6 @@ $this->params['breadcrumbs'][] = $this->title;
 <?= "    <?php " . ($generator->indexWidgetType === 'grid' ? " " : "") ?>echo $this->render('_search', ['model' => $searchModel]); ?>
 <?php endif; ?>
 
-<?= "<?= " ?>Modal::widget([
-    'id' => 'modal_view',
-    'closeButton' => [
-        'label' => '<< 返回列表页面',
-    ],
-]); ?>
-
 <?php if ($generator->indexWidgetType === 'grid'): ?>
     <?= "<?= " ?>GridView::widget([
         'dataProvider' => $dataProvider,
@@ -87,35 +80,25 @@ if (($tableSchema = $generator->getTableSchema()) === false) {
                 'buttons' => [
                     'view' => function ($url, $model, $key) {
                         $options = array_merge([
-                            'title' => Yii::t('yii', 'View'),
-                            'aria-label' => Yii::t('yii', 'View'),
-                            'class'=>'show-modal',
-                            'data-target' => '#modal_view', 
-                            'data-header' => Yii::t('yii', 'View') . ' ' . <?= $title ?>,
+                            'class'=>'btn btn-info btn-xs use-layer',
+                            'layer-config' => sprintf('{type:2,title:"%s",content:"%s",shadeClose:false}', Yii::t('yii', 'View') . ' ' . <?= $title ?>, $url) ,
                         ]);
-                        return Html::a('<span class="btn btn-info btn-xs">查看</span>', $url, $options);
+                        return Html::a(Yii::t('yii', 'View'), '#', $options);
                     },
                     'update' => function ($url, $model, $key) {
                         $options = array_merge([
-                            'title' => Yii::t('yii', 'Update'),
-                            'aria-label' => Yii::t('yii', 'Update'),
-                            'class'=>'show-modal',
-                            'data-target' => '#modal_view', 
-                            'data-header' => Yii::t('yii', 'Update') . ' ' . <?= $title ?>,
+                            'class'=>'btn btn-primary btn-xs use-layer',
+                            'layer-config' => sprintf('{type:2,title:"%s",content:"%s",shadeClose:false}', Yii::t('yii', 'Update') . ' ' . <?= $title ?>, $url) ,
                         ]);
-                        return Html::a('<span class="btn btn-primary btn-xs">编辑</span>', $url, $options);
+                        return Html::a(Yii::t('yii', 'Update'), '#', $options);
                     },
                     'delete' => function ($url, $model, $key) {
                         $options = array_merge([
-                            'title' => Yii::t('yii', 'Delete'),
-                            'aria-label' => Yii::t('yii', 'Delete'),
-                            'class'=>'show-modal',
-                            'data-target' => '#modal_view', 
-                            'data-header' => Yii::t('yii', 'Delete') . ' ' . <?= $title ?>,
-                            'confirm-msg' => '一旦删除，无法恢复，是否删除本条数据？',
+                            'class'=>'btn btn-danger btn-xs use-layer',
+                            'layer-config' => sprintf('{icon:3,area:["500px","200px"],type:0,title:"%s",content:"%s",shadeClose:false,btn:["确定","取消"],yes:function(index,layero){$.post("%s", {}, function(str){$(layero).find(".layui-layer-content").html(str);});},btn2:function(index, layero){layer.close(index);}}', Yii::t('yii', 'Delete') . ' ' . <?= $title ?>, '一旦删除，不能找回，你确定删除吗？',$url) ,
                         ]);
-                        return Html::a('<span class="btn btn-danger btn-xs">删除</span>', $url, $options);
-                    },
+                        return Html::a(Yii::t('yii', 'Delete'), '#', $options);
+                    }
                 ],
             ],
         ],

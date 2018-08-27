@@ -87,7 +87,7 @@ $skin = \Yii::$app->assetManager->bundles['myzero1\theme\adminlteiframe\assets\p
                     <li class="dropdown user user-menu">
                         <?= Html::a('联系方式', '#', [
                             'class' => 'adminlteiframe-modal use-layer',
-                            'layer-config' => '{type:2,title:"修改密码",content:"/site/contact",shadeClose:false}',
+                            'layer-config' => '{scrollbar:false,area:["350px","340px"],type:2,title:"联系方式",content:"/site/contact",shadeClose:false}',
                         ]); ?>
 
                     </li>
@@ -117,7 +117,7 @@ $skin = \Yii::$app->assetManager->bundles['myzero1\theme\adminlteiframe\assets\p
                                 <div class="pull-left">
                                     <?= Html::a('修改密码', "#", [
                                         'class' => 'use-layer btn btn-default btn-flat adminlteiframe-modal show-modal',
-                                        'layer-config' => '{type:2,title:"修改密码",content:"/site/change-pw",shadeClose:false}',
+                                        'layer-config' => '{area:["340px","340px"],type:2,title:"修改密码",content:"/site/change-pw",shadeClose:false}',
                                     ]); ?>
 
                                 </div>
@@ -568,140 +568,13 @@ $skin = \Yii::$app->assetManager->bundles['myzero1\theme\adminlteiframe\assets\p
 
 <div id="index-iframe-left-menu" style="height: 0;width: 0;overflow: hidden;">
 <?php 
-    // run the Closure in menu,biggst level is 2
-    $id = 0;
-    if (isset(Yii::$app->params['menu'])) {
-        $items = Yii::$app->params['menu'];
-        foreach ($items as $k => $v) {
-            if ($v instanceof Closure) {
-                $items[$k] = $items[$k]();
-            } else if ($k ==='url'){
-                $items[$k] = yii\helpers\Url::to($v);
-            } else if ($k ==='text'){
-                if (!isset($items['targetType'])) {
-                    $items['targetType'] = "iframe-tab";
-                    $items['id'] = ++$id;
-                }
-            } else if (is_array($v)) {
-                foreach ($v as $k1 => $v1) {
-                    if ($v1 instanceof Closure) {
-                        $items[$k][$k1] = $items[$k][$k1]();
-                    } else if ($k1 ==='url'){
-                        $items[$k][$k1] = yii\helpers\Url::to($v1);
-                    } else if ($k1 ==='text'){
-                        if (!isset($items[$k]['targetType'])) {
-                            $items[$k]['targetType'] = "iframe-tab";
-                            $items[$k]['id'] = ++$id;
-                            $items[$k]['urlType'] = "abosulte";
-                        }
-                    } else if (is_array($v1)) {
-                        foreach ($v1 as $k2 => $v2) {
-                            if ($v2 instanceof Closure) {
-                                $items[$k][$k1][$k2] = $items[$k][$k1][$k2]();
-                            } else if ($k2 ==='url'){
-                                $items[$k][$k1][$k2] = yii\helpers\Url::to($v2);
-                            } else if ($k2 ==='text'){
-                                if (!isset($items[$k][$k1]['targetType'])) {
-                                    $items[$k][$k1]['targetType'] = "iframe-tab";
-                                    $items[$k][$k1]['id'] = ++$id;
-                                    $items[$k][$k1]['urlType'] = "abosulte";
-                                }
-                            } else if (is_array($v2)) {
-                                foreach ($v2 as $k3 => $v3) {
-                                    if ($v3 instanceof Closure) {
-                                        $items[$k][$k1][$k2][$k3] = $items[$k][$k1][$k2][$k3]();
-                                    } else if ($k3 ==='url'){
-                                        $items[$k][$k1][$k2][$k3] = yii\helpers\Url::to($v3);
-                                    } else if ($k3 ==='text'){
-                                        if (!isset($items[$k][$k1][$k2]['targetType'])) {
-                                            $items[$k][$k1][$k2]['targetType'] = "iframe-tab";
-                                            $items[$k][$k1][$k2]['id'] = ++$id;
-                                            $items[$k][$k1][$k2]['urlType'] = "abosulte";
-                                        }
-                                    } else if (is_array($v3)) {
-                                        foreach ($v3 as $k4 => $v4) {
-                                            if ($v4 instanceof Closure) {
-                                                $items[$k][$k1][$k2][$k3][$k4] = $items[$k][$k1][$k2][$k3][$k4]();
-                                            } else if ($k4 ==='url'){
-                                                $items[$k][$k1][$k2][$k3][$k4] = yii\helpers\Url::to($v4);
-                                            } else if ($k4 ==='text'){
-                                                if (!isset($$items[$k][$k1][$k2][$k3]['targetType'])) {
-                                                    $$items[$k][$k1][$k2][$k3]['targetType'] = "iframe-tab";
-                                                    $$items[$k][$k1][$k2][$k3]['id'] = ++$id;
-                                                    $$items[$k][$k1][$k2][$k3]['urlType'] = "abosulte";
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-// var_dump($items);exit;
-    echo '[
-            {
-                id: "9000",
-                text: "header",
-                icon: "",
-                isHeader: true
-            },
-            {
-                id: "9003",
-                text: "用户管理",
-                url: "/user2/index",
-                targetType: "iframe-tab",
-                icon: "fa fa-circle-o",
-                urlType: "abosulte"
-            },
-            {
-                id: "9002",
-                text: "Forms",
-                icon: "fa fa-edit",
-                children: [
-                    {
-                        id: "90021",
-                        text: "user2",
-                        url: "/user2/index",
-                        targetType: "iframe-tab",
-                        icon: "fa fa-circle-o",
-                        urlType: "abosulte"
-                    },
-                    {
-                        id: "90022",
-                        text: "general",
-                        url: "forms/general_iframe.html",
-                        targetType: "iframe-tab",
-                        icon: "fa fa-circle-o",
-                        urlType: "abosulte"
-                    },
-                    {
-                        id: "90024",
-                        text: "百度",
-                        url: "https://www.baidu.com",
-                        targetType: "iframe-tab",
-                        icon: "fa fa-circle-o",
-                        urlType: "abosulte"
-                    }
-                ]
-            }
-        ]';
-    // echo json_encode($items);
+    echo json_encode(\Yii::$app->params['menu']);
 ?>
 </div>
 
 <div id="index-iframe-home-page" style="height: 0;width: 0;overflow: hidden;">
 <?php
-    echo '{
-        id: "-1",
-        title: "欢迎页",
-        close: false,
-        url: "/user2/view?id=1",
-        urlType: "abosulte"
-    }';
+    echo json_encode(\Yii::$app->params['homeMenu']);
 ?>
 
 </div>

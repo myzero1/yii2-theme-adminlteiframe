@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = Yii::t('yii', 'Update');
 
     <?= "<?php" ?> if(!\Yii::$app->request->isAjax): ?>
     
-    <h1><?= "<?= " ?>Html::encode($this->title) ?></h1>
+    <!-- <h1><?= "<?= " ?>Html::encode($this->title) ?></h1> -->
     
     <?= "<?php" ?> endif ?>
 

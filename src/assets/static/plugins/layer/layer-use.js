@@ -22,8 +22,9 @@ $(function(){
             title: 'title',
             maxmin: true,
             shadeClose: true, //点击遮罩关闭层
-            area : ['500px' , '400px'],
-            content: 'content'
+            area : ['660px' , '400px'],
+            content: 'content',
+            maxmin: false
         };
 
         var config = eval('(' + $(this).attr('layer-config') + ')');

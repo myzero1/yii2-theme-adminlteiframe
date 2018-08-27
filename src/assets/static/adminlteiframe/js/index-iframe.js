@@ -197,4 +197,12 @@ $(function () {
         }
     }*/
 
+
+
+    // $('.nav-link[onclick]').click(function(){
+    //     $('.nav-link[onclick]').parents('.treeview').removeClass('active');
+    //     $(this).parents('.treeview').addClass('active');
+    //     console.log($(this).attr('onclick'));
+    // });
+
 });

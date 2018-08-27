@@ -28,7 +28,7 @@ class IndexIframeAsset extends AssetBundle
     public $depends = [
         'yii\web\JqueryAsset',
         'yii\bootstrap\BootstrapPluginAsset',
-        'myzero1\theme\adminlteiframe\assets\php\components\plugins\LayUiAsset',
+        'myzero1\theme\adminlteiframe\assets\php\components\plugins\LayerAsset',
     ];
 
     public $skin = ''; // blue,orange

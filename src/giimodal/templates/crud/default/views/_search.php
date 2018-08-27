@@ -10,6 +10,7 @@ echo "<?php\n";
 ?>
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
@@ -39,19 +40,19 @@ foreach ($generator->getColumnNames() as $attribute) {
     <div class="form-group aciotns">
         <?= "<?= " ?>Html::submitButton(<?= $generator->generateString('搜索') ?>, ['class' => 'btn btn-primary']) ?>
 
-        <?= "<?= " ?>Html::a('添加', ['create'], [
-            'class' => 'btn btn-success show-modal',
-            'data-target' => '#modal_view',
-            'data-header' => 'Create User2',
+        <?= "<?= " ?>Html::a('添加', '#', [
+            'class' => 'btn btn-success use-layer',
+            'layer-config' => sprintf('{type:2,title:"%s",content:"%s",shadeClose:false}', '添加', Url::to(['create'])) ,
         ]); ?>
 
-       <?= "<?= " ?>Html::a('批量删除', ['delete-selected','ids' => ''], [
-            'class' => 'btn btn-danger show-modal',
-            'data-target' => '#modal_view',
-            'data-header' => '批量删除',
-            'confirm-msg' => '一旦删除，无法恢复，是否删除选定的数据？',
-            'id' => 'delete-selected',
-        ]); ?>
+
+
+        <?= "<?= " ?>Html::a('批量删除', '#', [
+                'id'=>'delete-selected',
+                'url'=>Url::to(['delete-selected','ids' => '']),
+                'class'=>'btn btn-danger use-layer',
+                'layer-config' => sprintf('{icon:3,area:["500px","200px"],type:0,title:"%s",content:"%s",shadeClose:false,btn:["确定","取消"],yes:function(index,layero){var url=$("#delete-selected").attr("url");$.post(url, {}, function(str){$(layero).find(".layui-layer-content").html(str);});},btn2:function(index, layero){layer.close(index);}}', '批量删除', '一旦删除，无法恢复，是否删除选定的数据？') 
+            ]); ?>
 
     </div>
 

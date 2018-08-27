@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= "<?php" ?> if(!\Yii::$app->request->isAjax): ?>
     
-    <h1><?= "<?= " ?>Html::encode($this->title) ?></h1>
+    <!-- <h1><?= "<?= " ?>Html::encode($this->title) ?></h1> -->
     
     <?= "<?php" ?> endif ?>
 

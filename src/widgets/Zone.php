@@ -1,6 +1,6 @@
 <?php
 
-namespace myzero1\theme\adminlteiframe\widgets;
+namespace myzero1app\themes\adminlte\widgets;
 
 /**
  * Zone widget renders this zones.

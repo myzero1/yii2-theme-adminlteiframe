@@ -105,10 +105,10 @@ $(function(){
 	$('body').on('mouseenter', '#delete-selected', function () {
 		var ids = $(".adminlteiframe-gridview").yiiGridView("getSelectedRows");
 		var idsStr = ids.join(',');
-		var href = $(this).attr('href');
-		var base = href.split('ids=');
-		var hrefNew = base[0] + 'ids=' + idsStr
-		$(this).attr('href', hrefNew);
+		var url = $(this).attr('url');
+		var base = url.split('ids=');
+		var urlNew = base[0] + 'ids=' + idsStr
+		$(this).attr('url', urlNew);
 		return false;
 	});
 });
