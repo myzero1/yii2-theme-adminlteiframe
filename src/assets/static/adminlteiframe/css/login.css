@@ -1,0 +1,103 @@
+    
+.ali-form-layout {
+    padding: 0 20px;
+    width: 300px;
+    height: 250;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin: -150px 0 0 -150px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    box-sizing: border-box;
+    background: #fff;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    box-shadow: 0 0 50px #00a65a;
+}
+.ali-form-header-layout {
+    margin: -40px auto 0px;
+    overflow: hidden;
+    padding: 20px;
+    text-align: center;
+}
+.ali-form-header {
+    width: auto;
+    height: 38px;
+    display: inline-block;
+    padding: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 50%;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 0 30px #00a65a;
+    background: #fff;
+}
+.app-name{
+    font-size: 28px;
+    line-height: 28px;
+    text-align: center;
+    display: inline-block;
+    font-weight: bold;
+    color: #0e3f68;
+}
+body{
+    background: url(../img/login-bg3.jpg) no-repeat center center;
+    background-color: #3c8dbc;
+    min-height: 100vh;
+    background-size: 100%;
+}
+.ali-form-layout .form-control{
+    border-radius: 4px;
+    position: relative;
+}
+
+.ali-form-layout .form-group{
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.ali-form-layout .control-label {
+    position: absolute;
+    color: #757575;
+    left: 10px;
+    top: 6px;
+    line-height: 20px;
+    background: #fff;
+    padding: 0 5px;
+    font-size: 14px;
+    cursor: text;
+    font-weight: normal;
+    z-index: 999;
+    margin: 0;
+}
+
+.ali-form-layout .focus .control-label {
+    top: -10px
+}
+
+.ali-form-layout .has-error .control-label,
+.ali-form-layout .has-success .control-label{
+    top: -10px
+}
+
+.ali-form-layout  .help-block-error{
+    top: -10px;
+    position: absolute;
+    left: 10px;
+    top: 24px;
+    line-height: 20px;
+    background: #fff;
+    padding: 0 5px;
+    font-size: 14px;
+    cursor: text;
+    font-weight: normal;
+    z-index: 999;
+    margin: 0;
+}
+
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+}
