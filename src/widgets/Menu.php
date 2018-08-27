@@ -1,6 +1,6 @@
 <?php
 
-namespace myzero1app\themes\adminlte\widgets;
+namespace myzero1\theme\adminlteiframe\widgets;
 
 use yii\helpers\ArrayHelper;
 use yii\helpers\Url;

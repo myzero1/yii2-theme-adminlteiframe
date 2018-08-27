@@ -6,7 +6,7 @@
 namespace myzero1app\themes\adminlte\widgets;
 use Yii;
 use yii\helpers\Html;
-class LinkPager extends \yii\widgets\LinkPager{
+class LinkPager2 extends \yii\widgets\LinkPager{
     
     /**
      * {pageButtons} {customPage}
