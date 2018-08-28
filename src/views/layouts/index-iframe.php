@@ -566,17 +566,70 @@ $skin = \Yii::$app->assetManager->bundles['myzero1\adminlteiframe\assets\php\com
     
 </div>
 
-<div id="index-iframe-left-menu" style="height: 0;width: 0;overflow: hidden;">
-<?php 
-    echo json_encode(\Yii::$app->params['menu']);
+<?php
+
+    $homeMenuDefault = [
+        'id' => "-1",
+        'title' => "首页",
+        'close' => false,
+        'url' => "/site/index",
+        'urlType' => "abosulte"
+    ];
+
+    $menuDefault = [
+        [
+            'id' => "-2",
+            'text' => "header",
+            'icon' => "",
+            'isHeader' => true,
+        ],
+        [
+            'id' => "-1",
+            'text' => "首页",
+            'icon' => "fa fa-dashboard",
+            'targetType' => 'iframe-tab',
+            'urlType' => 'abosulte',
+            'url' => "/site/index",
+        ],
+        [
+            'id' => "系统管理",
+            'text' => "系统管理",
+            'icon' => "fa fa-laptop",
+            'children' => [
+                [
+                    'id' => "错误页面",
+                    'text' => "错误页面",
+                    'icon' => "fa fa-circle-o",
+                    'targetType' => 'iframe-tab',
+                    'urlType' => 'abosulte',
+                    'url' => "/site/error",
+                ],
+            ],
+        ],
+    ];
+
+    if (isset(\Yii::$app->params['homeMenu'])) {
+        $homeMenu = \Yii::$app->params['homeMenu'];
+    } else {
+        $homeMenu = $homeMenuDefault;
+    }
+
+    if (isset(\Yii::$app->params['menu'])) {
+        $menu = \Yii::$app->params['menu'];
+    } else {
+        $menu = $menuDefault;
+    }
+
+    
 ?>
+
+
+<div id="index-iframe-left-menu" style="height: 0;width: 0;overflow: hidden;">
+    <?= json_encode($menu);?>
 </div>
 
 <div id="index-iframe-home-page" style="height: 0;width: 0;overflow: hidden;">
-<?php
-    echo json_encode(\Yii::$app->params['homeMenu']);
-?>
-
+    <?= json_encode($homeMenu);?>
 </div>
 
 <?php  $this->endBody() ?>
