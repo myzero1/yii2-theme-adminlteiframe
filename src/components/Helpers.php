@@ -5,7 +5,7 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace myzero1\theme\adminlteiframe\components;
+namespace myzero1\adminlteiframe\components;
 
 use yii\gii\Generator;
 use yii\helpers\Json;

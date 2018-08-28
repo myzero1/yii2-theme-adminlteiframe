@@ -1,6 +1,6 @@
 <?php
 
-namespace myzero1\theme\adminlteiframe\assets\php\components\plugins;
+namespace myzero1\adminlteiframe\assets\php\components\plugins;
 
 use yii\web\AssetBundle;
 
@@ -10,7 +10,7 @@ use yii\web\AssetBundle;
 
 class LayerAsset extends AssetBundle
 {
-    public $sourcePath = '@myzero1/theme/adminlteiframe/assets/static/plugins/layer';
+    public $sourcePath = '@vendor/myzero1/yii2-theme-adminlteiframe/src/assets/static/plugins/layer';
     public $css = [
         'theme/default/layer.css',
     ];

@@ -1,6 +1,6 @@
 <?php
 
-namespace myzero1\theme\adminlteiframe\assets\php\components\plugins;
+namespace myzero1\adminlteiframe\assets\php\components\plugins;
 
 use yii\web\AssetBundle;
 
@@ -10,7 +10,7 @@ use yii\web\AssetBundle;
 
 class LayUiAsset extends AssetBundle
 {
-    public $sourcePath = '@myzero1/theme/adminlteiframe/assets/static/plugins/layui';
+    public $sourcePath = '@vendor/myzero1/yii2-theme-adminlteiframe/src/assets/static/plugins/layui';
     public $css = [
         'css/layui.css',
     ];

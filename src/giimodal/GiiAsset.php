@@ -5,7 +5,7 @@
  * @license https://github.com/borodulin/yii2-gii-modal/blob/master/LICENSE
  */
 
-namespace myzero1\theme\adminlteiframe\giimodal;
+namespace myzero1\adminlteiframe\giimodal;
 
 use yii\web\AssetBundle;
 
@@ -15,7 +15,7 @@ use yii\web\AssetBundle;
  */
 class GiiAsset extends AssetBundle
 {
-    public $sourcePath = '@myzero1/theme/adminlteiframe/giimodal/assets';
+    public $sourcePath = '@vendor/myzero1/yii2-theme-adminlteiframe/src/giimodal/assets';
     
     public $js = [
         'gii-modal.js',

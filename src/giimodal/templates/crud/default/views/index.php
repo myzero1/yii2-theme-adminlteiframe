@@ -27,8 +27,8 @@ use <?= $generator->indexWidgetType === 'grid' ? "yii\\grid\\GridView" : "yii\\w
 <?= !empty($generator->searchModelClass) ? "/* @var \$searchModel " . ltrim($generator->searchModelClass, '\\') . " */\n" : '' ?>
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-myzero1\theme\adminlteiframe\giimodal\GiiAsset::register($this);
-myzero1\theme\adminlteiframe\assets\php\components\plugins\BootstrapTableAsset::register($this);
+myzero1\adminlteiframe\giimodal\GiiAsset::register($this);
+myzero1\adminlteiframe\assets\php\components\plugins\BootstrapTableAsset::register($this);
 
 $this->title = <?= $title ?>;
 $this->params['breadcrumbs'][] = $this->title;
@@ -120,7 +120,7 @@ if (($tableSchema = $generator->getTableSchema()) === false) {
             </div>
         ',
         'pager' => [
-            'class' => \myzero1\theme\adminlteiframe\widgets\LinkPager::className(),
+            'class' => \myzero1\adminlteiframe\widgets\LinkPager::className(),
             'firstPageLabel'=>"<<",
             'prevPageLabel'=>'<',
             'nextPageLabel'=>'>',

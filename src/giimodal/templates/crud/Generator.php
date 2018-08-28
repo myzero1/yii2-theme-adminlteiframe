@@ -5,7 +5,7 @@
  * @license https://github.com/borodulin/yii2-gii-modal/blob/master/LICENSE
  */
 
-namespace myzero1\theme\adminlteiframe\giimodal\templates\crud;
+namespace myzero1\adminlteiframe\giimodal\templates\crud;
 
 /**
  * 

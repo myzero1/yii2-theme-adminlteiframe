@@ -7,7 +7,7 @@
  * @var string $content Content
  */
 
-use myzero1\theme\adminlteiframe\assets\php\components\ListIframeAsset;
+use myzero1\adminlteiframe\assets\php\components\ListIframeAsset;
 use yii\helpers\Html;
 
 $bundle = ListIframeAsset::register($this);
@@ -42,7 +42,7 @@ $bundle = ListIframeAsset::register($this);
 
 <!-- Main content -->
 <section class="content list-content">
-    <?= myzero1\theme\adminlteiframe\widgets\Alert::widget(); ?>
+    <?= myzero1\adminlteiframe\widgets\Alert::widget(); ?>
     <?= $content ?>
 </section>
 <!-- /.content -->

@@ -37,7 +37,7 @@ if (YII_ENV_DEV) {
         'allowedIPs' => ['127.0.0.1', '::1'],  
         'generators' => [
             'modal_crud' => [ // generator name
-                'class' => 'myzero1\theme\adminlteiframe\giimodal\templates\crud\Generator', // generator class
+                'class' => 'myzero1\adminlteiframe\giimodal\templates\crud\Generator', // generator class
             ]
         ],
     ]; 

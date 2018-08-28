@@ -5,7 +5,7 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace myzero1\theme\adminlteiframe\widgets;
+namespace myzero1\adminlteiframe\widgets;
 
 use Yii;
 use yii\base\InvalidConfigException;
