@@ -19,7 +19,6 @@ class MainAsset extends AssetBundle
         'css/skins/all-skins.min.css',
         'css/app/main.css',
         'css/app/custom.css',
-        'css/adminlteiframe-gridview.css',
     ];
 
     public $js = [
