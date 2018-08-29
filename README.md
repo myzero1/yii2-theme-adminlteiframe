@@ -6,7 +6,13 @@ It add iframe,based on [almasaeed2010/AdminLTE](https://github.com/almasaeed2010
 Show time
 ------------
 
-wer
+![](screenshot/1.png)
+![](screenshot/2.png)
+![](screenshot/3.png)
+![](screenshot/4.png)
+![](screenshot/5.png)
+![](screenshot/6.png)
+![](screenshot/7.png)
 
 Installation
 ------------
