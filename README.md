@@ -33,7 +33,7 @@ Setting
 
 Once the extension is installed, simply modify your application configuration as follows:
 
-####in main.php####
+#### in main.php ####
 
 ```php
 return [
@@ -64,7 +64,7 @@ return [
 ];
 ```
 
-####in main-local.php####
+#### in main-local.php ####
 
 ```php
 ...
