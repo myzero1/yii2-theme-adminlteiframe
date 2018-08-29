@@ -187,7 +187,7 @@
                 'id' => "-1",
                 'title' => "首页",
                 'close' => false,
-                'url' => "/site/error",
+                'url' => "/site/home",
                 'urlType' => "abosulte"
             ];
 
@@ -204,7 +204,7 @@
                     'icon' => "fa fa-dashboard",
                     'targetType' => 'iframe-tab',
                     'urlType' => 'abosulte',
-                    'url' => "/site/error",
+                    'url' => "/site/home",
                 ],
                 [
                     'id' => "系统管理",
@@ -212,12 +212,12 @@
                     'icon' => "fa fa-laptop",
                     'children' => [
                         [
-                            'id' => "错误页面",
-                            'text' => "错误页面",
+                            'id' => "设置页面",
+                            'text' => "设置页面",
                             'icon' => "fa fa-circle-o",
                             'targetType' => 'iframe-tab',
                             'urlType' => 'abosulte',
-                            'url' => "/site/error",
+                            'url' => "/site/setting",
                         ],
                     ],
                 ],
