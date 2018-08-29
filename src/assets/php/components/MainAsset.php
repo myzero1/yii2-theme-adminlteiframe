@@ -32,7 +32,4 @@ class MainAsset extends AssetBundle
         'myzero1\adminlteiframe\assets\php\components\plugins\BootstrapTableAsset',
         'myzero1\adminlteiframe\assets\php\components\plugins\DataRangePickerAsset',
     ];
-
-    public $skin = ''; // blue,orange
-    public $showTopNav = false; // ture,false
 }
