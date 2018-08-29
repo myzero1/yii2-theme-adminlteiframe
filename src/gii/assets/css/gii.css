@@ -53,6 +53,7 @@
 }
 .admlteiframe-gv-pagination li{
 	float: left;
+    list-style: none;
 }
 .admlteiframe-gv-pagination li.disabled{
 	opacity: 0.2;
@@ -251,4 +252,8 @@
 .adminlteiframe-form textarea:-webkit-autofill, 
 .adminlteiframe-form select:-webkit-autofill{
     -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+}
+.fixed-table-container thead th .asc,
+.fixed-table-container thead th .desc{
+    background: none !important;
 }
