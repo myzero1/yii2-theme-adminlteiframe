@@ -59,7 +59,7 @@ return [
         ],
         'assetManager' => [
             'class' => 'yii\web\AssetManager',
-            'forceCopy' => false,
+            'forceCopy' => true,
             // 'linkAssets' => true,//link to assets,no cache.used in develop.
             'bundles'=> [
                 'myzero1\adminlteiframe\assets\php\components\LayoutAsset' => [
