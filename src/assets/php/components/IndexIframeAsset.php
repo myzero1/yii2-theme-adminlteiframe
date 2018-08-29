@@ -31,6 +31,5 @@ class IndexIframeAsset extends AssetBundle
         'myzero1\adminlteiframe\assets\php\components\plugins\LayerAsset',
     ];
 
-    public $skin = ''; // blue,orange
-    public $showTopNav = false; // ture,false
+    public $skin = 'skin-blue';
 }
