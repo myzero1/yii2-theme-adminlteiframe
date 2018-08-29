@@ -10,15 +10,16 @@ use yii\web\AssetBundle;
 
 class DataRangePickerAsset extends AssetBundle
 {
-    public $sourcePath = '@vendor/myzero1/yii2-theme-adminlteiframe/src/assets/static/plugins/daterangepicker';
+    public $sourcePath = '@vendor/myzero1/yii2-theme-adminlteiframe/src/assets/static/plugins';
     //public $baseUrl = '@web';
     public $css = [
-        'daterangepicker.css',
+        'libs/daterangepicker/daterangepicker.css',
         // 'jquery.dataTables.min.css',
     ];
 
     public $js = [
-        'moment.min.js',
-        'daterangepicker.js',
+        'libs/daterangepicker/moment.min.js',
+        'libs/daterangepicker/daterangepicker.js',
+        'use/daterangepicker.js',
     ];
 }

@@ -24,7 +24,6 @@ class MainAsset extends AssetBundle
     public $js = [
         'js/app.js',
         'js/app_iframe.js',
-        'js/plugins/daterangepicker.js',
     ];
 
     public $depends = [

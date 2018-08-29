@@ -10,16 +10,16 @@ use yii\web\AssetBundle;
 
 class BootstrapTableAsset extends AssetBundle
 {
-    public $sourcePath = '@vendor/myzero1/yii2-theme-adminlteiframe/src/assets/static/plugins/bootstrap-table';
+    public $sourcePath = '@vendor/myzero1/yii2-theme-adminlteiframe/src/assets/static/plugins';
     //public $baseUrl = '@web';
     public $css = [
-        'bootstrap-table.min.css',
-        'bootstrap-table-fixed-columns.css',
+        'libs/bootstrap-table/bootstrap-table.min.css',
+        'libs/bootstrap-table/bootstrap-table-fixed-columns.css',
     ];
 
     public $js = [
-        'bootstrap-table.min.js',
-        'bootstrap-table-zh-CN.min.js',
-        'bootstrap-table-fixed-columns.js',
+        'libs/bootstrap-table/bootstrap-table.min.js',
+        'libs/bootstrap-table/bootstrap-table-zh-CN.min.js',
+        'libs/bootstrap-table/bootstrap-table-fixed-columns.js',
     ];
 }

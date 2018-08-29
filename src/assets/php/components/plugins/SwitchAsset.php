@@ -10,13 +10,13 @@ use yii\web\AssetBundle;
 
 class SwitchAsset extends AssetBundle
 {
-    public $sourcePath = '@vendor/myzero1/yii2-theme-adminlteiframe/src/assets/static/plugins/bootstrap-switch';
+    public $sourcePath = '@vendor/myzero1/yii2-theme-adminlteiframe/src/assets/static/plugins';
     //public $baseUrl = '@web';
     public $css = [
-        'bootstrap-switch.css',
+        'libs/bootstrap-switch/bootstrap-switch.css',
     ];
 
     public $js = [
-        'bootstrap-switch.js',
+        'libs/bootstrap-switch/bootstrap-switch.js',
     ];
 }

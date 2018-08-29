@@ -10,13 +10,13 @@ use yii\web\AssetBundle;
 
 class LayerAsset extends AssetBundle
 {
-    public $sourcePath = '@vendor/myzero1/yii2-theme-adminlteiframe/src/assets/static/plugins/layer';
+    public $sourcePath = '@vendor/myzero1/yii2-theme-adminlteiframe/src/assets/static/plugins';
     public $css = [
-        'theme/default/layer.css',
+        'libs/layer/theme/default/layer.css',
     ];
 
     public $js = [
-        'layer.js',
-        'layer-use.js',
+        'libs/layer/layer.js',
+        'use/layer.js',
     ];
 }
