@@ -28,7 +28,6 @@ use <?= $generator->indexWidgetType === 'grid' ? "yii\\grid\\GridView" : "yii\\w
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 myzero1\adminlteiframe\gii\GiiAsset::register($this);
-myzero1\adminlteiframe\assets\php\components\plugins\BootstrapTableAsset::register($this);
 
 $this->title = <?= $title ?>;
 $this->params['breadcrumbs'][] = $this->title;
