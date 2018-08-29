@@ -13,6 +13,9 @@ Show time
 ![](screenshot/5.png)
 ![](screenshot/6.png)
 ![](screenshot/7.png)
+![](screenshot/8.png)
+![](screenshot/9.png)
+![](screenshot/10.png)
 
 Installation
 ------------
