@@ -17,8 +17,6 @@ class MainAsset extends AssetBundle
         'css/ionicons.min.css',
         'css/AdminLTE.2.3.8.min.css',
         'css/skins/all-skins.min.css',
-        'css/app/main.css',
-        'css/app/custom.css',
     ];
 
     public $js = [
