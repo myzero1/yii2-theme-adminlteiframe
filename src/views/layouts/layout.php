@@ -5,11 +5,10 @@
      * @var \yii\web\View $this View
      * @var string $content Content
      */
-
-    use myzero1\adminlteiframe\assets\php\components\IndexIframeAsset;
+    
     use yii\helpers\Html;
 
-    $bundle = IndexIframeAsset::register($this);
+    $bundle = myzero1\adminlteiframe\assets\php\components\LayoutAsset::register($this);
     $profile = [
         'avatarUrl' => sprintf('%s/img/myzero1.jpg', $bundle->baseUrl),
         'username' => Yii::$app->user->isGuest ? '' : '管理员',
@@ -19,7 +18,7 @@
         'profileUrl' => '#',
     ];
 
-    $skin = \Yii::$app->assetManager->bundles['myzero1\adminlteiframe\assets\php\components\IndexIframeAsset']->skin;
+    $skin = \Yii::$app->assetManager->bundles['myzero1\adminlteiframe\assets\php\components\LayoutAsset']->skin;
 ?>
 
 <?php  $this->beginPage() ?>

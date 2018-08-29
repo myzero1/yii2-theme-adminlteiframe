@@ -8,7 +8,7 @@ use yii\web\AssetBundle;
  * Main asset for the `adminlte` theming
  */
 
-class ListIframeAsset extends AssetBundle
+class MainAsset extends AssetBundle
 {
     public $sourcePath = '@vendor/myzero1/yii2-theme-adminlteiframe/src/assets/static/adminlteiframe';
     //public $baseUrl = '@web';
@@ -26,18 +26,14 @@ class ListIframeAsset extends AssetBundle
         'js/app.js',
         'js/app_iframe.js',
         'js/plugins/daterangepicker.js',
-        'js/app/list-crud.js',
-        'js/app/utils.js',
     ];
 
     public $depends = [
         'yii\web\JqueryAsset',
         'yii\bootstrap\BootstrapPluginAsset',
-        'myzero1\adminlteiframe\assets\php\components\plugins\SwitchAsset',
-        // 'myzero1\adminlteiframe\assets\php\components\plugins\BootstrapDatePickerAsset',
-        'myzero1\adminlteiframe\assets\php\components\plugins\DataRangePickerAsset',
-        // 'myzero1\adminlteiframe\assets\php\components\plugins\DataTablesAsset',
         'myzero1\adminlteiframe\assets\php\components\plugins\LayerAsset',
+        'myzero1\adminlteiframe\assets\php\components\plugins\SwitchAsset',
+        'myzero1\adminlteiframe\assets\php\components\plugins\DataRangePickerAsset',
     ];
 
     public $skin = ''; // blue,orange

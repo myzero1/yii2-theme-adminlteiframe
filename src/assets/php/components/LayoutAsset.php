@@ -8,7 +8,7 @@ use yii\web\AssetBundle;
  * Main asset for the `adminlte` theming
  */
 
-class IndexIframeAsset extends AssetBundle
+class LayoutAsset extends AssetBundle
 {
     public $sourcePath = '@vendor/myzero1/yii2-theme-adminlteiframe/src/assets/static/adminlteiframe';
     //public $baseUrl = '@web';

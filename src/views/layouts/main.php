@@ -7,10 +7,9 @@
  * @var string $content Content
  */
 
-use myzero1\adminlteiframe\assets\php\components\ListIframeAsset;
 use yii\helpers\Html;
 
-$bundle = ListIframeAsset::register($this);
+$bundle = myzero1\adminlteiframe\assets\php\components\MainAsset::register($this);
 
 ?>
 
