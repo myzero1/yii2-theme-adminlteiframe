@@ -103,12 +103,23 @@ $(function(){
 		return false;
 	});
 	$('body').on('mouseenter', '#delete-selected', function () {
-		var ids = $(".adminlteiframe-gridview").yiiGridView("getSelectedRows");
-		var idsStr = ids.join(',');
-		var url = $(this).attr('url');
-		var base = url.split('ids=');
-		var urlNew = base[0] + 'ids=' + idsStr
-		$(this).attr('url', urlNew);
+		// var ids = $(".adminlteiframe-gridview").yiiGridView("getSelectedRows");
+		// var idsStr = ids.join(',');
+
+		var target = $(this);
+
+		var checked = $('.adminlteiframe-gridview .fixed-table-body-columns input[name="z1selected[]"]:checked');
+		var checkedValue = new Array();
+		checked.each(function(){
+			checkedValue.push($(this).val());
+		})
+		var checkedValueStr = checkedValue.join(',');
+
+		var url = target.attr('url');
+		var base = url.split('z1selected=');
+		var urlNew = base[0] + 'z1selected=' + checkedValueStr
+		target.attr('url', urlNew);
+		
 		return false;
 	});
 });
