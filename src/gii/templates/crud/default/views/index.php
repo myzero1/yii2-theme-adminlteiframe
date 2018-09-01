@@ -46,9 +46,12 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= !empty($generator->searchModelClass) ? "// 'filterModel' => \$searchModel,\n        'columns' => [\n" : "'columns' => [\n"; ?>
             // ['class' => 'yii\grid\SerialColumn'],
             [
-                'class' => yii\grid\CheckboxColumn::className(),
-                'name' => 'id',
                 'headerOptions' => ['width'=>'30'],
+                'class' => yii\grid\CheckboxColumn::className(),
+                'name' => 'z1selected',
+                'checkboxOptions' => function ($model, $key, $index, $column) {
+                    return ['value' => $model->id];
+                },
             ],
 
 <?php
@@ -80,21 +83,21 @@ if (($tableSchema = $generator->getTableSchema()) === false) {
                     'view' => function ($url, $model, $key) {
                         $options = array_merge([
                             'class'=>'btn btn-info btn-xs use-layer',
-                            'layer-config' => sprintf('{type:2,title:"%s",content:"%s",shadeClose:false}', Yii::t('yii', 'View') . ' ' . <?= $title ?>, $url) ,
+                            'layer-config' => sprintf('{type:2,title:"%s",content:"%s",shadeClose:false}', Yii::t('yii', 'View'), $url) ,
                         ]);
                         return Html::a(Yii::t('yii', 'View'), '#', $options);
                     },
                     'update' => function ($url, $model, $key) {
                         $options = array_merge([
                             'class'=>'btn btn-primary btn-xs use-layer',
-                            'layer-config' => sprintf('{type:2,title:"%s",content:"%s",shadeClose:false}', Yii::t('yii', 'Update') . ' ' . <?= $title ?>, $url) ,
+                            'layer-config' => sprintf('{type:2,title:"%s",content:"%s",shadeClose:false}', Yii::t('yii', 'Update'), $url) ,
                         ]);
                         return Html::a(Yii::t('yii', 'Update'), '#', $options);
                     },
                     'delete' => function ($url, $model, $key) {
                         $options = array_merge([
                             'class'=>'btn btn-danger btn-xs use-layer',
-                            'layer-config' => sprintf('{icon:3,area:["500px","200px"],type:0,title:"%s",content:"%s",shadeClose:false,btn:["确定","取消"],yes:function(index,layero){$.post("%s", {}, function(str){$(layero).find(".layui-layer-content").html(str);});},btn2:function(index, layero){layer.close(index);}}', Yii::t('yii', 'Delete') . ' ' . <?= $title ?>, '一旦删除，不能找回，你确定删除吗？',$url) ,
+                            'layer-config' => sprintf('{icon:3,area:["500px","200px"],type:0,title:"%s",content:"%s",shadeClose:false,btn:["确定","取消"],yes:function(index,layero){$.post("%s", {}, function(str){$(layero).find(".layui-layer-content").html(str);});},btn2:function(index, layero){layer.close(index);}}', Yii::t('yii', 'Delete'), '一旦删除，不能找回，你确定删除吗？',$url) ,
                         ]);
                         return Html::a(Yii::t('yii', 'Delete'), '#', $options);
                     }

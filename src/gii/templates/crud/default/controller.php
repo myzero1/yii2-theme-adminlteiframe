@@ -116,7 +116,7 @@ class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->bas
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             Yii::$app->getSession()->setFlash('success', '添加成功');
-            return $this->redirectParent(['index']);
+            return \myzero1\adminlteiframe\helpers\Tool::redirectParent(['index']);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -136,7 +136,7 @@ class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->bas
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             Yii::$app->getSession()->setFlash('success', '修改成功');
-            return $this->redirectParent(['index']);
+            return \myzero1\adminlteiframe\helpers\Tool::redirectParent(['index']);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -164,12 +164,12 @@ class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->bas
      * <?= implode("\n     * ", $actionParamComments) . "\n" ?>
      * @return mixed
      */
-    public function actionDeleteSelected($ids)
+    public function actionDeleteSelected($z1selected)
     {
-        if (empty($ids)) {
-            return 'ids 不能为空。';
+        if (empty($z1selected)) {
+            return 'z1selected 不能为空。';
         } else {
-            <?= $modelClass ?>::deleteAll(['id' => explode(',', $ids)]); 
+            <?= $modelClass ?>::deleteAll(['id' => explode(',', $z1selected)]); 
 
             return $this->redirect(['index']);
         }
@@ -200,17 +200,6 @@ class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->bas
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
-    }
-
-
-    /**
-     * redirect parent window.
-     * @param array ['user/delete',['id'=>1]]
-     * @return string
-     */
-    protected function redirectParent(array $params)
-    {
-        return sprintf('<script type="text/javascript">parent.location.href="%s"</script>',Url::to($params));
     }
 
 }
