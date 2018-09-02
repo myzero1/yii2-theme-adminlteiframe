@@ -109,3 +109,19 @@ OR
 http://localhost/path/to/index.php/gii
 ```
 
+
+#### use plugins ####
+
+* use echart *
+
+    Just add a "div" element as flowlling:
+
+    ```
+    <div data-provide="echarts" id='client-chart' style="width: 100%;height:250px;" data-echarts-config="{title: {text: '折线图基本',left: 'center'}}"></div>
+    
+    ```
+
+    ![](https://github.com/myzero1/show-time/blob/master/yii2-theme-adminlteiframe/screenshot/101.png)
+
+
+
