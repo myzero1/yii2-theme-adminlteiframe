@@ -1,5 +1,5 @@
 function applyEcharts(){
-    $('div[data-provide="echarts"]').each(function() {
+    $('div[data-provide="z1echarts"]').each(function() {
         var myChart = echarts.init(document.getElementById($(this).attr('id')));
 
         var defaultConfig = {

@@ -112,21 +112,21 @@ http://localhost/path/to/index.php/gii
 
 #### use plugins ####
 
-* use echart
+* ` use echart `
 
     Just add code  as flowlling, in view:
 
     ```
     <?php myzero1\adminlteiframe\assets\php\components\plugins\EchartsAsset::register($this); ?>
     
-    <div data-provide="echarts" id='client-chart' style="width: 100%;height:250px;" data-echarts-config="{title: {text: '折线图基本',left: 'center'}}"></div>
+    <div data-provide="z1echarts" id='client-chart' style="width: 100%;height:250px;" data-echarts-config="{title: {text: '折线图基本',left: 'center'}}"></div>
     
     ```
 
     ![](https://github.com/myzero1/show-time/blob/master/yii2-theme-adminlteiframe/screenshot/101.png)
 
 
-* use datarangepicker
+*  ` use datarangepicker `
 
     Just add code  as flowlling, in view:
 
@@ -134,10 +134,29 @@ http://localhost/path/to/index.php/gii
     <?php myzero1\adminlteiframe\assets\php\components\plugins\DataRangePickerAsset::register($this); ?>
     
     <?php echo $form->field($model, 'date')->textInput(['data-provide' =>"z1datarangepicker",'data-z1datarangepicker-config' => '{singleDatePicker: false}']) ?>
+
+    Or
+
+    <input type="text" name="username" data-provide="z1datarangepicker" data-z1datarangepicker-config="{singleDatePicker: false}" >
     
     ```
 
     ![](https://github.com/myzero1/show-time/blob/master/yii2-theme-adminlteiframe/screenshot/201.png)
+
+
+
+*  ` use layer `
+
+    Just add code  as flowlling, in view:
+
+    ```
+    <?php myzero1\adminlteiframe\assets\php\components\plugins\LayerAsset::register($this); ?>
+    
+    <a href="#" data-provide="z1layer" layer-config='{scrollbar:false,area:["350px","340px"],type:2,title:"联系方式",content:"/site/contact",shadeClose:false}'>联系方式</a>
+
+    ```
+
+    ![](https://github.com/myzero1/show-time/blob/master/yii2-theme-adminlteiframe/screenshot/301.png)
 
 
 

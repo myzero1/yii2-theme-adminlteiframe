@@ -1,6 +1,6 @@
 $(function(){
     $(document).on('click', '.use-layer',  function(){
-/*        
+      /*        
         //弹出一个iframe层
         $('#parentIframe').on('click', function(){
         layer.open({
@@ -16,7 +16,42 @@ $(function(){
 
         type: ["dialog", "page", "iframe", "loading", "tips"],// 依次为0,1,2,3,4
 
-*/
+      */
+        var defaultConfig = {
+            type: 1,
+            title: 'title',
+            maxmin: true,
+            shadeClose: true, //点击遮罩关闭层
+            area : ['660px' , '400px'],
+            content: 'content',
+            maxmin: false
+        };
+
+        var config = eval('(' + $(this).attr('layer-config') + ')');
+
+        $.extend(defaultConfig, config);
+
+        layer.open(defaultConfig);
+    });
+
+    $(document).on('click', 'a[data-provide="z1layer"]',  function(){
+      /*        
+        //弹出一个iframe层
+        $('#parentIframe').on('click', function(){
+        layer.open({
+          type: 2,
+          title: 'iframe父子操作',
+          maxmin: true,
+          shadeClose: true, //点击遮罩关闭层
+          area : ['800px' , '520px'],
+          content: 'test/iframe.html'
+        });
+        });
+        https://layer.layui.com/hello.html
+
+        type: ["dialog", "page", "iframe", "loading", "tips"],// 依次为0,1,2,3,4
+
+      */
         var defaultConfig = {
             type: 1,
             title: 'title',
