@@ -112,16 +112,32 @@ http://localhost/path/to/index.php/gii
 
 #### use plugins ####
 
-* use echart *
+* use echart
 
-    Just add a "div" element as flowlling:
+    Just add a "div" element and  as flowlling:
 
     ```
+    <?php myzero1\adminlteiframe\assets\php\components\plugins\EchartsAsset::register($this); ?>
+    
     <div data-provide="echarts" id='client-chart' style="width: 100%;height:250px;" data-echarts-config="{title: {text: '折线图基本',left: 'center'}}"></div>
     
     ```
 
     ![](https://github.com/myzero1/show-time/blob/master/yii2-theme-adminlteiframe/screenshot/101.png)
+
+
+* use datarangepicker
+
+    Just add a "div" element and  as flowlling:
+
+    ```
+    <?php myzero1\adminlteiframe\assets\php\components\plugins\DataRangePickerAsset::register($this); ?>
+    
+    <?php echo $form->field($model, 'date')->textInput(['data-provide' =>"z1datarangepicker",'data-z1datarangepicker-config' => '{singleDatePicker: false}']) ?>
+    
+    ```
+
+    ![](https://github.com/myzero1/show-time/blob/master/yii2-theme-adminlteiframe/screenshot/201.png)
 
 
 
