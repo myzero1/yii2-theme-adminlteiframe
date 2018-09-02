@@ -22,4 +22,9 @@ class BootstrapTableAsset extends AssetBundle
         'libs/bootstrap-table/bootstrap-table-zh-CN.min.js',
         'libs/bootstrap-table/bootstrap-table-fixed-columns.js',
     ];
+
+    public $depends = [
+        'yii\web\JqueryAsset',
+        'yii\bootstrap\BootstrapPluginAsset',
+    ];
 }

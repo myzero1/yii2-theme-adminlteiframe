@@ -19,4 +19,8 @@ class LayerAsset extends AssetBundle
         'libs/layer/layer.js',
         'use/layer.js',
     ];
+
+    public $depends = [
+        'yii\web\JqueryAsset',
+    ];
 }

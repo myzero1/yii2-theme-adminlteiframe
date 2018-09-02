@@ -22,4 +22,8 @@ class DataRangePickerAsset extends AssetBundle
         'libs/daterangepicker/daterangepicker.js',
         'use/daterangepicker.js',
     ];
+
+    public $depends = [
+        'yii\web\JqueryAsset',
+    ];
 }

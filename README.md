@@ -125,7 +125,6 @@ http://localhost/path/to/index.php/gii
 
     ![](https://github.com/myzero1/show-time/blob/master/yii2-theme-adminlteiframe/screenshot/101.png)
 
-
 *  ` use datarangepicker `
 
     Just add code  as flowlling, in view:
@@ -143,8 +142,6 @@ http://localhost/path/to/index.php/gii
 
     ![](https://github.com/myzero1/show-time/blob/master/yii2-theme-adminlteiframe/screenshot/201.png)
 
-
-
 *  ` use layer `
 
     Just add code  as flowlling, in view:
@@ -157,6 +154,19 @@ http://localhost/path/to/index.php/gii
     ```
 
     ![](https://github.com/myzero1/show-time/blob/master/yii2-theme-adminlteiframe/screenshot/301.png)
+
+*  ` use wysihtml5 `
+
+    Just add code  as flowlling, in view:
+
+    ```
+    <?php myzero1\adminlteiframe\assets\php\components\plugins\Wysihtml5Asset::register($this); ?>
+    
+    <textarea data-provide="z1wysihtml5" data-z1wysihtml5-config="{}" rows="10" cols="80"></textarea>
+
+    ```
+
+    ![](https://github.com/myzero1/show-time/blob/master/yii2-theme-adminlteiframe/screenshot/401.png)
 
 
 

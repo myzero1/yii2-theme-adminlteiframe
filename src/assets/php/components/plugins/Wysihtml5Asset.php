@@ -8,16 +8,18 @@ use yii\web\AssetBundle;
  * Main asset for the `adminlte` theming
  */
 
-class SwitchAsset extends AssetBundle
+class Wysihtml5Asset extends AssetBundle
 {
     public $sourcePath = '@vendor/myzero1/yii2-theme-adminlteiframe/src/assets/static/plugins';
-    //public $baseUrl = '@web';
     public $css = [
-        'libs/bootstrap-switch/bootstrap-switch.css',
+        'libs/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css',
     ];
 
     public $js = [
-        'libs/bootstrap-switch/bootstrap-switch.js',
+        'libs/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js',
+        'libs/bootstrap-wysihtml5/locales/bootstrap-wysihtml5.en-US.js',
+        'libs/bootstrap-wysihtml5/locales/bootstrap-wysihtml5.zh-CN.js',
+        'use/wysihtml5.js',
     ];
 
     public $depends = [
