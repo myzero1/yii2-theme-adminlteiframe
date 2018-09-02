@@ -114,7 +114,7 @@ http://localhost/path/to/index.php/gii
 
 * use echart
 
-    Just add coding  as flowlling, in view:
+    Just add code  as flowlling, in view:
 
     ```
     <?php myzero1\adminlteiframe\assets\php\components\plugins\EchartsAsset::register($this); ?>
@@ -128,7 +128,7 @@ http://localhost/path/to/index.php/gii
 
 * use datarangepicker
 
-    Just add coding  as flowlling, in view:
+    Just add code  as flowlling, in view:
 
     ```
     <?php myzero1\adminlteiframe\assets\php\components\plugins\DataRangePickerAsset::register($this); ?>
