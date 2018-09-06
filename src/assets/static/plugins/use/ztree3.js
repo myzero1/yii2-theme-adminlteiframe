@@ -5,6 +5,93 @@
 
 */
 function applyz1ztree(){
+    initUl();
+    initSelect();
+    // initInput();
+
+
+}
+
+function initUl(){
+/*
+  {
+    "setting": {...},
+    "data": [...],
+  }
+
+    var setting = {
+      view: {
+        selectedMulti: false
+      },
+      async: {
+        enable: true,
+        url:"../asyncData/getNodes.php",
+        autoParam:["id", "name=n", "level=lv"],
+        otherParam:{"otherParam":"zTreeAsyncTest"},
+        dataFilter: filter
+      },
+      callback: {
+        beforeClick: beforeClick,
+        beforeAsync: beforeAsync,
+        onAsyncError: onAsyncError,
+        onAsyncSuccess: onAsyncSuccess
+      }
+    };
+    $.fn.zTree.init($("#treeDemo"), setting);
+
+    $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+  
+*/
+    $('ul[data-provide="z1ztree"]').each(function() {
+        var target = $(this);
+
+        if (!target.hasClass("ztree")) {
+          alert('The element must has the ztree class');
+          return false;
+        }
+
+        var defaultConfig = {
+            "setting": {
+              data: {
+                simpleData: {
+                  enable: true
+                }
+              },
+              async: {
+                enable: false
+              }
+            },
+            "data": [
+              {id:1, pId:0, name:"level1"},
+              {id:2, pId:0, name:"level1"},
+              {id:3, pId:0, name:"level1", open:true},
+              {id:6, pId:3, name:"level2"},
+              {id:4, pId:3, name:"level2"},
+              {id:41, pId:3, name:"level2"}
+            ]
+          };
+
+          var configSetting = $(this).attr('data-z1ztree-config');
+          if (configSetting=='undefied') {
+              configSetting = {};
+          } else {
+              configSetting = eval('(' + configSetting + ')');
+          }
+          var config = $.extend({}, defaultConfig, configSetting);
+
+          if (config.setting.async.enable) {
+            $.fn.zTree.init(target, config.setting);
+          } else {
+            $.fn.zTree.init(target, config.setting, config.data);
+          }
+    });
+}
+
+function initSelect(){
+
+}
+
+function initInput(){
     $('input[data-provide="z1ztree"]').each(function() {
         var defaultConfig = {
             "setting": {
@@ -27,14 +114,25 @@ function applyz1ztree(){
             },
             "isAjax": false,
             "data": [
-              { id:1, pId:0, name:"fuzzySearch demo 1", t:"id=1", open:true},
-              { id:11, pId:1, name:"[]\\^$.|?*+():keywords with js meta characters", t:"id=11"},
-              { id:12, pId:1, name:"{}<>'\"~`!@#%&-;:/,=:keywords with other characters", t:"id=12"},
-              { id:2, pId:0, name:"fuzzySearch demo 2", t:"id=2", open:true},
-              { id:21, pId:2, name:"uppercase ABDEFGHINQRT:keywords igonore case", t:"id=21"},
-              { id:22, pId:2, name:"lowercase abdefghinqrt:keywords igonore case", t:"id=21"},
-              { id:3, pId:0, name:"fuzzySearch demo 3", t:"id=3", open:true },
-              { id:31, pId:3, name:"blank blank:keywords with blank", t:"id=31"}
+              {id:1, pId:0, name:"Beijing"},
+              {id:2, pId:0, name:"Tianjin"},
+              {id:3, pId:0, name:"Shanghai"},
+              {id:6, pId:0, name:"Chongqing"},
+              {id:4, pId:0, name:"Hebei Province", open:true},
+              {id:41, pId:4, name:"Shijiazhuang"},
+              {id:42, pId:4, name:"Baoding"},
+              {id:43, pId:4, name:"Handan"},
+              {id:44, pId:4, name:"Chengde"},
+              {id:5, pId:0, name:"Guangdong Province", open:true},
+              {id:51, pId:5, name:"Guangzhou"},
+              {id:52, pId:5, name:"Shenzhen"},
+              {id:53, pId:5, name:"Dongguan"},
+              {id:54, pId:5, name:"Fushan"},
+              {id:6, pId:0, name:"Fujian Province", open:true},
+              {id:61, pId:6, name:"Fuzhou"},
+              {id:62, pId:6, name:"Xiamen"},
+              {id:63, pId:6, name:"Quanzhou"},
+              {id:64, pId:6, name:"Sanming"}
             ]
           };
 
@@ -71,6 +169,7 @@ function applyz1ztree(){
           target.after(ztreeLayer);
 
           $.fn.zTree.init($("#"+ztreeId), setting, data);
+          fuzzySearch(ztreeId,'#ztreeLayer-search-name',null,true); //initialize fuzzysearch function
     });
 }
 
