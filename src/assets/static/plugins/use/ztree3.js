@@ -6,8 +6,7 @@
 */
 function applyz1ztree(){
     initUl();
-    initSelect();
-    // initInput();
+    initInput();
 
 
 }
@@ -87,52 +86,59 @@ function initUl(){
     });
 }
 
-function initSelect(){
-
-}
-
 function initInput(){
     $('input[data-provide="z1ztree"]').each(function() {
+        var ztreeId = 'ztree-'+Math.floor(Math.random()*(999999999));
+        var target = $(this);
+
         var defaultConfig = {
             "setting": {
               check: {
-                enable: true//checkbox
+                enable: true,
+                chkboxType: {"Y":"", "N":""}
               },
               view: {
-                nameIsHTML: true, //allow html in node name for highlight use       
-                selectedMulti: false
-              },
-              edit: {
-                enable: false,
-                editNameSelectAll: false
+                dblClickExpand: false
               },
               data: {
                 simpleData: {
                   enable: true
                 }
+              },
+              async: {
+                enable: false
+              },
+              callback: {
+                // beforeClick: beforeClick,
+                // onCheck: onCheck
+                beforeClick: function(treeId, treeNode) {
+                  var zTree = $.fn.zTree.getZTreeObj(ztreeId);
+                  zTree.checkNode(treeNode, !treeNode.checked, null, true);
+                  return false;
+                },
+                onCheck: function(e, treeId, treeNode) {
+                  var zTree = $.fn.zTree.getZTreeObj(ztreeId),
+                  nodes = zTree.getCheckedNodes(true),
+                  ztvalue = new Array();
+                  ztname = new Array();
+                  for (var i=0, l=nodes.length; i<l; i++) {
+                    ztvalue.push(nodes[i].value);
+                    ztname.push(nodes[i].name);
+                  }
+
+                  target.attr("value", ztvalue.join(','));
+                  $(".ztreeShowInput").attr("value", ztname.join(','));
+
+                }
               }
             },
-            "isAjax": false,
             "data": [
-              {id:1, pId:0, name:"Beijing"},
-              {id:2, pId:0, name:"Tianjin"},
-              {id:3, pId:0, name:"Shanghai"},
-              {id:6, pId:0, name:"Chongqing"},
-              {id:4, pId:0, name:"Hebei Province", open:true},
-              {id:41, pId:4, name:"Shijiazhuang"},
-              {id:42, pId:4, name:"Baoding"},
-              {id:43, pId:4, name:"Handan"},
-              {id:44, pId:4, name:"Chengde"},
-              {id:5, pId:0, name:"Guangdong Province", open:true},
-              {id:51, pId:5, name:"Guangzhou"},
-              {id:52, pId:5, name:"Shenzhen"},
-              {id:53, pId:5, name:"Dongguan"},
-              {id:54, pId:5, name:"Fushan"},
-              {id:6, pId:0, name:"Fujian Province", open:true},
-              {id:61, pId:6, name:"Fuzhou"},
-              {id:62, pId:6, name:"Xiamen"},
-              {id:63, pId:6, name:"Quanzhou"},
-              {id:64, pId:6, name:"Sanming"}
+              {id:1, pId:0, name:"l11", value:"v11"},
+              {id:2, pId:0, name:"l12", value:"v12"},
+              {id:3, pId:0, name:"l13", value:"v13", open:true},
+              {id:4, pId:3, name:"l21", value:"v21"},
+              {id:5, pId:3, name:"l22", value:"v22"},
+              {id:6, pId:3, name:"l23", value:"v23"}
             ]
           };
 
@@ -146,30 +152,27 @@ function initInput(){
           var setting = config.setting;
           var data = config.data;
 
-          if (config.isAjax) {
-            $data = [];
-          }
-
-          var target = $(this);
-          var ztreeId = 'ztree-'+Math.floor(Math.random()*(999999999));
           var ztreeLayer = '\
-          <div id="ztreeLayer-layout">\
-            <div id="ztreeLayer-search">\
-              <input type="text" id="ztreeLayer-search-name" />\
+          <div class="ztreeLayer-layout" style="padding: 10px;border: 1px solid #d2d6de;margin-top: 2px;overflow: auto;">\
+            <div class="ztreeLayer-search">\
+              <input type="text" class="ztreeLayer-search-name" style="width: 100%;" />\
             </div>\
             <div id="ztreeLayer-body">\
-            <ul id="'+ztreeId+'" class="ztree" style="margin-top:0; width:180px; height: 300px;"></ul>\
+            <ul id="'+ztreeId+'" class="ztree ztree-content" style="margin-top:0; width:100%; height: 200px;overflow: auto;"></ul>\
             </div>\
           </div>\
           ';
-          var ztreeVal = '<input type="hidden" name="'+target.attr('name')+'" />';
 
-          target.attr('name', 'ztreeShow');
-          target.after(ztreeVal);
+          var width = target.outerWidth() - 2;
+          var height = target.outerHeight() - 15;
+
+          var ztreeShow = '<input type="text" class="ztreeShowInput" style="position: absolute;top: 1px;left:1px;border: 0;width:'+width+'px;height:'+height+'px" />';
+
           target.after(ztreeLayer);
+          target.after(ztreeShow);
 
           $.fn.zTree.init($("#"+ztreeId), setting, data);
-          fuzzySearch(ztreeId,'#ztreeLayer-search-name',null,true); //initialize fuzzysearch function
+          fuzzySearch(ztreeId,'.ztreeLayer-search-name',null,true); //initialize fuzzysearch function
     });
 }
 
