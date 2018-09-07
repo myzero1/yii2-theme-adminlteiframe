@@ -123,7 +123,9 @@ function initInput(){
                   ztname = new Array();
                   for (var i=0, l=nodes.length; i<l; i++) {
                     ztvalue.push(nodes[i].value);
-                    ztname.push(nodes[i].name);
+                    // ztname.push(nodes[i].name);
+                    // str.replace(/<[^>]+>/g,"");//去掉所有的html标记
+                    ztname.push(nodes[i].name.replace(/<[^>]+>/g,""));
                   }
 
                   target.attr("value", ztvalue.join(','));
@@ -164,9 +166,9 @@ function initInput(){
           ';
 
           var width = target.outerWidth() - 2;
-          var height = target.outerHeight() - 15;
+          var height = target.outerHeight() - 2;
 
-          var ztreeShow = '<input type="text" class="ztreeShowInput" style="position: absolute;top: 1px;left:1px;border: 0;width:'+width+'px;height:'+height+'px" />';
+          var ztreeShow = '<input type="text" class="ztreeShowInput" style="padding-left: 10px;position: absolute;top: 1px;left:1px;border: 0;width:'+width+'px;height:'+height+'px" />';
 
           target.after(ztreeLayer);
           target.after(ztreeShow);
