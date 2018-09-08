@@ -213,4 +213,4 @@ http://localhost/path/to/index.php/gii
    <?php echo $form->field($model, 'id')->dropDownList(['n1'=>'v1','n2'=>'v2',] ,['data-provide' =>"z1select2", "multiple"=>"multiple"])?>
     
     ```
-    ![](https://github.com/myzero1/show-time/blob/master/yii2-theme-adminlteiframe/screenshot/601.png)
+    ![](https://github.com/myzero1/show-time/blob/master/yii2-theme-adminlteiframe/screenshot/602.png)
