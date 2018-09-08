@@ -168,5 +168,32 @@ http://localhost/path/to/index.php/gii
 
     ![](https://github.com/myzero1/show-time/blob/master/yii2-theme-adminlteiframe/screenshot/401.png)
 
+*  ` use ztree `
 
+    use ztree,in ul. You can set data-provide="z1ztree" to use it and set data-z1ztree-config='{...} to set it,you can set the primary parameter of ztree in data-z1ztree-config.  Just add code  as flowlling, in view:
+    ```
+    <ul id="mytes" data-provide="z1ztree" data-z1ztree-config='{data:[{ id:1, pId:0, name:"l1", open:true},{ id:2, pId:0, name:"l1", open:true},{ id:3, pId:1, name:"l2"}]}' class="ztree"></ul>
 
+    ```
+    ![](https://github.com/myzero1/show-time/blob/master/yii2-theme-adminlteiframe/screenshot/501.png)
+    
+    use ztree by default,in input.Just add code  as flowlling, in view:
+    ```
+    <?php echo $form->field($model, 'id')->textInput(['data-provide' =>"z1ztree"])?>
+
+    ```
+    ![](https://github.com/myzero1/show-time/blob/master/yii2-theme-adminlteiframe/screenshot/502.png)
+    
+    use ztree without parents,in input.Just add code  as flowlling, in view:
+    ```
+    <?php echo $form->field($model, 'id')->textInput(['data-provide' =>"z1ztree",'data-z1ztree-config' => '{"withParents": false}'])?>
+
+    ```
+    ![](https://github.com/myzero1/show-time/blob/master/yii2-theme-adminlteiframe/screenshot/503.png)
+    
+    use ztree by checkbox .Just add code  as flowlling, in view:
+    ```
+    <?php echo $form->field($model, 'id')->textInput(['data-provide' =>"z1ztree",'data-z1ztree-config' => '{"checkType": "checkbox"}'])?>
+
+    ```
+    ![](https://github.com/myzero1/show-time/blob/master/yii2-theme-adminlteiframe/screenshot/504.png)
