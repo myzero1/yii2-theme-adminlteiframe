@@ -92,15 +92,37 @@ function initInput(){
         var ztreeId = 'ztree-' + inputNum;
         var ztreeSearchId = 'ztree-search' + inputNum;
         var target = $(this);
+/*
+
+for radio
+check: {
+  enable: true,
+  chkStyle: 'radio',
+  chkboxType: { "Y": "", "N": "" },
+  radioType: 'all'
+},
+
+for checkbox
+check: {
+  enable: true,
+  chkStyle: 'checkbox',
+  chkboxType: { "Y": "p", "N": "p" },
+  radioType: 'all'
+},
+
+*/
 
         var defaultConfig = {
+            "withParents": true,
             "setting": {
               check: {
                 enable: true,
-                chkboxType: {"Y":"", "N":""}
+                chkStyle: 'checkbox',
+                chkboxType: { "Y": "ps", "N": "ps" },
+                radioType: 'all'
               },
               view: {
-                dblClickExpand: false
+                dblClickExpand: true
               },
               data: {
                 simpleData: {
@@ -111,12 +133,15 @@ function initInput(){
                 enable: false
               },
               callback: {
-                // beforeClick: beforeClick,
-                // onCheck: onCheck
                 beforeClick: function(treeId, treeNode) {
                   var zTree = $.fn.zTree.getZTreeObj(ztreeId);
                   zTree.checkNode(treeNode, !treeNode.checked, null, true);
                   return false;
+                },
+                beforeCheck: function(treeId, treeNode) {
+                  if (defaultConfig.setting.check.chkStyle == 'radio') {
+                    return !treeNode.isParent;//当是父节点 返回false 不让选取
+                  }
                 },
                 onCheck: function(e, treeId, treeNode) {
                   var zTree = $.fn.zTree.getZTreeObj(ztreeId),
@@ -128,11 +153,27 @@ function initInput(){
                     // ztname.push(nodes[i].name);
                     // str.replace(/<[^>]+>/g,"");//去掉所有的html标记
                     ztname.push(nodes[i].name.replace(/<[^>]+>/g,""));
+
+                    // just for radio
+                    if (defaultConfig.setting.check.chkStyle == 'radio' && defaultConfig.withParents) {
+                      var tmpNode = nodes[i];
+                      while( tmpNode.getParentNode() != null){
+                        ztvalue.push(tmpNode.getParentNode().value);
+                        ztname.push(tmpNode.getParentNode().name.replace(/<[^>]+>/g,""));
+                        tmpNode = tmpNode.getParentNode();
+                      }
+                    }
                   }
 
-                  target.attr("value", ztvalue.join(','));
-                  target.next(".ztreeShowInput").attr("value", ztname.join(','));
-
+                  if (defaultConfig.setting.check.chkStyle == 'radio') {
+                    ztvalue.reverse();
+                    ztname.reverse();
+                    target.attr("value", ztvalue.join('>'));
+                    target.next(".ztreeShowInput").attr("value", ztname.join('>'));
+                  } else {
+                    target.attr("value", ztvalue.join(','));
+                    target.next(".ztreeShowInput").attr("value", ztname.join(','));
+                  }
                 }
               }
             },
@@ -142,7 +183,8 @@ function initInput(){
               {id:3, pId:0, name:"l13", value:"v13", open:true},
               {id:4, pId:3, name:"l21", value:"v21"},
               {id:5, pId:3, name:"l22", value:"v22"},
-              {id:6, pId:3, name:"l23", value:"v23"}
+              {id:6, pId:3, name:"l23", value:"v23"},
+              {id:7, pId:6, name:"l31", value:"v31"}
             ]
           };
 
