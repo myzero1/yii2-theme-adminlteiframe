@@ -1,6 +1,5 @@
 function applyz1select2(){
-    $('textarea[data-provide="z1select2"]').each(function() {
-
+    $('select[data-provide="z1select2"]').each(function() {
         var defaultConfig = {
           language: "zh-CN", //设置 提示语言
           width: "100%", //设置下拉框的宽度
