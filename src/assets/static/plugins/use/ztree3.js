@@ -88,7 +88,9 @@ function initUl(){
 
 function initInput(){
     $('input[data-provide="z1ztree"]').each(function() {
-        var ztreeId = 'ztree-'+Math.floor(Math.random()*(999999999));
+        var inputNum = Math.floor(Math.random()*(999999999));
+        var ztreeId = 'ztree-' + inputNum;
+        var ztreeSearchId = 'ztree-search' + inputNum;
         var target = $(this);
 
         var defaultConfig = {
@@ -129,7 +131,7 @@ function initInput(){
                   }
 
                   target.attr("value", ztvalue.join(','));
-                  $(".ztreeShowInput").attr("value", ztname.join(','));
+                  target.next(".ztreeShowInput").attr("value", ztname.join(','));
 
                 }
               }
@@ -158,7 +160,7 @@ function initInput(){
           <div class="ztree-input-layout" style="display:none; background: #fff;z-index: 9999;position: absolute;width:'+target.outerWidth()+'px">\
             <div class="ztreeLayer-layout" style="padding: 10px;border: 1px solid #d2d6de;margin-top: 2px;overflow: auto;">\
               <div class="ztreeLayer-search">\
-                <input type="text" placeholder="请输入关键词" class="ztreeLayer-search-name" style="width: 100%;" />\
+                <input type="text" id="'+ztreeSearchId+'" placeholder="请输入关键词" class="ztreeLayer-search-name" style="width: 100%;" />\
               </div>\
               <div id="ztreeLayer-body">\
               <ul id="'+ztreeId+'" class="ztree ztree-content" style="margin-top:0; width:100%; height: max-200px;overflow: auto;"></ul>\
@@ -170,19 +172,19 @@ function initInput(){
           var width = target.outerWidth() - 2;
           var height = target.outerHeight() - 2;
 
-          var ztreeShow = '<input type="text" readonly value="" onclick="showMenu();" class="ztreeShowInput" style="padding-left: 10px;position: absolute;top: 1px;left:1px;border: 0;width:'+width+'px;height:'+height+'px" />';
+          var ztreeShow = '<input type="text" readonly value="" onclick="showMenu($(this));" class="ztreeShowInput" style="padding-left: 10px;position: absolute;top: 1px;left:1px;border: 0;width:'+width+'px;height:'+height+'px" />';
 
           target.after(ztreeLayer);
           target.after(ztreeShow);
 
           $.fn.zTree.init($("#"+ztreeId), setting, data);
-          fuzzySearch(ztreeId,'.ztreeLayer-search-name',null,true); //initialize fuzzysearch function
+          fuzzySearch(ztreeId,"#"+ztreeSearchId,null,true); //initialize fuzzysearch function
     });
 }
 
 
-function showMenu() {
-  $(".ztree-input-layout").slideDown("fast");
+function showMenu(target) {
+  target.next(".ztree-input-layout").slideDown("fast");
 
   $("body").bind("mousedown", onBodyDown);
 }
