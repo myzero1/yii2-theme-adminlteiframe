@@ -170,7 +170,7 @@ function initInput(){
           var width = target.outerWidth() - 2;
           var height = target.outerHeight() - 2;
 
-          var ztreeShow = '<input type="text" onclick="showMenu();" class="ztreeShowInput" style="padding-left: 10px;position: absolute;top: 1px;left:1px;border: 0;width:'+width+'px;height:'+height+'px" />';
+          var ztreeShow = '<input type="text" readonly value="" onclick="showMenu();" class="ztreeShowInput" style="padding-left: 10px;position: absolute;top: 1px;left:1px;border: 0;width:'+width+'px;height:'+height+'px" />';
 
           target.after(ztreeLayer);
           target.after(ztreeShow);
