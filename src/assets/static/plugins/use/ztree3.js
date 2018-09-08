@@ -160,7 +160,7 @@ function initInput(){
           <div class="ztree-input-layout" style="display:none; background: #fff;z-index: 9999;position: absolute;width:'+target.outerWidth()+'px">\
             <div class="ztreeLayer-layout" style="padding: 10px;border: 1px solid #d2d6de;margin-top: 2px;overflow: auto;">\
               <div class="ztreeLayer-search">\
-                <input type="text" id="'+ztreeSearchId+'" placeholder="请输入关键词" class="ztreeLayer-search-name" style="width: 100%;" />\
+                <input type="text" id="'+ztreeSearchId+'" placeholder="请输入关键词" class="ztreeLayer-search-name" style="width: 100%;padding-left:5px;" />\
               </div>\
               <div id="ztreeLayer-body">\
               <ul id="'+ztreeId+'" class="ztree ztree-content" style="margin-top:0; width:100%; height: max-200px;overflow: auto;"></ul>\
