@@ -155,12 +155,14 @@ function initInput(){
           var data = config.data;
 
           var ztreeLayer = '\
-          <div class="ztreeLayer-layout" style="padding: 10px;border: 1px solid #d2d6de;margin-top: 2px;overflow: auto;">\
-            <div class="ztreeLayer-search">\
-              <input type="text" class="ztreeLayer-search-name" style="width: 100%;" />\
-            </div>\
-            <div id="ztreeLayer-body">\
-            <ul id="'+ztreeId+'" class="ztree ztree-content" style="margin-top:0; width:100%; height: 200px;overflow: auto;"></ul>\
+          <div class="ztree-input-layout" style="display:none; background: #fff;z-index: 9999;position: absolute;width:'+target.outerWidth()+'px">\
+            <div class="ztreeLayer-layout" style="padding: 10px;border: 1px solid #d2d6de;margin-top: 2px;overflow: auto;">\
+              <div class="ztreeLayer-search">\
+                <input type="text" placeholder="请输入关键词" class="ztreeLayer-search-name" style="width: 100%;" />\
+              </div>\
+              <div id="ztreeLayer-body">\
+              <ul id="'+ztreeId+'" class="ztree ztree-content" style="margin-top:0; width:100%; height: max-200px;overflow: auto;"></ul>\
+              </div>\
             </div>\
           </div>\
           ';
@@ -168,7 +170,7 @@ function initInput(){
           var width = target.outerWidth() - 2;
           var height = target.outerHeight() - 2;
 
-          var ztreeShow = '<input type="text" class="ztreeShowInput" style="padding-left: 10px;position: absolute;top: 1px;left:1px;border: 0;width:'+width+'px;height:'+height+'px" />';
+          var ztreeShow = '<input type="text" onclick="showMenu();" class="ztreeShowInput" style="padding-left: 10px;position: absolute;top: 1px;left:1px;border: 0;width:'+width+'px;height:'+height+'px" />';
 
           target.after(ztreeLayer);
           target.after(ztreeShow);
@@ -176,6 +178,24 @@ function initInput(){
           $.fn.zTree.init($("#"+ztreeId), setting, data);
           fuzzySearch(ztreeId,'.ztreeLayer-search-name',null,true); //initialize fuzzysearch function
     });
+}
+
+
+function showMenu() {
+  $(".ztree-input-layout").slideDown("fast");
+
+  $("body").bind("mousedown", onBodyDown);
+}
+function hideMenu() {
+  $(".ztree-input-layout").fadeOut("fast");
+  $("body").unbind("mousedown", onBodyDown);
+}
+function onBodyDown(event) {
+  var tmp = $(event.target);
+
+  if (tmp.parents(".ztree-input-layout").length==0) {
+    hideMenu();
+  }
 }
 
 applyz1ztree();
