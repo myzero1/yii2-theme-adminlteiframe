@@ -197,3 +197,20 @@ http://localhost/path/to/index.php/gii
 
     ```
     ![](https://github.com/myzero1/show-time/blob/master/yii2-theme-adminlteiframe/screenshot/504.png)
+
+
+*  ` use select2 `
+
+    Use Single selection,Just add code  as flowlling, in view:
+    ```
+    <?php echo $form->field($model, 'id')->dropDownList(['n1'=>'v1','n2'=>'v2',] ,['data-provide' =>"z1select2"])?>
+    
+    ```
+    ![](https://github.com/myzero1/show-time/blob/master/yii2-theme-adminlteiframe/screenshot/601.png)
+    
+    Use Multi selection,Just add code  as flowlling, in view:
+    ```
+   <?php echo $form->field($model, 'id')->dropDownList(['n1'=>'v1','n2'=>'v2',] ,['data-provide' =>"z1select2", "multiple"=>"multiple"])?>
+    
+    ```
+    ![](https://github.com/myzero1/show-time/blob/master/yii2-theme-adminlteiframe/screenshot/601.png)
