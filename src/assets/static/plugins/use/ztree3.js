@@ -92,33 +92,29 @@ function initInput(){
         var ztreeId = 'ztree-' + inputNum;
         var ztreeSearchId = 'ztree-search' + inputNum;
         var target = $(this);
-/*
+        var radioCheck = {
+          enable: true,
+          chkStyle: 'radio',
+          chkboxType: { "Y": "", "N": "" },
+          radioType: 'all'
+        };
+        var checkboxCheck = {
+          enable: true,
+          chkStyle: 'checkbox',
+          chkboxType: { "Y": "s", "N": "s" }
+        };
 
-for radio
-check: {
-  enable: true,
-  chkStyle: 'radio',
-  chkboxType: { "Y": "", "N": "" },
-  radioType: 'all'
-},
-
-for checkbox
-check: {
-  enable: true,
-  chkStyle: 'checkbox',
-  chkboxType: { "Y": "p", "N": "p" },
-  radioType: 'all'
-},
-
-*/
-
+        /*
+          {"withParents": true,"checkType": "radio"}
+        */
         var defaultConfig = {
             "withParents": true,
+            "checkType": "radio", // checkbox
             "setting": {
               check: {
                 enable: true,
-                chkStyle: 'checkbox',
-                chkboxType: { "Y": "ps", "N": "ps" },
+                chkStyle: 'radio',
+                chkboxType: { "Y": "", "N": "" },
                 radioType: 'all'
               },
               view: {
@@ -155,7 +151,7 @@ check: {
                     ztname.push(nodes[i].name.replace(/<[^>]+>/g,""));
 
                     // just for radio
-                    if (defaultConfig.setting.check.chkStyle == 'radio' && defaultConfig.withParents) {
+                    if (defaultConfig.setting.check.chkStyle == 'radio' && config.withParents) {
                       var tmpNode = nodes[i];
                       while( tmpNode.getParentNode() != null){
                         ztvalue.push(tmpNode.getParentNode().value);
@@ -189,10 +185,15 @@ check: {
           };
 
           var configSetting = $(this).attr('data-z1ztree-config');
-          if (configSetting=='undefied') {
+          if (configSetting===undefined) {//undefined
               configSetting = {};
           } else {
               configSetting = eval('(' + configSetting + ')');
+              if (configSetting.checkType && configSetting.checkType=='checkbox') {
+                defaultConfig.setting.check = checkboxCheck;
+              } else {
+                defaultConfig.setting.check = radioCheck;
+              }
           }
           var config = $.extend({}, defaultConfig, configSetting);
           var setting = config.setting;
