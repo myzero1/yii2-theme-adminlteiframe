@@ -2,8 +2,8 @@
 
 /* @var $this \yii\web\View */
 /* @var $content string */
-use myzero1app\themes\adminlte\assets\ThemingAsset;
-use myzero1app\themes\adminlte\assets\widgets\Alert;
+use myzero1\rbacp\themes\adminlte\assets\ThemingAsset;
+use myzero1\rbacp\themes\adminlte\assets\widgets\Alert;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
