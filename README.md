@@ -52,8 +52,8 @@ return [
         'view' => [
             'theme' => [
                 'pathMap' => [
-                    // '@app/views' => '@vendor/dmstr/yii2-adminlte-asset/example-views/yiisoft/yii2-app' myzero1\theme\adminlteiframe
-                    '@app/views' => '@vendor/myzero1/yii2-theme-adminlteiframe/src/views', // using the adminlteiframe theme
+                    // '@app/views' => '@vendor/myzero1/yii2-theme-adminlteiframe/src/views/adminlte', // using the adminlte theme
+                    '@app/views' => '@vendor/myzero1/yii2-theme-adminlteiframe/src/views/adminlteiframe', // using the adminlteiframe theme
                 ],
             ],
         ],
@@ -62,6 +62,10 @@ return [
             'forceCopy' => true,
             // 'linkAssets' => true,//link to assets,no cache.used in develop.
             'bundles'=> [
+                // 'myzero1\adminlteiframe\assets\php\components\AdminLteAsset' => [
+                //     'skin' => 'skin-blue',// skin-{blue|black|purple|green|red|yellow}[-light],example skin-blue,skin-blue-light
+                // ],// setting the them skin
+            
                 'myzero1\adminlteiframe\assets\php\components\LayoutAsset' => [
                     'skin' => 'skin-blue',// skin-{blue|black|purple|green|red|yellow}[-light],example skin-blue,skin-blue-light
                 ],// setting the them skin
@@ -110,7 +114,60 @@ http://localhost/path/to/index.php/gii
 ```
 
 
+
+#### select theme ####
+
+* ` use adminlteifram `
+
+    You show setting the layout as layout in site Controller for index page,in ` SiteController  `  as flowlling, in view:
+
+    ```
+    public function actionIndex()
+    {
+        $this->layout = 'layout';
+        return $this->render('index');
+    }
+    
+    ```
+    
+    ![](https://github.com/myzero1/show-time/blob/master/yii2-theme-adminlteiframe/screenshot/1.png)
+
+    
+
+* ` use adminlte `
+
+    Do nothing.
+    
+    ![](https://github.com/myzero1/show-time/blob/master/yii2-theme-adminlteiframe/screenshot/701.png)
+
+
+
 #### use plugins ####
+
+
+* ` Add plug-ins to requirements ` 
+
+    Just add code  as flowlling, in view:
+
+    ```php
+    
+    <?php \myzero1\adminlteiframe\assets\php\components\plugins\Select2Asset::register($this); ?>
+    
+    ```
+    
+    ` Optional plug-in `
+    
+    ```php
+    \myzero1\adminlteiframe\assets\php\components\plugins\BootstrapTableAsset::register($this);
+    \myzero1\adminlteiframe\assets\php\components\plugins\DataRangePickerAsset::register($this);
+    \myzero1\adminlteiframe\assets\php\components\plugins\EchartsAsset::register($this);
+    \myzero1\adminlteiframe\assets\php\components\plugins\LayerAsset::register($this);
+    \myzero1\adminlteiframe\assets\php\components\plugins\Select2Asset::register($this);
+    \myzero1\adminlteiframe\assets\php\components\plugins\SwitchAsset::register($this);
+    \myzero1\adminlteiframe\assets\php\components\plugins\Wysihtml5Asset::register($this);
+    \myzero1\adminlteiframe\assets\php\components\plugins\ZtreeAsset::register($this);
+    
+    ```
 
 * ` use echart `
 
@@ -168,5 +225,49 @@ http://localhost/path/to/index.php/gii
 
     ![](https://github.com/myzero1/show-time/blob/master/yii2-theme-adminlteiframe/screenshot/401.png)
 
+*  ` use ztree `
+
+    use ztree,in ul. You can set data-provide="z1ztree" to use it and set data-z1ztree-config='{...} to set it,you can set the primary parameter of ztree in data-z1ztree-config.  Just add code  as flowlling, in view:
+    ```
+    <ul id="mytes" data-provide="z1ztree" data-z1ztree-config='{data:[{ id:1, pId:0, name:"l1", open:true},{ id:2, pId:0, name:"l1", open:true},{ id:3, pId:1, name:"l2"}]}' class="ztree"></ul>
+
+    ```
+    ![](https://github.com/myzero1/show-time/blob/master/yii2-theme-adminlteiframe/screenshot/501.png)
+    
+    use ztree by default,in input.Just add code  as flowlling, in view:
+    ```
+    <?php echo $form->field($model, 'id')->textInput(['data-provide' =>"z1ztree"])?>
+
+    ```
+    ![](https://github.com/myzero1/show-time/blob/master/yii2-theme-adminlteiframe/screenshot/502.png)
+    
+    use ztree without parents,in input.Just add code  as flowlling, in view:
+    ```
+    <?php echo $form->field($model, 'id')->textInput(['data-provide' =>"z1ztree",'data-z1ztree-config' => '{"withParents": false}'])?>
+
+    ```
+    ![](https://github.com/myzero1/show-time/blob/master/yii2-theme-adminlteiframe/screenshot/503.png)
+    
+    use ztree by checkbox .Just add code  as flowlling, in view:
+    ```
+    <?php echo $form->field($model, 'id')->textInput(['data-provide' =>"z1ztree",'data-z1ztree-config' => '{"checkType": "checkbox"}'])?>
+
+    ```
+    ![](https://github.com/myzero1/show-time/blob/master/yii2-theme-adminlteiframe/screenshot/504.png)
 
 
+*  ` use select2 `
+
+    Use Single selection,Just add code  as flowlling, in view:
+    ```
+    <?php echo $form->field($model, 'id')->dropDownList(['n1'=>'v1','n2'=>'v2',] ,['data-provide' =>"z1select2"])?>
+    
+    ```
+    ![](https://github.com/myzero1/show-time/blob/master/yii2-theme-adminlteiframe/screenshot/601.png)
+    
+    Use Multi selection,Just add code  as flowlling, in view:
+    ```
+   <?php echo $form->field($model, 'id')->dropDownList(['n1'=>'v1','n2'=>'v2',] ,['data-provide' =>"z1select2", "multiple"=>"multiple"])?>
+    
+    ```
+    ![](https://github.com/myzero1/show-time/blob/master/yii2-theme-adminlteiframe/screenshot/601.png)
