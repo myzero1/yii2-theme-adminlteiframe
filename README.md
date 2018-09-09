@@ -16,7 +16,6 @@ Show time
 ![](https://github.com/myzero1/show-time/blob/master/yii2-theme-adminlteiframe/screenshot/8.png)
 ![](https://github.com/myzero1/show-time/blob/master/yii2-theme-adminlteiframe/screenshot/9.png)
 ![](https://github.com/myzero1/show-time/blob/master/yii2-theme-adminlteiframe/screenshot/10.png)
-![](https://github.com/myzero1/show-time/blob/master/yii2-theme-adminlteiframe/screenshot/701.png)
 
 Installation
 ------------
@@ -144,6 +143,31 @@ http://localhost/path/to/index.php/gii
 
 
 #### use plugins ####
+
+
+* ` Add plug-ins to requirements ` 
+
+    Just add code  as flowlling, in view:
+
+    ```php
+    
+    <?php \myzero1\adminlteiframe\assets\php\components\plugins\Select2Asset::register($this); ?>
+    
+    ```
+    
+    ` Optional plug-in `
+    
+    ```php
+    \myzero1\adminlteiframe\assets\php\components\plugins\BootstrapTableAsset::register($this);
+    \myzero1\adminlteiframe\assets\php\components\plugins\DataRangePickerAsset::register($this);
+    \myzero1\adminlteiframe\assets\php\components\plugins\EchartsAsset::register($this);
+    \myzero1\adminlteiframe\assets\php\components\plugins\LayerAsset::register($this);
+    \myzero1\adminlteiframe\assets\php\components\plugins\Select2Asset::register($this);
+    \myzero1\adminlteiframe\assets\php\components\plugins\SwitchAsset::register($this);
+    \myzero1\adminlteiframe\assets\php\components\plugins\Wysihtml5Asset::register($this);
+    \myzero1\adminlteiframe\assets\php\components\plugins\ZtreeAsset::register($this);
+    
+    ```
 
 * ` use echart `
 
