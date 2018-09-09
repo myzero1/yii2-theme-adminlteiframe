@@ -16,6 +16,7 @@ Show time
 ![](https://github.com/myzero1/show-time/blob/master/yii2-theme-adminlteiframe/screenshot/8.png)
 ![](https://github.com/myzero1/show-time/blob/master/yii2-theme-adminlteiframe/screenshot/9.png)
 ![](https://github.com/myzero1/show-time/blob/master/yii2-theme-adminlteiframe/screenshot/10.png)
+![](https://github.com/myzero1/show-time/blob/master/yii2-theme-adminlteiframe/screenshot/701.png)
 
 Installation
 ------------
@@ -52,8 +53,8 @@ return [
         'view' => [
             'theme' => [
                 'pathMap' => [
-                    // '@app/views' => '@vendor/dmstr/yii2-adminlte-asset/example-views/yiisoft/yii2-app' myzero1\theme\adminlteiframe
-                    '@app/views' => '@vendor/myzero1/yii2-theme-adminlteiframe/src/views', // using the adminlteiframe theme
+                    // '@app/views' => '@vendor/myzero1/yii2-theme-adminlteiframe/src/views/adminlte', // using the adminlte theme
+                    '@app/views' => '@vendor/myzero1/yii2-theme-adminlteiframe/src/views/adminlteiframe', // using the adminlteiframe theme
                 ],
             ],
         ],
@@ -62,6 +63,10 @@ return [
             'forceCopy' => true,
             // 'linkAssets' => true,//link to assets,no cache.used in develop.
             'bundles'=> [
+                // 'myzero1\adminlteiframe\assets\php\components\AdminLteAsset' => [
+                //     'skin' => 'skin-blue',// skin-{blue|black|purple|green|red|yellow}[-light],example skin-blue,skin-blue-light
+                // ],// setting the them skin
+            
                 'myzero1\adminlteiframe\assets\php\components\LayoutAsset' => [
                     'skin' => 'skin-blue',// skin-{blue|black|purple|green|red|yellow}[-light],example skin-blue,skin-blue-light
                 ],// setting the them skin
@@ -108,6 +113,34 @@ http://localhost/path/to/index.php?r=gii
 OR
 http://localhost/path/to/index.php/gii
 ```
+
+
+
+#### select theme ####
+
+* ` use adminlteifram `
+
+    You show setting the layout as layout in site Controller for index page,in ` SiteController  `  as flowlling, in view:
+
+    ```
+    public function actionIndex()
+    {
+        $this->layout = 'layout';
+        return $this->render('index');
+    }
+    
+    ```
+    
+    ![](https://github.com/myzero1/show-time/blob/master/yii2-theme-adminlteiframe/screenshot/1.png)
+
+    
+
+* ` use adminlte `
+
+    Do nothing.
+    
+    ![](https://github.com/myzero1/show-time/blob/master/yii2-theme-adminlteiframe/screenshot/701.png)
+
 
 
 #### use plugins ####
@@ -213,4 +246,4 @@ http://localhost/path/to/index.php/gii
    <?php echo $form->field($model, 'id')->dropDownList(['n1'=>'v1','n2'=>'v2',] ,['data-provide' =>"z1select2", "multiple"=>"multiple"])?>
     
     ```
-    ![](https://github.com/myzero1/show-time/blob/master/yii2-theme-adminlteiframe/screenshot/602.png)
+    ![](https://github.com/myzero1/show-time/blob/master/yii2-theme-adminlteiframe/screenshot/601.png)
