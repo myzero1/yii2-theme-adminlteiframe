@@ -41,7 +41,7 @@ $skin = \Yii::$app->assetManager->bundles['myzero1\adminlteiframe\assets\php\com
     <head>
         <?=  $this->render('//layouts/head') ?>
     </head>
-    <body class="<?= $skin?> fixed">
+    <body class="<?= $skin?>">
 
     <?php  $this->beginBody(); ?>
 
@@ -156,8 +156,17 @@ $skin = \Yii::$app->assetManager->bundles['myzero1\adminlteiframe\assets\php\com
                     <?=  $content ?>
             </section>
             <!-- /.content -->
-        </div>
+          </div>
         <!-- /.content-wrapper -->
+
+        <!-- /.content-wrapper -->
+        <footer class="main-footer">
+            <div class="pull-right hidden-xs">
+                <b>Version</b> 1.0.0.0
+            </div>
+            <strong>Copyright &copy; 2018-2020 <a href="https://github.com/myzero1/yii2-theme-adminlteiframe">Myzero1</a>.</strong> All rights
+            reserved.
+        </footer>
 
     <?php  $this->endBody(); ?>
     </body>
