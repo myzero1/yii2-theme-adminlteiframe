@@ -1,70 +1,80 @@
 <?php
-use yii\helpers\Html;
-use yii\bootstrap\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $model \common\models\LoginForm */
 
-$this->title = 'Sign In';
+use yii\helpers\Html;
+use yii\bootstrap\ActiveForm;
 
-$fieldOptions1 = [
-    'options' => ['class' => 'form-group has-feedback'],
-    'inputTemplate' => "{input}<span class='glyphicon glyphicon-envelope form-control-feedback'></span>"
-];
-
-$fieldOptions2 = [
-    'options' => ['class' => 'form-group has-feedback'],
-    'inputTemplate' => "{input}<span class='glyphicon glyphicon-lock form-control-feedback'></span>"
-];
+$this->title = \Yii::$app->name;
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<div class="login-box">
-    <div class="login-logo">
-        <a href="#"><b>Admin</b>LTE</a>
-    </div>
-    <!-- /.login-logo -->
-    <div class="login-box-body">
-        <p class="login-box-msg">Sign in to start your session</p>
+<div class="larry-canvas" id="canvas" style="width: 100vw; height: 100vh;position: absolute;top: 0;left: 0;overflow: hidden;"></div>
 
-        <?php $form = ActiveForm::begin(['id' => 'login-form', 'enableClientValidation' => false]); ?>
-
-        <?= $form
-            ->field($model, 'username', $fieldOptions1)
-            ->label(false)
-            ->textInput(['placeholder' => $model->getAttributeLabel('username')]) ?>
-
-        <?= $form
-            ->field($model, 'password', $fieldOptions2)
-            ->label(false)
-            ->passwordInput(['placeholder' => $model->getAttributeLabel('password')]) ?>
-
-        <div class="row">
-            <div class="col-xs-8">
-                <?= $form->field($model, 'rememberMe')->checkbox() ?>
-            </div>
-            <!-- /.col -->
-            <div class="col-xs-4">
-                <?= Html::submitButton('Sign in', ['class' => 'btn btn-primary btn-block btn-flat', 'name' => 'login-button']) ?>
-            </div>
-            <!-- /.col -->
+<div class="ali-form-layout">
+    <div class="ali-form-header-layout">
+        <div class="ali-form-header">
+            <span class="app-name"><?= Html::encode($this->title) ?></span>
         </div>
+    </div>
+    <div class="ali-form-body">
+        <?php $form = ActiveForm::begin(['id' => 'login-form', 'enableClientValidation' => true]); ?>
 
+            <input type="text" value="admin" style="position: absolute;z-index: -1;" disabled autocomplete = "off"/><!-- 这个username会被浏览器记住，我随便用个admin-->
+            <input type="password"  value=" " style="position: absolute;z-index: -1;" disabled autocomplete = "off"/>
+
+            <?= $form->field($model, 'username')->textInput(['placeholder' => '请输入']) ?>
+
+            <?= $form->field($model, 'password')->passwordInput(['placeholder' => '请输入']) ?>
+
+            <?php $model->rememberMe = 0; ?>
+
+            <?= $form->field($model, 'rememberMe', [
+                'labelOptions' => [
+                    'style' => '
+                        padding:0;
+                    ',
+                ],
+                'options' => [
+                    'style' => '
+                        width:400px;
+                    ',
+                ],
+            ])->checkbox([
+                'id' => 'mywitch',
+                'data-handle-width' => '105',
+                'data-on-color' => 'primary',
+                'data-on-text' => '要记住密码',
+                'data-off-color' => 'info',
+                'data-off-text' => '不记住密码',
+                'checked' => $model->rememberMe == '1' ? true : false,
+            ])->label('<div style="position: absolute;top: -8px;left: 10px;background: #fff;padding: 0 5px;color:#757575;">记住密码</div>') ?>
+
+            <div class="form-group">
+                <?= Html::submitButton('登录', ['class' => 'btn btn-primary', 'name' => 'login-button','style' => 'width:260px;']) ?>
+            </div>
+
+            <p style="visibility: hidden;"><input type="password"  value=" " style="position: absolute;z-index: -1;" disabled autocomplete = "off"/></p><!-- 这个password的值会被浏览器记住，我随便用个空格 -->
 
         <?php ActiveForm::end(); ?>
-
-        <div class="social-auth-links text-center">
-            <p>- OR -</p>
-            <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign in
-                using Facebook</a>
-            <a href="#" class="btn btn-block btn-social btn-google-plus btn-flat"><i class="fa fa-google-plus"></i> Sign
-                in using Google+</a>
-        </div>
-        <!-- /.social-auth-links -->
-
-        <a href="#">I forgot my password</a><br>
-        <a href="register.html" class="text-center">Register a new membership</a>
-
     </div>
-    <!-- /.login-box-body -->
-</div><!-- /.login-box -->
+</div>
+
+
+<?php
+
+$bundle = \myzero1\adminlteiframe\assets\php\components\MainAsset::register(Yii::$app->view);
+$bundle->css[] = 'css/login.css'; // dynamic file added
+$bundle->js[] = 'js/login.js'; // dynamic file added
+
+$js = <<<JS
+    if(window.top!=window.self){
+        window.top.location.href = window.self.location.href;
+    }
+JS;
+
+$this->registerJs($js, \yii\web\View::POS_HEAD);
+
+?>

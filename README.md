@@ -119,7 +119,7 @@ http://localhost/path/to/index.php/gii
 
 * ` use adminlteifram `
 
-    You show setting the layout as layout in site Controller for index page,in ` SiteController  `  as flowlling, in view:
+    You show set the layout as layout in site Controller for index page,in ` SiteController  `  as flowlling, in view:
 
     ```
     public function actionIndex()
@@ -136,7 +136,28 @@ http://localhost/path/to/index.php/gii
 
 * ` use adminlte `
 
-    Do nothing.
+     You show replace the ` render ` by ` renderAjax ` at actionLogin,in ` SiteController  `  as flowlling, in view:
+
+    ```
+    public function actionLogin()
+    {
+        if (!Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+
+        $model = new LoginForm();
+        if ($model->load(Yii::$app->request->post()) && $model->login()) {
+            return $this->goBack();
+        } else {
+            $model->password = '';
+
+            return $this->renderAjax('login', [
+                'model' => $model,
+            ]);
+        }
+    }
+    
+    ```
     
     ![](https://github.com/myzero1/show-time/blob/master/yii2-theme-adminlteiframe/screenshot/701.png)
 

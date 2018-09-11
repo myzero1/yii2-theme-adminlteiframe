@@ -12,9 +12,11 @@ use yii\helpers\Html;
 use yii\widgets\Breadcrumbs;
 
 $bundle = myzero1\adminlteiframe\assets\php\components\AdminLteAsset::register($this);
+$bundle2 = myzero1\adminlteiframe\assets\php\components\ImgAsset::register($this);
+$avatarUrl = sprintf('%s/img/myzero1.jpg', $bundle->baseUrl);
 
 $profile = [
-    'avatarUrl' => '',
+    'avatarUrl' => $avatarUrl,
     'username' => Yii::$app->user->identity->username,
     'trueName' => "",
     'lastTime' => 0,
@@ -22,14 +24,7 @@ $profile = [
     'profileUrl' => '#',
 ];
 
-$profile = [
-    'avatarUrl' => '',
-    'username' => Yii::$app->user->identity->username,
-    'trueName' => "",
-    'lastTime' => 0,
-    'lastIp' => "",
-    'profileUrl' => '#',
-];
+// var_dump($profile['avatarUrl']);exit;
 
 $skin = \Yii::$app->assetManager->bundles['myzero1\adminlteiframe\assets\php\components\AdminLteAsset']->skin;
 
@@ -67,13 +62,14 @@ $skin = \Yii::$app->assetManager->bundles['myzero1\adminlteiframe\assets\php\com
                   <!-- User Account: style can be found in dropdown.less -->
                   <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                      <i class="glyphicon glyphicon-user"></i>
+                      <!-- <i class="glyphicon glyphicon-user"></i> -->
+                      <img src="<?= $profile['avatarUrl'] ?>" class="user-image" alt="User Image">
                       <span class="hidden-xs"><?=  $profile['username'] ?> <i class="caret"></i></span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header bg-light-blue">
-                            <?php  if ($profile['avatarUrl']) : ?>
+                            <?php  if ($profile['avatarUrl'] != '') : ?>
                                 <?=  Html::img($profile['avatarUrl'], ['class' => 'img-circle', 'alt' => $profile['username']]) ?>
                             <?php  endif; ?>
                             <p>

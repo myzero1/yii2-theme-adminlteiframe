@@ -618,6 +618,15 @@ $(function(){
         background: "none",
         color: "#E5E5E5"
     });
+
+    $(window).resize(function(){
+        $("#canvas").removeJParticle();
+        
+        $("#canvas").jParticle({
+            background: "none",
+            color: "#E5E5E5"
+        });
+    });
 });
 
 // -------jParticle end---------
