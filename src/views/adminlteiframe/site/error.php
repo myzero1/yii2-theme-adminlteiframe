@@ -5,9 +5,14 @@
 /* @var $message string */
 /* @var $exception Exception */
 
+$bundle = myzero1\adminlteiframe\assets\php\components\ImgAsset::register($this);
+$xkbg = sprintf('%s/img/xkbg.png', $bundle->baseUrl);
+
 use yii\helpers\Html;
 
 $this->title = $name;
+
+
 ?>
 
 
@@ -70,9 +75,7 @@ $this->title = $name;
 		left:0;
 		width:100%;
 		height:100%;
-		/*background-image:url(https://openclipart.org/image/2400px/svg_to_png/250847/Trees-Landscape-Silhouette.png);
-		*/
-	background-image:url('http://www.jq22.com/css/img/xkbg.png');
+		background-image:url('<?= $xkbg; ?>');
 		background-size:1000px 250px;
 		background-repeat:repeat-x;
 		background-position:center bottom;
