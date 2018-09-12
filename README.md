@@ -253,7 +253,23 @@ http://localhost/path/to/index.php/gii
 
     ![](https://github.com/myzero1/show-time/blob/master/yii2-theme-adminlteiframe/screenshot/401.png)
 
-    You can also use the advanced wysiwyg tool, [https://github.com/yiidoc/yii2-redactor)
+    You can also use the advanced wysiwyg tool, [yiidoc/yii2-redactor](https://github.com/yiidoc/yii2-redactor)
+    If you want to upload a file,you can try this widget,[kartik-v/yii2-widget-fileinput](https://github.com/kartik-v/yii2-widget-fileinput)
+    You can combine yiidoc/yii2-redactor and kartik-v/yii2-widget-fileinput together.
+
+    ```
+    echo $form->field($model, 'file')->widget(\kartik\file\FileInput::classname(), [
+        'language' => 'zh_cn',
+        'options' => ['accept' => 'image/*'],
+        'pluginOptions' => [
+            'showPreview' => false,
+            'showCaption' => true,
+            // 'elCaptionText' => '#customCaption',
+            'previewFileType' => 'any', 
+            'uploadUrl' => yii\helpers\Url::to(['/redactor/upload/image']),
+        ]
+    ]);
+    ```
 
 *  ` use ztree `
 
