@@ -80,7 +80,7 @@ return [
 #### in main-local.php ####
 
 ```php
-...
+......
 if (YII_ENV_DEV) {
     $config['modules']['gii'] = [
         'class' => 'yii\gii\Module',      
@@ -88,10 +88,15 @@ if (YII_ENV_DEV) {
         'generators' => [
             'adminlteiframe_crud' => [ // generator name
                 'class' => 'myzero1\adminlteiframe\gii\templates\crud\Generator', // generator class
-            ]
+                'templates' => [
+                    'default' => '@vendor/myzero1/yii2-theme-adminlteiframe/src/gii/templates/crud/adminlteiframe',
+                    'z1adminlte' => '@vendor/myzero1/yii2-theme-adminlteiframe/src/gii/templates/crud/adminlte',
+                ]
+            ],
         ],
     ];
 }
+......
 ```
 
 
