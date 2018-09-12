@@ -10,6 +10,7 @@
 use yii\helpers\Html;
 
 $bundle = myzero1\adminlteiframe\assets\php\components\MainAsset::register($this);
+myzero1\adminlteiframe\gii\GiiAsset::register($this);
 
 ?>
 
