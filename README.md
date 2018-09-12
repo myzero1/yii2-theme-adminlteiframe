@@ -253,6 +253,8 @@ http://localhost/path/to/index.php/gii
 
     ![](https://github.com/myzero1/show-time/blob/master/yii2-theme-adminlteiframe/screenshot/401.png)
 
+    You can also use the advanced wysiwyg tool, [https://github.com/yiidoc/yii2-redactor)
+
 *  ` use ztree `
 
     use ztree,in ul. You can set data-provide="z1ztree" to use it and set data-z1ztree-config='{...} to set it,you can set the primary parameter of ztree in data-z1ztree-config.  Just add code  as flowlling, in view:
