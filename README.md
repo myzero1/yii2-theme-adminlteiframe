@@ -228,6 +228,8 @@ http://localhost/path/to/index.php/gii
     <?php myzero1\adminlteiframe\assets\php\components\plugins\LayerAsset::register($this); ?>
     
     <a href="#" data-provide="z1layer" layer-config='{scrollbar:false,area:["350px","340px"],type:2,title:"联系方式",content:"/site/contact",shadeClose:false}'>联系方式</a>
+    
+    <a href="#" data-provide="z1layer" layer-config='{scrollbar:false,area:["350px","80%"],type:2,title:'修改密码",content:"/site/change-pw",shadeClose:false}'>联系方式</a>
 
     ```
 
