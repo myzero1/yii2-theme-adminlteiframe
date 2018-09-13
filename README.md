@@ -80,7 +80,7 @@ return [
 #### in main-local.php ####
 
 ```php
-...
+......
 if (YII_ENV_DEV) {
     $config['modules']['gii'] = [
         'class' => 'yii\gii\Module',      
@@ -88,10 +88,15 @@ if (YII_ENV_DEV) {
         'generators' => [
             'adminlteiframe_crud' => [ // generator name
                 'class' => 'myzero1\adminlteiframe\gii\templates\crud\Generator', // generator class
-            ]
+                'templates' => [
+                    'default' => '@vendor/myzero1/yii2-theme-adminlteiframe/src/gii/templates/crud/adminlteiframe',
+                    'z1adminlte' => '@vendor/myzero1/yii2-theme-adminlteiframe/src/gii/templates/crud/adminlte',
+                ]
+            ],
         ],
     ];
 }
+......
 ```
 
 
@@ -247,6 +252,24 @@ http://localhost/path/to/index.php/gii
     ```
 
     ![](https://github.com/myzero1/show-time/blob/master/yii2-theme-adminlteiframe/screenshot/401.png)
+
+    You can also use the advanced wysiwyg tool, [yiidoc/yii2-redactor](https://github.com/yiidoc/yii2-redactor)
+    If you want to upload a file,you can try this widget,[kartik-v/yii2-widget-fileinput](https://github.com/kartik-v/yii2-widget-fileinput)
+    You can combine yiidoc/yii2-redactor and kartik-v/yii2-widget-fileinput together.
+
+    ```
+    echo $form->field($model, 'file')->widget(\kartik\file\FileInput::classname(), [
+        'language' => 'zh_cn',
+        'options' => ['accept' => 'image/*'],
+        'pluginOptions' => [
+            'showPreview' => false,
+            'showCaption' => true,
+            // 'elCaptionText' => '#customCaption',
+            'previewFileType' => 'any', 
+            'uploadUrl' => yii\helpers\Url::to(['/redactor/upload/image']),
+        ]
+    ]);
+    ```
 
 *  ` use ztree `
 
