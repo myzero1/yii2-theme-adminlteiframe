@@ -48,7 +48,7 @@ myzero1\adminlteiframe\assets\php\components\plugins\BootstrapTableAsset::regist
             $js = "
                 var t=setTimeout(function(){
                         $('.adminlteiframe-alert').slideUp(1000);
-                    },3000);
+                    },1000);
             ";
 
             $this->registerJs($js);
