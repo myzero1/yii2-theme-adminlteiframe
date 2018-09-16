@@ -24,12 +24,17 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="ali-form-body">
         <?php $form = ActiveForm::begin(['id' => 'login-form', 'enableClientValidation' => true]); ?>
 
-            <input type="text" value="admin" style="position: absolute;z-index: -1;" disabled autocomplete = "off"/><!-- 这个username会被浏览器记住，我随便用个admin-->
-            <input type="password"  value=" " style="position: absolute;z-index: -1;" disabled autocomplete = "off"/>
+            <?= $form->field($model, 'username')->textInput([
+                    'placeholder' => '请输入',
+                    'readonly' => true,
+                    'onfocus'=>"this.removeAttribute('readonly');",
+                ]) ?>
 
-            <?= $form->field($model, 'username')->textInput(['placeholder' => '请输入']) ?>
-
-            <?= $form->field($model, 'password')->passwordInput(['placeholder' => '请输入']) ?>
+            <?= $form->field($model, 'password')->passwordInput([
+                    'placeholder' => '请输入',
+                    'readonly' => true,
+                    'onfocus'=>"this.removeAttribute('readonly');",
+                ]) ?>
 
             <?php $model->rememberMe = 0; ?>
 
@@ -58,8 +63,6 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="form-group">
                 <?= Html::submitButton('登录', ['class' => 'btn btn-primary', 'name' => 'login-button','style' => 'width:260px;']) ?>
             </div>
-
-            <p style="visibility: hidden;"><input type="password"  value=" " style="position: absolute;z-index: -1;" disabled autocomplete = "off"/></p><!-- 这个password的值会被浏览器记住，我随便用个空格 -->
 
         <?php ActiveForm::end(); ?>
     </div>
