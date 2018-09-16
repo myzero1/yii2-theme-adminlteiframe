@@ -108,7 +108,9 @@ if (($tableSchema = $generator->getTableSchema()) === false) {
             'class' => 'adminlteiframe-gridview',
         ],
         'tableOptions' => [
-            'class' => 'gridview-table table table-bordered table-hover dataTable'
+            'class' => 'gridview-table table table-bordered table-hover dataTable',
+            'data-provide' => 'z1table',
+            'data-z1table-config' => '{"fixedColumns":true,"subtraction1":100,"subtraction2Selector":[".adminlteiframe-action-box"]}',
         ],
         'summary' => '
             <div class="admlteiframe-gv-summary">
@@ -146,39 +148,3 @@ if (($tableSchema = $generator->getTableSchema()) === false) {
 <?php endif; ?>
 
 </div>
-
-<?= "<?php " ?>
-
-$js=<<<eof
-    function getTableHeight(){
-        var heightToal = window.parent.$('html').outerHeight(true);
-        var filterHeight = $(".adminlteiframe-action-box").height();
-        height = heightToal - $(".adminlteiframe-action-box").height();// subtract filters
-        height = height - 260;// subtract others
-        return height;
-    }
-
-    function fixTable(){
-        if (!($(".gridview-table .empty").length > 0 || $(".gridview-table tbody tr").length == 0)) {
-                if(typeof mybootstrapTable!="undefined"){
-                    mybootstrapTable.bootstrapTable('destroy');
-                }
-
-                mybootstrapTable = $(".gridview-table").bootstrapTable('destroy').bootstrapTable({
-                    height: getTableHeight(),
-                    fixedColumns: true
-                });
-        }
-    }
-
-    fixTable();
-
-    $(window).resize(function(){
-        fixTable();
-    });
-
-eof;
-
-$this->registerJs($js);
-
-?>
