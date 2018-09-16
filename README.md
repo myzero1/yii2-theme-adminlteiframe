@@ -185,15 +185,14 @@ http://localhost/path/to/index.php/gii
     ` Optional plug-in `
     
     ```php
-    \myzero1\adminlteiframe\assets\php\components\plugins\BootstrapTableAsset::register($this);
     \myzero1\adminlteiframe\assets\php\components\plugins\DataRangePickerAsset::register($this);
+    \myzero1\adminlteiframe\assets\php\components\plugins\TableAsset::register($this);
     \myzero1\adminlteiframe\assets\php\components\plugins\EchartsAsset::register($this);
     \myzero1\adminlteiframe\assets\php\components\plugins\LayerAsset::register($this);
     \myzero1\adminlteiframe\assets\php\components\plugins\Select2Asset::register($this);
     \myzero1\adminlteiframe\assets\php\components\plugins\SwitchAsset::register($this);
     \myzero1\adminlteiframe\assets\php\components\plugins\Wysihtml5Asset::register($this);
     \myzero1\adminlteiframe\assets\php\components\plugins\ZtreeAsset::register($this);
-    
     ```
 
 * ` use echart `

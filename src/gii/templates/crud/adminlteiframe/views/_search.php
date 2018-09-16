@@ -13,6 +13,8 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 
+// myzero1\adminlteiframe\assets\php\components\plugins\DataRangePickerAsset::register($this);
+
 /* @var $this yii\web\View */
 /* @var $model <?= ltrim($generator->searchModelClass, '\\') ?> */
 /* @var $form yii\widgets\ActiveForm */

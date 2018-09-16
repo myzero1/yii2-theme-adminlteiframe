@@ -28,8 +28,6 @@ class MainAsset extends AssetBundle
         'yii\web\JqueryAsset',
         'yii\bootstrap\BootstrapPluginAsset',
         'myzero1\adminlteiframe\assets\php\components\plugins\LayerAsset',
-        'myzero1\adminlteiframe\assets\php\components\plugins\SwitchAsset',
-        'myzero1\adminlteiframe\assets\php\components\plugins\TableAsset',
-        'myzero1\adminlteiframe\assets\php\components\plugins\DataRangePickerAsset',
+        'myzero1\adminlteiframe\assets\php\components\plugins\TableAsset', 
     ];
 }

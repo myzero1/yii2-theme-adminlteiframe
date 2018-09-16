@@ -7,6 +7,8 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
+myzero1\adminlteiframe\assets\php\components\plugins\SwitchAsset::register($this);
+
 $this->title = \Yii::$app->name;
 $this->params['breadcrumbs'][] = $this->title;
 ?>
