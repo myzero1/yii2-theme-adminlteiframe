@@ -49,8 +49,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 'data-on-text' => '要记住密码',
                 'data-off-color' => 'info',
                 'data-off-text' => '不记住密码',
+                'data-label-text' => '要记住密码',
                 'checked' => $model->rememberMe == '1' ? true : false,
-            ])->label('<div style="position: absolute;top: -8px;left: 10px;background: #fff;padding: 0 5px;color:#757575;">记住密码</div>') ?>
+            ])->label('') ?>
 
             <div class="form-group">
                 <?= Html::submitButton('登录', ['class' => 'btn btn-primary', 'name' => 'login-button','style' => 'width:260px;']) ?>

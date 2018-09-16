@@ -5,7 +5,8 @@ It add iframe,based on [almasaeed2010/AdminLTE](https://github.com/almasaeed2010
 
 Show time
 ------------
-
+![](https://github.com/myzero1/show-time/blob/master/yii2-theme-adminlteiframe/screenshot/801.png)
+![](https://github.com/myzero1/show-time/blob/master/yii2-theme-adminlteiframe/screenshot/802.png)
 ![](https://github.com/myzero1/show-time/blob/master/yii2-theme-adminlteiframe/screenshot/1.png)
 ![](https://github.com/myzero1/show-time/blob/master/yii2-theme-adminlteiframe/screenshot/2.png)
 ![](https://github.com/myzero1/show-time/blob/master/yii2-theme-adminlteiframe/screenshot/3.png)
@@ -317,3 +318,28 @@ http://localhost/path/to/index.php/gii
     
     ```
     ![](https://github.com/myzero1/show-time/blob/master/yii2-theme-adminlteiframe/screenshot/601.png)
+
+*  ` use bootsrap-table-fix-column `
+
+    Use It,Just add code  as flowlling, in view:
+    ```
+    <table data-provide="z1table" data-z1table-config='{"fixedColumns":true,"subtraction1":100,"subtraction2Selector":[".adminlteiframe-action-box"]}'>
+        <tr>
+            <td>r1c1</td>
+            <td>r1c2</td>
+            <td>r1c3</td>
+        </tr>
+        <tr>
+            <td>r2c1</td>
+            <td>r2c2</td>
+            <td>r2c3</td>
+        </tr>
+        <tr>
+            <td>r3c1</td>
+            <td>r3c2</td>
+            <td>r3c3</td>
+        </tr>
+    </table>
+    
+    ```
+    ![](https://github.com/myzero1/show-time/blob/master/yii2-theme-adminlteiframe/screenshot/1.png)

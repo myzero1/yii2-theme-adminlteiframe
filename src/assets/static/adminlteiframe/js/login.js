@@ -636,12 +636,13 @@ $("#mywitch").bootstrapSwitch({
         if ($("#mywitch").is(':checked') == false) {
             $("#loginform-staffname").val('holdon');
             $(".field-loginform-staffname").hide();
+            $("#login-form .bootstrap-switch-label").text('要记住密码');
         } else {
             $(".field-loginform-staffname").show();
             $("#loginform-staffname").focus();
             $("#loginform-staffname").val('');
+            $("#login-form .bootstrap-switch-label").text('不记住密码');
         }
-        console.log( $("#mywitch").is(':checked') )
     }
 });
 
