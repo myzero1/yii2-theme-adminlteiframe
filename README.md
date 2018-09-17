@@ -258,18 +258,46 @@ http://localhost/path/to/index.php/gii
     You can combine yiidoc/yii2-redactor and kartik-v/yii2-widget-fileinput together.
 
     ```
-    echo $form->field($model, 'file')->widget(\kartik\file\FileInput::classname(), [
-        'language' => 'zh_cn',
-        'options' => ['accept' => 'image/*'],
-        'pluginOptions' => [
-            'showPreview' => false,
-            'showCaption' => true,
-            // 'elCaptionText' => '#customCaption',
-            'previewFileType' => 'any', 
-            'uploadUrl' => yii\helpers\Url::to(['/redactor/upload/image']),
-        ]
-    ]);
+    <?php 
+    <?php 
+        echo $form->field($model, 'photo', [
+            "template" => sprintf("{label}\n{input}%s\n{hint}\n{error}",
+                \kartik\file\FileInput::widget([
+                    'name' => 'file',
+                    'pluginOptions' => [
+                        'layoutTemplates' => 'progress',
+                        'uploadUrl' => Url::to(['/redactor/upload/image']),
+                        'showPreview' => false,
+                        'showUpload' => false,
+                        'initialCaption' => $model->photo,
+                    ],
+                    'pluginEvents' => [
+                        'change' => '
+                            function(event, data, previewId, index) {
+                                if($("#z1fileinput-progress").length == 0){
+                                    var mystyle = "<div id=z1fileinput-progress><style> \
+                                        .kv-upload-progress .progress{height: 100%;margin: 0;position: absolute;z-index: 999;width: 40px;right: 80px;border: 1px solid #00a65a;}\
+                                        .kv-upload-progress .progress-bar{height: 100%;line-height: 32px;}\
+                                    </style></div>";
+                                    $("body").append(mystyle);
+                                }
+
+                                $(this).fileinput("upload");
+                            }
+                        ',
+                        'fileuploaded' => '
+                            function(event, data, previewId, index) {
+                                $(this).parents(".form-group").find("input[type=hidden].form-control").val(data.response.filelink);
+                            }
+                        ',
+                    ],
+                ])
+            ),
+        ])->hiddenInput()->label('照片');
+    ?>
     ```
+
+    ![](https://github.com/myzero1/show-time/blob/master/yii2-theme-adminlteiframe/screenshot/901.png)
 
 *  ` use ztree `
 
