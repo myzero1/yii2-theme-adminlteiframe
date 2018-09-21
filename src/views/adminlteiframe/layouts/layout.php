@@ -222,14 +222,14 @@
                 ],
             ];
 
-            if (isset(\Yii::$app->params['homeMenu'])) {
-                $homeMenu = \Yii::$app->params['homeMenu'];
+            if (isset($this->context->module->params['homeMenu'])) {
+                $homeMenu = $this->context->module->params['homeMenu'];
             } else {
                 $homeMenu = $homeMenuDefault;
             }
 
-            if (isset(\Yii::$app->params['menu'])) {
-                $menu = \Yii::$app->params['menu'];
+            if (isset($this->context->module->params['menu'])) {
+                $menu = $this->context->module->params['menu'];
             } else {
                 $menu = $menuDefault;
             }

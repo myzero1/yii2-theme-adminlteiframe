@@ -16,7 +16,7 @@
 
     $sRbacpModuleName = Helper::getRbacpModuleName();
     
-    $items = [
+    $menuDefault = [
         [
             'label' => Yii::t('app', 'rbacp首页'),
             // 'url' => sprintf('/admin/%s/default/index', $sRbacpModuleName),
@@ -89,17 +89,10 @@
         ],
     ];
 
-    $sMemuSessionName = sprintf('sMenuItems_%s', $sRbacpModuleName);
-    $sMenuItems = Yii::$app->session->get($sMemuSessionName);
-    if (1||is_null($sMenuItems)) {
-        if (isset(Yii::$app->modules[$sRbacpModuleName])) {
-            $itemsNew = \myzero1\rbacp\components\Rbac::getMenuItems($items);
-        } else {
-            $itemsNew = $items;
-        }
-        Yii::$app->session->set($sMemuSessionName, json_encode($itemsNew));
+    if (isset($this->context->module->params['menu'])) {
+        $menu = $this->context->module->params['menu'];
     } else {
-        $itemsNew = json_decode($sMenuItems, TRUE);
+        $menu = $menuDefault;
     }
 
     echo Menu::widget(
@@ -107,8 +100,7 @@
             'options' => [
                 'class' => 'sidebar-menu'
             ],
-            // 'items' => Yii::$app->params['menu'],
-            'items' => $itemsNew
+            'items' => $menu
         ]
     );
 
