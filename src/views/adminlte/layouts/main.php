@@ -17,7 +17,7 @@ $avatarUrl = sprintf('%s/img/myzero1.jpg', $bundle->baseUrl);
 
 $profile = [
     'avatarUrl' => $avatarUrl,
-    'username' => Yii::$app->user->identity->username,
+    'username' => \Yii::$app->user->isGuest ? '' : Yii::$app->user->identity->username,
     'trueName' => "",
     'lastTime' => 0,
     'lastIp' => "",
@@ -34,7 +34,7 @@ $skin = \Yii::$app->assetManager->bundles['myzero1\adminlteiframe\assets\php\com
 <!DOCTYPE html>
 <html lang="<?=  Yii::$app->language ?>">
     <head>
-        <?=  $this->render('//layouts/head') ?>
+        <?=  $this->render('./head') ?>
     </head>
     <body class="<?= $skin?>">
 
@@ -118,7 +118,7 @@ $skin = \Yii::$app->assetManager->bundles['myzero1\adminlteiframe\assets\php\com
             </div>
             <!-- sidebar: style can be found in sidebar.less -->
             <section class="sidebar">
-                <?=  $this->render('//layouts/sidebar-menu') ?>
+                <?=  $this->render('./sidebar-menu') ?>
             </section>
             <!-- /.sidebar -->
           </aside>

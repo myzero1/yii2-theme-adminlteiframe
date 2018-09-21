@@ -27,7 +27,7 @@ class AdminLteAsset extends AssetBundle
         'yii\web\JqueryAsset',
         'yii\bootstrap\BootstrapPluginAsset',
         'myzero1\adminlteiframe\assets\php\components\plugins\LayerAsset',
-        'myzero1\adminlteiframe\assets\php\components\plugins\BootstrapTableAsset',
+        'myzero1\adminlteiframe\assets\php\components\plugins\TableAsset',
         'myzero1\adminlteiframe\assets\php\components\plugins\DataRangePickerAsset',
     ];
 

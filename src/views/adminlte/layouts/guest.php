@@ -2,7 +2,7 @@
     <!DOCTYPE html>
     <html lang="<?=  Yii::$app->language ?>">
     <head>
-        <?=  $this->render('//layouts/head') ?>
+        <?=  $this->render('./head') ?>
     </head>
     <body class="bg-black">
     <?php  $this->beginBody(); ?>
