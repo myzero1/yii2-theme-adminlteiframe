@@ -1985,6 +1985,11 @@ var addTabs = function (options) {
          });*/
     }
 
+    // 若设定了点击菜单重新加载刷新
+    if ($("body").attr("menu-refresh-tab") === '1') {
+        refreshTabById(pageId);
+    }
+
     activeTabByPageId(pageId);
 
 };

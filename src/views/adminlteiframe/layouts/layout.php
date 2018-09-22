@@ -19,6 +19,7 @@
     ];
 
     $skin = \Yii::$app->assetManager->bundles['myzero1\adminlteiframe\assets\php\components\LayoutAsset']->skin;
+    $menuRefreshTab = \Yii::$app->assetManager->bundles['myzero1\adminlteiframe\assets\php\components\LayoutAsset']->menuRefreshTab;
 ?>
 
 <?php  $this->beginPage() ?>
@@ -47,7 +48,7 @@
 
         <?php  $this->head() ?>
     </head>
-    <body class="hold-transition <?= $skin?> sidebar-mini fixed">
+    <body class="hold-transition <?= $skin?> sidebar-mini fixed" menu-refresh-tab="<?= $menuRefreshTab?>">
         <?php  $this->beginBody() ?>
         <div class="wrapper">
             <header class="main-header">

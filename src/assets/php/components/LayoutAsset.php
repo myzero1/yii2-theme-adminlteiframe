@@ -32,4 +32,5 @@ class LayoutAsset extends AssetBundle
     ];
 
     public $skin = 'skin-blue';
+    public $menuRefreshTab = false; //true,false
 }
