@@ -60,21 +60,73 @@ return [
         ],
         'assetManager' => [
             'class' => 'yii\web\AssetManager',
-            'forceCopy' => true,
+            'forceCopy' => false,
             // 'linkAssets' => true,//link to assets,no cache.used in develop.
             'bundles'=> [
-                // 'myzero1\adminlteiframe\assets\php\components\AdminLteAsset' => [
-                //     'skin' => 'skin-blue',// skin-{blue|black|purple|green|red|yellow}[-light],example skin-blue,skin-blue-light
-                // ],// setting the them skin
-            
                 'myzero1\adminlteiframe\assets\php\components\LayoutAsset' => [
-                    'skin' => 'skin-blue',// skin-{blue|black|purple|green|red|yellow}[-light],example skin-blue,skin-blue-light
-                ],// setting the them skin
+                    'skin' => 'skin-blue-light',// skin-{blue|black|purple|green|red|yellow}[-light],example skin-blue,skin-blue-light,
+                    'menuRefreshTab' => true, // true,false
+
+                ],
+                // 'myzero1\adminlteiframe\assets\php\components\AdminLteAsset' => [
+                //     'skin' => 'skin-red',// skin-{blue|black|purple|green|red|yellow}[-light],example skin-blue,skin-blue-light,
+                // ],
             ],
         ],
         ......
     ],
     ......
+    'params' => [
+        ......
+        'menu' => [
+            [
+                'id' => "-1",
+                'text' => "首页",
+                'title'=>"首页",
+                'icon' => "fa fa-dashboard",
+                'targetType' => 'iframe-tab',
+                'urlType' => 'abosulte',
+                'url' => ['/site/home'],
+                'isHome' => true,
+            ],
+            [
+                'id' => "系统管理",
+                'text' => "系统管理",
+                'title'=>"系统管理",
+                'icon' => "fa fa-laptop",
+                'items' => [
+                    [
+                        'id' => "网吧管理",
+                        'text' => "网吧管理",
+                        'title'=>"网吧管理",
+                        'icon' => "fa fa-circle-o",
+                        'targetType' => 'iframe-tab',
+                        'urlType' => 'abosulte',
+                        'url' => ['/netbar/index'],
+                    ],
+                    [
+                        'id' => "权限管理",
+                        'text' => "权限管理",
+                        'title'=>"权限管理",
+                        'icon' => "fa fa-circle-o",
+                        'targetType' => 'iframe-tab',
+                        'urlType' => 'abosulte',
+                        'url' => ['/rbacp-role/index'],
+                    ],
+                ],
+            ],
+        ],
+        'welcomeMenu' => [
+            'id' => "-1",
+            'title' => "欢迎页面",
+            'close' => false,
+            'url' => ['/site/welcome'],
+            'urlType' => "abosulte",
+        ],
+        ......
+    ],
+    ......
+    
 ];
 ```
 
@@ -99,6 +151,20 @@ if (YII_ENV_DEV) {
 }
 ......
 ```
+
+
+### setting in module ####
+in the main.php of module
+
+```php
+return [
+    ......
+    'layout' => 'main',// to set theme by setting layout and layoutPath
+    'layoutPath' => \Yii::getAlias('@vendor/myzero1/yii2-theme-adminlteiframe/src/views/adminlte/layouts'),
+    ......
+];
+```
+
 
 
 Usage

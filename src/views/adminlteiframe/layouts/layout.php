@@ -210,7 +210,7 @@
                     'id' => "系统管理",
                     'text' => "系统管理",
                     'icon' => "fa fa-laptop",
-                    'children' => [
+                    'items' => [
                         [
                             'id' => "设置页面",
                             'text' => "设置页面",
@@ -234,6 +234,14 @@
             } else {
                 $menu = $menuDefault;
             }
+
+            foreach ($menu as $key=>$item) {
+                if (isset($item['items'])) {
+                    $menu[$key]['children']=array_values($item['items']);
+                }
+                unset($menu[$key]['items']);
+            }
+            $menu=array_values($menu);
         ?>
         <div id="index-iframe-left-menu" style="height: 0;width: 0;overflow: hidden;">
             <?= json_encode($menu);?>
