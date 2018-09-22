@@ -2236,6 +2236,24 @@ function activeTabByPageId(pageId) {
     findTabPanel(pageId).addClass("active");
     // scrollToTab($('.menu_tab.active'));
     scrollToTab($title[0]);
+    //激活菜单，add by myzero1
+    var $inOpenGroup = $(".menu-open a[data-pageid="+pageId+"]").length;
+    if ($inOpenGroup==1) {
+        $("li.treeview a[onclick^='addTabs']").parent().removeClass('active');
+        $("li.treeview a[data-pageid="+pageId+"]").parent().addClass('active');
+    } else {
+        $(".treeview[is-group]").removeClass("active");
+        $(".treeview-menu").removeClass('menu-open');
+        $(".treeview-menu").slideUp($.AdminLTE.options.animationSpeed);
+
+        var $group = $("li.treeview a[data-pageid="+pageId+"]").parents(".treeview[is-group]");
+        $group.addClass('active');
+        $group.find(".treeview-menu").addClass('menu-open');
+        $group.find(".treeview-menu").slideDown($.AdminLTE.options.animationSpeed);
+
+        $("li.treeview a[onclick^='addTabs']").parent().removeClass('active');
+        $("li.treeview a[data-pageid="+pageId+"]").parent().addClass('active');
+    }
 }
 
 $(function () {
@@ -2362,6 +2380,12 @@ $(function () {
                 $a.append($title);
                 $a.addClass("nav-link");
 
+                //给菜单添加data-pageid, add by myzeo1
+                if (item.url !== null) {
+                    $a.attr('data-pageid', item.id);
+                }
+
+
                 var isOpen = item.isOpen;
 
                 if (isOpen === true) {
@@ -2373,6 +2397,7 @@ $(function () {
                     pullSpan.append(pullIcon);
                     $a.append(pullSpan);
                     li.append($a);
+                    li.attr('is-group',true);
 
                     var menus = $('<ul></ul>');
                     menus.addClass('treeview-menu');
@@ -2427,10 +2452,31 @@ $(function () {
         $menu_ul.on("click", "li.treeview a", function () {
             var $a = $(this);
             if ($a.next().length == 0) {//如果size>0,就认为它是可以展开的
+                // 添加菜单激活，add by myzero1
+                $("li.treeview a[onclick^='addTabs']").parent().removeClass('active');
+                $(this).parent().addClass('active');
                 if ($(window).width() < $.AdminLTE.options.screenSizes.sm) {//小屏幕
                     //触发左边菜单栏按钮点击事件,关闭菜单栏
                     $($.AdminLTE.options.sidebarToggleSelector).click();
                 }
+            }
+        });
+
+        //另外绑定菜单被点击事件,做其它动作
+        $menu_ul.on("click", "li.treeview[is-group]", function () {
+            var $group = $(this);
+            var $isOpen = $group.find('.menu-open').length;
+            if ($isOpen == 0) {
+                var $pageId = $(".menu_tab.active").attr("data-pageid");
+                $group.find("a[data-pageid="+$pageId+"]").parent().addClass('active');
+
+                var int=self.setInterval(function(){
+                    if ($group.find('.menu-open').length==1) {
+                        $group.find("a[data-pageid="+$pageId+"]").parent().addClass('active');
+                        int=window.clearInterval(int);
+                    }
+                },50)
+                
             }
         });
     };
