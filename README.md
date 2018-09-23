@@ -94,7 +94,7 @@ return [
                 'text' => "系统管理",
                 'title'=>"系统管理",
                 'icon' => "fa fa-laptop",
-                'items' => [
+                'children' => [
                     [
                         'id' => "网吧管理",
                         'text' => "网吧管理",
