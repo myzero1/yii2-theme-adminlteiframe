@@ -183,21 +183,7 @@
             </footer>
         </div>
         <?php
-            $homeMenuDefault = [
-                'id' => "-1",
-                'title' => "首页",
-                'close' => false,
-                'url' => "/site/home",
-                'urlType' => "abosulte"
-            ];
-
             $menuDefault = [
-                [
-                    'id' => "-2",
-                    'text' => "header",
-                    'icon' => "",
-                    'isHeader' => true,
-                ],
                 [
                     'id' => "-1",
                     'text' => "首页",
@@ -205,7 +191,14 @@
                     'targetType' => 'iframe-tab',
                     'urlType' => 'abosulte',
                     'url' => "/site/home",
+                    'isHome' => true,
                 ],
+                // [
+                //     'id' => "-2",
+                //     'text' => "header",
+                //     'icon' => "",
+                //     'isHeader' => true,
+                // ],
                 [
                     'id' => "系统管理",
                     'text' => "系统管理",
@@ -223,12 +216,6 @@
                 ],
             ];
 
-            if (isset($this->context->module->params['homeMenu'])) {
-                $homeMenu = $this->context->module->params['homeMenu'];
-            } else {
-                $homeMenu = $homeMenuDefault;
-            }
-
             if (isset($this->context->module->params['menu'])) {
                 $menu = $this->context->module->params['menu'];
             } else {
@@ -242,6 +229,16 @@
                 unset($menu[$key]['items']);
             }
             $menu=array_values($menu);
+
+            if (count($menu) && isset($menu[0]['isHome']) && $menu[0]['isHome']) {
+                $homeMenu = $menu[0];
+            } else {
+                if (isset($this->context->module->params['welcomeMenu'])) {
+                    $homeMenu = $this->context->module->params['welcomeMenu'];
+                } else {
+                    throw new \yii\web\HttpException(500, '菜单配置错误');
+                }
+            }
         ?>
         <div id="index-iframe-left-menu" style="height: 0;width: 0;overflow: hidden;">
             <?= json_encode($menu);?>
