@@ -222,14 +222,6 @@
                 $menu = $menuDefault;
             }
 
-            foreach ($menu as $key=>$item) {
-                if (isset($item['items'])) {
-                    $menu[$key]['children']=array_values($item['items']);
-                }
-                unset($menu[$key]['items']);
-            }
-            $menu=array_values($menu);
-
             if (count($menu) && isset($menu[0]['isHome']) && $menu[0]['isHome']) {
                 $homeMenu = $menu[0];
             } else {
