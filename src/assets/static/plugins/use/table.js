@@ -33,7 +33,8 @@ function getTableHeight(defaultConfig){
     var subtraction2 = 0;
     for (var i = defaultConfig.subtraction2Selector.length - 1; i >= 0; i--) {
       if ($(defaultConfig.subtraction2Selector[i]).length > 0) {
-        subtraction2 = subtraction2 + $(defaultConfig.subtraction2Selector[i]).height();
+        // subtraction2 = subtraction2 + $(defaultConfig.subtraction2Selector[i]).height();
+        subtraction2 = subtraction2 + $(defaultConfig.subtraction2Selector[i]).outerHeight(true);
       }
     }
 
