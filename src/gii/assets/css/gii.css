@@ -216,6 +216,7 @@
 }
 .adminlteiframe-form .form-group {
     position: relative;
+    margin-bottom: 20px;
 }
 .adminlteiframe-form .form-group.aciotns {
     width: auto;
@@ -235,10 +236,9 @@
     margin: 0;
 }
 .adminlteiframe-form .help-block{
-    top: -10px;
     position: absolute;
     left: 10px;
-    top: 24px;
+    bottom: -10px;
     line-height: 20px;
     background: #fff;
     padding: 0 5px;
