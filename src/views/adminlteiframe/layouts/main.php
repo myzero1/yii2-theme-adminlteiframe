@@ -46,8 +46,14 @@ myzero1\adminlteiframe\gii\GiiAsset::register($this);
         <?php
             $js = "
                 var t=setTimeout(function(){
+                        clearTimeout(t);
                         $('.adminlteiframe-alert').slideUp(1000);
-                    },1000);
+                        var t2=setTimeout(function(){
+                            clearTimeout(t2);
+                            $('.adminlteiframe-alert').remove();
+                            $(window).resize();
+                        },1000);
+                    },3000);
             ";
 
             $this->registerJs($js);
