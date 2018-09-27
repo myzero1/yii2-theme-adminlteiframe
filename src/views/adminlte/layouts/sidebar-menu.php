@@ -18,14 +18,14 @@
     
     $menuDefault = [
         [
-            'label' => Yii::t('app', 'rbacp首页'),
+            'text' => Yii::t('app', 'rbacp首页'),
             // 'url' => sprintf('/admin/%s/default/index', $sRbacpModuleName),
             'url' => [sprintf('/%s/default/index', $sRbacpModuleName)],
             'icon' => 'fa-dashboard',
             'active' => $sUri === sprintf('%s/%s/default/index', \Yii::$app->homeUrl, $sRbacpModuleName)
         ],
         [
-            'label' => Yii::t('app', 'rbacp数据库'),
+            'text' => Yii::t('app', 'rbacp数据库'),
             'url' => '#',
             'icon' => 'fa-database',
             'items' => [
@@ -42,12 +42,12 @@
             ]
         ],
         [
-            'label' => Yii::t('app', 'rbacp权限管理'),
+            'text' => Yii::t('app', 'rbacp权限管理'),
             'url' => '#',
             'icon' => ' fa-cubes',
             'items' => [
                 [
-                    'label' => Yii::t('app', '角色管理'),
+                    'text' => Yii::t('app', '角色管理'),
                     'url' => [sprintf('/%s/rbacp-role/index', $sRbacpModuleName)],
                     'visible' => true,
                     'active' => in_array($sUri, [
@@ -57,7 +57,7 @@
                     ]),
                 ],
                 [
-                    'label' => Yii::t('app', '授权管理'),
+                    'text' => Yii::t('app', '授权管理'),
                     'url' => [sprintf('/%s/rbacp-user-view/index', $sRbacpModuleName)],
                     'visible' => true,
                     'active' => in_array($sUri, [
@@ -66,7 +66,7 @@
                     ]),
                 ],
                 [
-                    'label' => Yii::t('app', '功能权限'),
+                    'text' => Yii::t('app', '功能权限'),
                     'url' => [sprintf('/%s/rbacp-privilege/index', $sRbacpModuleName)],
                     'visible' => true,
                     'active' => in_array($sUri, [
@@ -76,7 +76,7 @@
                     ]),
                 ],
                 [
-                    'label' => Yii::t('app', '数据策略'),
+                    'text' => Yii::t('app', '数据策略'),
                     'url' => [sprintf('/%s/rbacp-policy/index', $sRbacpModuleName)],
                     'visible' => true,
                     'active' => in_array($sUri, [

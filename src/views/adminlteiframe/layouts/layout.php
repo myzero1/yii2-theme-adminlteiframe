@@ -185,6 +185,12 @@
         <?php
             $menuDefault = [
                 [
+                    'id' => "-2",
+                    'text' => "header",
+                    'icon' => "",
+                    'isHeader' => true,
+                ],
+                [
                     'id' => "-1",
                     'text' => "首页",
                     'icon' => "fa fa-dashboard",
@@ -193,12 +199,6 @@
                     'url' => "/site/home",
                     'isHome' => true,
                 ],
-                // [
-                //     'id' => "-2",
-                //     'text' => "header",
-                //     'icon' => "",
-                //     'isHeader' => true,
-                // ],
                 [
                     'id' => "系统管理",
                     'text' => "系统管理",
@@ -224,6 +224,8 @@
 
             if (count($menu) && isset($menu[0]['isHome']) && $menu[0]['isHome']) {
                 $homeMenu = $menu[0];
+            } elseif (count($menu) && isset($menu[1]['isHome']) && $menu[1]['isHome']) {
+                $homeMenu = $menu[1];
             } else {
                 if (isset($this->context->module->params['welcomeMenu'])) {
                     $homeMenu = $this->context->module->params['welcomeMenu'];
