@@ -65,11 +65,15 @@ return [
             'bundles'=> [
                 'myzero1\adminlteiframe\assets\php\components\LayoutAsset' => [
                     'skin' => 'skin-blue-light',// skin-{blue|black|purple|green|red|yellow}[-light],example skin-blue,skin-blue-light,
-                    'menuRefreshTab' => true, // true,false
+                    // 'menuRefreshTab' => false, // true,false
+                    // 'jsVersion' => '1.7',
+                    // 'cssVersion' => '1.7',
 
                 ],
                 // 'myzero1\adminlteiframe\assets\php\components\AdminLteAsset' => [
                 //     'skin' => 'skin-red',// skin-{blue|black|purple|green|red|yellow}[-light],example skin-blue,skin-blue-light,
+                    // 'jsVersion' => '1.7',
+                    // 'cssVersion' => '1.7',
                 // ],
             ],
         ],

@@ -11,7 +11,7 @@ use yii\web\AssetBundle;
 class LayoutAsset extends AssetBundle
 {
     public $skin = 'skin-blue';
-    public $menuRefreshTab = false; //true,false
+    public $menuRefreshTab = true; //true,false
     public $jsVersion = '1.735.1';
     public $cssVersion = '1.735.1';
     function init(){
