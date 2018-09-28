@@ -10,13 +10,19 @@ use yii\web\AssetBundle;
 
 class LayoutAsset extends AssetBundle
 {
+    function init(){
+        parent::init();
+        
+        $this->css[] = sprintf('css/skins/%s.css', $this->skin);
+    }
+    
     public $sourcePath = '@vendor/myzero1/yii2-theme-adminlteiframe/src/assets/static/adminlteiframe';
     //public $baseUrl = '@web';
     public $css = [
         'css/font-awesome.min.css',
         'css/ionicons.min.css',
         'css/AdminLTE.2.3.8.min.css',
-        'css/skins/all-skins.min.css',
+        // 'css/skins/all-skins.min.css',
     ];
 
     public $js = [

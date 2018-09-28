@@ -1919,6 +1919,10 @@ var addTabs = function (options) {
 
     options = $.extend(true, defaultTabOptions, options);
 
+    if (options.title=='新页面') {
+        options.title = options.text;
+    }
+
     if (options.urlType === "relative") {
         // var url = window.location.protocol + '//' + window.location.host + "/";
         var basePath = window.location.pathname + "/../";
