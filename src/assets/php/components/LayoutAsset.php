@@ -10,10 +10,14 @@ use yii\web\AssetBundle;
 
 class LayoutAsset extends AssetBundle
 {
+    public $skin = 'skin-blue';
+    public $menuRefreshTab = false; //true,false
+    public $jsVersion = '1.735.1';
+    public $cssVersion = '1.735.1';
     function init(){
         parent::init();
-        
         $this->css[] = sprintf('css/skins/%s.css', $this->skin);
+        self::addVersion($this->js, $this->jsVersion, $this->css, $this->cssVersion);
     }
     
     public $sourcePath = '@vendor/myzero1/yii2-theme-adminlteiframe/src/assets/static/adminlteiframe';
@@ -37,6 +41,24 @@ class LayoutAsset extends AssetBundle
         'myzero1\adminlteiframe\assets\php\components\plugins\LayerAsset',
     ];
 
-    public $skin = 'skin-blue';
-    public $menuRefreshTab = false; //true,false
+
+
+    public static function addVersion(&$js, $jsVersion, &$css, $cssVersion){
+        if (is_array($js)) {
+            $jsArr = $js;
+            
+            foreach ($jsArr as $jsItem) {
+                $jsNew[] = $jsItem . '?ver=' . $jsVersion;
+            }
+            $js = $jsNew;
+        }
+        if (is_array($css)) {
+            $cssArr = $css;
+            $cssNew = [];
+            foreach ($cssArr as $cssItem) {
+                $cssNew[] = $cssItem . '?ver=' . $cssVersion;
+            }
+            $css = $cssNew;
+        }
+    }
 }

@@ -42,6 +42,9 @@ function search_menu() {
 }
 
 $(function () {
+    baseArr = base.split("?ver=");
+    base = baseArr[0];
+    
     App.setbasePath(base);
     App.setGlobalImgPath("/img/");
 

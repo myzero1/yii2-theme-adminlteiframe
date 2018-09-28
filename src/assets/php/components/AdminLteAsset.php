@@ -10,10 +10,12 @@ use yii\web\AssetBundle;
 
 class AdminLteAsset extends AssetBundle
 {
+    public $jsVersion = '1.735.1';
+    public $cssVersion = '1.735.1';
     function init(){
         parent::init();
-        
         $this->css[] = sprintf('css/skins/%s.css', $this->skin);
+        \myzero1\adminlteiframe\assets\php\components\LayoutAsset::addVersion($this->js, $this->jsVersion, $this->css, $this->cssVersion);
     }
     
     public $sourcePath = '@vendor/myzero1/yii2-theme-adminlteiframe/src/assets/static/adminlteiframe';

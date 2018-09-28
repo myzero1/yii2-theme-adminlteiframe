@@ -10,6 +10,12 @@ use yii\web\AssetBundle;
 
 class SwitchAsset extends AssetBundle
 {
+    public $jsVersion = '1.735.1';
+    public $cssVersion = '1.735.1';
+    function init(){
+        parent::init();
+        \myzero1\adminlteiframe\assets\php\components\LayoutAsset::addVersion($this->js, $this->jsVersion, $this->css, $this->cssVersion);
+    }
     public $sourcePath = '@vendor/myzero1/yii2-theme-adminlteiframe/src/assets/static/plugins';
     //public $baseUrl = '@web';
     public $css = [
