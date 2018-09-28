@@ -44,6 +44,13 @@ function applyz1datarangepicker(){
                 }
             });
         }
+
+        $(this).on('apply.daterangepicker', function(ev, picker) {
+            if ($(this).val() == '') {
+                // $(this).val(picker.startDate.format('YYYY-MM-DD'));
+                $(this).val(picker.startDate.format(config.locale.format));
+            }
+        });
     });
 }
 
