@@ -7,6 +7,7 @@ function applyz1datarangepicker(){
             "timePicker24Hour": true,
             "linkedCalendars": false,
             "autoUpdateInput": false,
+            "autoUpdateInput": false,
             "locale": {
                 format: 'YYYY-MM-DD',
                 separator: ' ~ ',
@@ -15,6 +16,8 @@ function applyz1datarangepicker(){
                 applyLabel: "应用",
                 cancelLabel: "取消",
                 resetLabel: "重置"
+                clearLabel: "清空",
+                customRangeLabel: '自定义'
             }};
         var configSetting = $(this).attr('data-z1datarangepicker-config');
         if (configSetting=='undefied') {
@@ -23,6 +26,21 @@ function applyz1datarangepicker(){
             configSetting = eval('(' + configSetting + ')');
         }
         var config = $.extend({}, defaultConfig, configSetting);
+
+/*
+        ranges: {
+            'Today': [moment(), moment()],
+            'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+            'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+            'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+            'This Month': [moment().startOf('month'), moment().endOf('month')],
+            'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+        },
+        */
+
+        if (config.ranges != undefined) {
+            config.ranges[config.locale.clearLabel] = ["1970-01-01", "1970-01-01"];
+        }
 
         if (config.singleDatePicker === true) {
             $(this).daterangepicker(config, function(start, end, label) {
@@ -46,38 +64,17 @@ function applyz1datarangepicker(){
         }
 
         $(this).on('apply.daterangepicker', function(ev, picker) {
-
-            if ($(this).val() == '') { // 点击当天不起作用
+            // 点击当天不起作用
+            if ($(this).val() == '') {
                 $(this).val(moment().format(config.locale.format));
             }
-            if ($(this).val() == '1970-01-01') { // 清空
+
+            // 在range中添加清空
+            if ($(this).val() == '1970-01-01' || $(this).val() == '1970-01-01'+config.locale.separator+'1970-01-01') {
                 $(this).val('');
                 picker.setStartDate(moment().format(config.locale.format));
             }
         });
-
-        // $(this).on('show.daterangepicker', function(ev, picker) {
-        //     console.log('show.daterangepicker');
-        //     console.log(moment().format('YYYY-MM-DD'));
-        //     console.log($(this));
-        //     if ($(this).val() == '') {
-        //         // $(this).val(picker.startDate.format('YYYY-MM-DD'));
-        //         $(this).val(moment().format('YYYY-MM-DD'));
-        //     }
-        //     if ($(this).val() == 'Invalid date') {
-        //         $(this).val('');
-        //     }
-        // });
-
-        // $(this).on('hide.daterangepicker', function(ev, picker) {
-        //     console.log('hide.daterangepicker');
-        //     console.log($(this).val());
-        //     if ($(this).val() == '') {
-        //         // $(this).val(picker.startDate.format('YYYY-MM-DD'));
-        //         console.log(moment().format('YYYY-MM-DD'));
-        //         $(this).val(moment().format('YYYY-MM-DD'));
-        //     }
-        // });
     });
 }
 
