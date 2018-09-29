@@ -46,11 +46,38 @@ function applyz1datarangepicker(){
         }
 
         $(this).on('apply.daterangepicker', function(ev, picker) {
-            if ($(this).val() == '') {
-                // $(this).val(picker.startDate.format('YYYY-MM-DD'));
-                $(this).val(picker.startDate.format(config.locale.format));
+
+            if ($(this).val() == '') { // 点击当天不起作用
+                $(this).val(moment().format(config.locale.format));
+            }
+            if ($(this).val() == '1970-01-01') { // 清空
+                $(this).val('');
+                picker.setStartDate(moment().format(config.locale.format));
             }
         });
+
+        // $(this).on('show.daterangepicker', function(ev, picker) {
+        //     console.log('show.daterangepicker');
+        //     console.log(moment().format('YYYY-MM-DD'));
+        //     console.log($(this));
+        //     if ($(this).val() == '') {
+        //         // $(this).val(picker.startDate.format('YYYY-MM-DD'));
+        //         $(this).val(moment().format('YYYY-MM-DD'));
+        //     }
+        //     if ($(this).val() == 'Invalid date') {
+        //         $(this).val('');
+        //     }
+        // });
+
+        // $(this).on('hide.daterangepicker', function(ev, picker) {
+        //     console.log('hide.daterangepicker');
+        //     console.log($(this).val());
+        //     if ($(this).val() == '') {
+        //         // $(this).val(picker.startDate.format('YYYY-MM-DD'));
+        //         console.log(moment().format('YYYY-MM-DD'));
+        //         $(this).val(moment().format('YYYY-MM-DD'));
+        //     }
+        // });
     });
 }
 
