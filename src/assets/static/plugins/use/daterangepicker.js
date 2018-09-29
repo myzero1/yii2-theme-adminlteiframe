@@ -15,7 +15,6 @@ function applyz1datarangepicker(){
                 monthNames: ["一月","二月","三月","四月","五月","六月","七月","八月","九月","十月","十一月","十二月"],
                 applyLabel: "应用",
                 cancelLabel: "取消",
-                resetLabel: "重置"
                 clearLabel: "清空",
                 customRangeLabel: '自定义'
             }};
