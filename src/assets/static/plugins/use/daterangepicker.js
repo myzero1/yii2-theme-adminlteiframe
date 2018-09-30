@@ -1,6 +1,6 @@
 function applyz1datarangepicker(){
     $('input[data-provide="z1datarangepicker"]').each(function() {
-        $(this).after('<i style="line-height:32px;font-size:20px;right:5px;position:absolute;" class="z1datarangepicker-icon glyphicon glyphicon-calendar fa fa-calendar"></i>');
+        $(this).after('<i onclick="myclick($(this));function myclick(target){target.prev().click();}" style="line-height:32px;font-size:20px;right:5px;position:absolute;cursor:pointer;" class="z1datarangepicker-icon glyphicon glyphicon-calendar fa fa-calendar"></i>');
         
         var defaultConfig = {
             "timePicker": true,
