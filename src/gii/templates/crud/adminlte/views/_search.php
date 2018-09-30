@@ -42,6 +42,7 @@ foreach ($generator->getColumnNames() as $attribute) {
     <div class="form-group">
         <?= "<?= " ?>Html::submitButton(<?= $generator->generateString('Search') ?>, ['class' => 'btn btn-primary']) ?>
         <?= "<?= " ?>Html::resetButton(<?= $generator->generateString('Reset') ?>, ['class' => 'btn btn-default']) ?>
+        <?= "<?= " ?>Html::button(<?= $generator->generateString('Clear') ?>, ['class' => 'btn btn-default','onclick' => "clear($(this));function clear(target){target.parents('form').first().find(':input').not(':button, :submit, :reset,:hidden,:radio').val('').removeAttr('checked').removeAttr('selected');}",]) ?>
     </div>
 
     <?= "<?php " ?>ActiveForm::end(); ?>
