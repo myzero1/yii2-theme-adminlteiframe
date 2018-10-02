@@ -254,7 +254,7 @@
     var dragEnd = void 0;
     var handlers = {
       click: function click(event) {
-        // event.stopPropagation();// comment by myzero1,to integrate to IE11
+        event.stopPropagation();
       },
 
 
