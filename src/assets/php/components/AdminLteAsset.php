@@ -24,11 +24,13 @@ class AdminLteAsset extends AssetBundle
         'css/ionicons.min.css',
         'css/AdminLTE.2.3.8.min.css',
         // 'css/skins/all-skins.min.css',
+        'css/custom.css',
     ];
 
     public $js = [
         // 'js/adminlte.js',
         'js/app.js',
+        'js/custom.js',
     ];
 
     public $depends = [
