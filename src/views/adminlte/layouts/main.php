@@ -17,7 +17,7 @@ $avatarUrl = sprintf('%s/img/myzero1.jpg', $bundle->baseUrl);
 
 $profile = [
     'avatarUrl' => $avatarUrl,
-    'username' => \Yii::$app->user->isGuest ? '' : Yii::$app->user->identity->username,
+    'username' => Yii::$app->user->isGuest ? '' : '管理员',
     'trueName' => "",
     'lastTime' => 0,
     'lastIp' => "",
