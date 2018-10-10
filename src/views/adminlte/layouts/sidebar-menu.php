@@ -15,7 +15,6 @@
     // var_dump($sUri);exit;
 
     $sRbacpModuleName = Helper::getRbacpModuleName();
-    
     $menuDefault = [
         [
             'text' => Yii::t('app', 'rbacp首页'),
@@ -30,14 +29,12 @@
             'icon' => 'fa-database',
             'items' => [
                 [
-                    'label' => Yii::t('app', 'rbacp添加数据'),
+                    'text' => Yii::t('app', 'rbacp添加数据'),
                     'url' => [sprintf('/%s/default/migrate-up', $sRbacpModuleName)],
-                    'visible' => true,
                 ],
                 [
-                    'label' => Yii::t('app', 'rbacp删除数据'),
+                    'text' => Yii::t('app', 'rbacp删除数据'),
                     'url' => [sprintf('/%s/default/migrate-down', $sRbacpModuleName)],
-                    'visible' => true,
                 ],
             ]
         ],
@@ -49,7 +46,6 @@
                 [
                     'text' => Yii::t('app', '角色管理'),
                     'url' => [sprintf('/%s/rbacp-role/index', $sRbacpModuleName)],
-                    'visible' => true,
                     'active' => in_array($sUri, [
                         sprintf('%s/%s/rbacp-role/index', \Yii::$app->homeUrl, $sRbacpModuleName),
                         sprintf('%s/%s/rbacp-role/create', \Yii::$app->homeUrl, $sRbacpModuleName),
@@ -59,7 +55,6 @@
                 [
                     'text' => Yii::t('app', '授权管理'),
                     'url' => [sprintf('/%s/rbacp-user-view/index', $sRbacpModuleName)],
-                    'visible' => true,
                     'active' => in_array($sUri, [
                         sprintf('%s/%s/rbacp-user-view/index', \Yii::$app->homeUrl, $sRbacpModuleName),
                         sprintf('%s/%s/rbacp-user-view/update', \Yii::$app->homeUrl, $sRbacpModuleName),
@@ -68,7 +63,6 @@
                 [
                     'text' => Yii::t('app', '功能权限'),
                     'url' => [sprintf('/%s/rbacp-privilege/index', $sRbacpModuleName)],
-                    'visible' => true,
                     'active' => in_array($sUri, [
                         sprintf('%s/%s/rbacp-privilege/index', \Yii::$app->homeUrl, $sRbacpModuleName),
                         sprintf('%s/%s/rbacp-privilege/create', \Yii::$app->homeUrl, $sRbacpModuleName),
@@ -78,7 +72,6 @@
                 [
                     'text' => Yii::t('app', '数据策略'),
                     'url' => [sprintf('/%s/rbacp-policy/index', $sRbacpModuleName)],
-                    'visible' => true,
                     'active' => in_array($sUri, [
                         sprintf('%s/%s/rbacp-policy/index', \Yii::$app->homeUrl, $sRbacpModuleName),
                         sprintf('%s/%s/rbacp-policy/create', \Yii::$app->homeUrl, $sRbacpModuleName),
@@ -94,7 +87,8 @@
     } else {
         $menu = $menuDefault;
     }
-
+    $menu = $menuDefault;
+// var_dump($menu);exit;
     echo Menu::widget(
         [
             'options' => [

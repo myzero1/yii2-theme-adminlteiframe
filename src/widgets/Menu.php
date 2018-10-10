@@ -1,10 +1,11 @@
 <?php
+
 namespace myzero1\adminlteiframe\widgets;
 
-use Yii;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 use yii\helpers\Html;
+
 /**
  * Class Menu
  * Theme menu widget.
@@ -14,88 +15,25 @@ class Menu extends \yii\widgets\Menu
     /**
      * @inheritdoc
      */
-    public $linkTemplate = '<a href="{url}">{icon} {label}</a>';
+    public $linkTemplate = '<a href="{url}">{icon} {label} {arrow}</a>';
+
     /**
      * @inheritdoc
-     * Styles all labels of items on sidebar by AdminLTE
      */
-    public $labelTemplate = '<span>{label}</span>';
-    public $submenuTemplate = "\n<ul class='treeview-menu' {show}>\n{items}\n</ul>\n";
+    public $submenuTemplate = "\n<ul class='treeview-menu'>\n{items}\n</ul>\n";
+
+    /**
+     * @var string Class that will be added for parents "li"
+     */
+    public $treeClass = 'treeview';
+
+    /**
+     * @inheritdoc
+     */
     public $activateParents = true;
-    public $defaultIconHtml = '<i class="fa fa-circle-o"></i> ';
-    public $options = ['class' => 'sidebar-menu', 'data-widget' => 'tree'];
-
-    /**
-     * @var string is prefix that will be added to $item['icon'] if it exist.
-     * By default uses for Font Awesome (http://fontawesome.io/)
-     */
-    // public static $iconClassPrefix = 'fa fa-';
-    public static $iconClassPrefix = '';
-
-    private $noDefaultAction;
-    private $noDefaultRoute;
-
-    /**
-     * Renders the menu.
-     */
-    public function run()
-    {
-        if ($this->route === null && Yii::$app->controller !== null) {
-            $this->route = Yii::$app->controller->getRoute();
-        }
-        if ($this->params === null) {
-            $this->params = Yii::$app->request->getQueryParams();
-        }
-        $posDefaultAction = strpos($this->route, Yii::$app->controller->defaultAction);
-        if ($posDefaultAction) {
-            $this->noDefaultAction = rtrim(substr($this->route, 0, $posDefaultAction), '/');
-        } else {
-            $this->noDefaultAction = false;
-        }
-        $posDefaultRoute = strpos($this->route, Yii::$app->controller->module->defaultRoute);
-        if ($posDefaultRoute) {
-            $this->noDefaultRoute = rtrim(substr($this->route, 0, $posDefaultRoute), '/');
-        } else {
-            $this->noDefaultRoute = false;
-        }
-        $items = $this->normalizeItems($this->items, $hasActiveChild);
-        if (!empty($items)) {
-            $options = $this->options;
-            $tag = ArrayHelper::remove($options, 'tag', 'ul');
-
-            echo Html::tag($tag, $this->renderItems($items), $options);
-        }
-    }
 
     /**
      * @inheritdoc
-     */
-    protected function renderItem($item)
-    {
-        if (isset($item['children'])) {
-            $labelTemplate = '<a href="{url}">{icon} {label} <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>';
-            $linkTemplate = '<a href="{url}">{icon} {label} <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>';
-        } else {
-            $labelTemplate = $this->labelTemplate;
-            $linkTemplate = $this->linkTemplate;
-        }
-
-        $replacements = [
-            '{label}' => strtr($this->labelTemplate, ['{label}' => $item['text'],]),
-            '{icon}' => empty($item['icon']) ? $this->defaultIconHtml
-                : '<i class="' . static::$iconClassPrefix . $item['icon'] . '"></i> ',
-            '{url}' => isset($item['url']) ? Url::to($item['url']) : 'javascript:void(0);',
-        ];
-
-        $template = ArrayHelper::getValue($item, 'template', isset($item['url']) ? $linkTemplate : $labelTemplate);
-
-        return strtr($template, $replacements);
-    }
-
-    /**
-     * Recursively renders the menu items (without the container tag).
-     * @param array $items the menu items to be rendered recursively
-     * @return string the rendering result
      */
     protected function renderItems($items)
     {
@@ -105,7 +43,7 @@ class Menu extends \yii\widgets\Menu
             $options = array_merge($this->itemOptions, ArrayHelper::getValue($item, 'options', []));
             $tag = ArrayHelper::remove($options, 'tag', 'li');
             $class = [];
-            if (isset($item['active']) && $item['active']) {
+            if ($item['active']) {
                 $class[] = $this->activeCssClass;
             }
             if ($i === 0 && $this->firstItemCssClass !== null) {
@@ -114,6 +52,15 @@ class Menu extends \yii\widgets\Menu
             if ($i === $n - 1 && $this->lastItemCssClass !== null) {
                 $class[] = $this->lastItemCssClass;
             }
+
+            $menu = $this->renderItem($item);
+            if (!empty($item['items'])) {
+                $class[] = $this->treeClass;
+                $menu .= strtr($this->submenuTemplate, [
+                    '{items}' => $this->renderItems($item['items']),
+                ]);
+            }
+
             if (!empty($class)) {
                 if (empty($options['class'])) {
                     $options['class'] = implode(' ', $class);
@@ -121,21 +68,49 @@ class Menu extends \yii\widgets\Menu
                     $options['class'] .= ' ' . implode(' ', $class);
                 }
             }
-            $menu = $this->renderItem($item);
-            if (!empty($item['children'])) {
-                $menu .= strtr($this->submenuTemplate, [
-                    '{show}' => $item['active'] ? "style='display: block'" : '',
-                    '{items}' => $this->renderItems($item['children']),
-                ]);
-                if (isset($options['class'])) {
-                    $options['class'] .= ' treeview';
-                } else {
-                    $options['class'] = 'treeview';
-                }
-            }
+
             $lines[] = Html::tag($tag, $menu, $options);
         }
+
         return implode("\n", $lines);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    protected function renderItem($item)
+    {
+        if (isset($item['url'])) {
+            $template = ArrayHelper::getValue($item, 'template', $this->linkTemplate);
+
+            $replace = !empty($item['icon']) ? [
+                '{url}' => Url::to($item['url']),
+                '{label}' => $item['text'],
+                '{icon}' => '<i class="fa ' . $item['icon'] . '"></i> ',
+                '{arrow}' => !empty($item['items']) ? '<i class="fa pull-right fa-angle-left"></i>' : ''
+            ] : [
+                '{url}' => Url::to($item['url']),
+                '{label}' => $item['text'],
+                '{icon}' => $item['icon'] !== false ? '<i class="fa fa-angle-double-right"></i>' : '',
+                '{arrow}' => !empty($item['items']) ? '<i class="fa pull-right fa-angle-left"></i>' : ''
+            ];
+
+            return strtr($template, $replace);
+        } else {
+            $template = ArrayHelper::getValue($item, 'template', $this->labelTemplate);
+
+            $replace = !empty($item['icon']) ? [
+                '{label}' => $item['text'],
+                '{icon}' => '<i class="fa ' . $item['icon'] . '"></i> ',
+                '{arrow}' => !empty($item['items']) ? '<i class="fa pull-right fa-angle-left"></i>' : ''
+            ] : [
+                '{label}' => $item['text'],
+                '{icon}' => $item['icon'] !== false ? '<i class="fa fa-angle-double-right"></i>' : '',
+                '{arrow}' => !empty($item['items']) ? '<i class="fa pull-right fa-angle-left"></i>' : ''
+            ];
+
+            return strtr($template, $replace);
+        }
     }
 
     /**
@@ -148,11 +123,11 @@ class Menu extends \yii\widgets\Menu
                 unset($items[$i]);
                 continue;
             }
-            if (!isset($item['label'])) {
-                $item['label'] = '';
+            if (!isset($item['text'])) {
+                $item['text'] = '';
             }
             $encodeLabel = isset($item['encode']) ? $item['encode'] : $this->encodeLabels;
-            $items[$i]['label'] = $encodeLabel ? Html::encode($item['label']) : $item['label'];
+            $items[$i]['label'] = $encodeLabel ? Html::encode($item['text']) : $item['text'];
             $items[$i]['icon'] = isset($item['icon']) ? $item['icon'] : '';
             $hasActiveChild = false;
             if (isset($item['items'])) {
@@ -175,40 +150,7 @@ class Menu extends \yii\widgets\Menu
                 $active = true;
             }
         }
-        return array_values($items);
-    }
 
-    /**
-     * Checks whether a menu item is active.
-     * This is done by checking if [[route]] and [[params]] match that specified in the `url` option of the menu item.
-     * When the `url` option of a menu item is specified in terms of an array, its first element is treated
-     * as the route for the item and the rest of the elements are the associated parameters.
-     * Only when its route and parameters match [[route]] and [[params]], respectively, will a menu item
-     * be considered active.
-     * @param array $item the menu item to be checked
-     * @return boolean whether the menu item is active
-     */
-    protected function isItemActive($item)
-    {
-        if (isset($item['url']) && is_array($item['url']) && isset($item['url'][0])) {
-            $route = $item['url'][0];
-            if (isset($route[0]) && $route[0] !== '/' && Yii::$app->controller) {
-                $route = ltrim(Yii::$app->controller->module->getUniqueId() . '/' . $route, '/');
-            }
-            $route = ltrim($route, '/');
-            if ($route != $this->route && $route !== $this->noDefaultRoute && $route !== $this->noDefaultAction) {
-                return false;
-            }
-            unset($item['url']['#']);
-            if (count($item['url']) > 1) {
-                foreach (array_splice($item['url'], 1) as $name => $value) {
-                    if ($value !== null && (!isset($this->params[$name]) || $this->params[$name] != $value)) {
-                        return false;
-                    }
-                }
-            }
-            return true;
-        }
-        return false;
+        return array_values($items);
     }
 }
