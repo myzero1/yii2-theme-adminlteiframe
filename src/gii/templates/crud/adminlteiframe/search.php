@@ -57,7 +57,7 @@ function generateSqlSearchConditions($generator)
             case Schema::TYPE_TIME:
             case Schema::TYPE_DATETIME:
             case Schema::TYPE_TIMESTAMP:
-                $hashConditions[] = "'{$column}' => sprintf('{$column} = %s',\$this->{$column}),";
+                $hashConditions[] = "'{$column}' => sprintf('{$column} = \"%s\"',\$this->{$column}),";
                 break;
             default:
                 $likeKeyword = \Yii::$app->db->driverName === 'pgsql' ? 'ilike' : 'like';
