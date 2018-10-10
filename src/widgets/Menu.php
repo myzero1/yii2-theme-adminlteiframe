@@ -123,6 +123,7 @@ class Menu extends \yii\widgets\Menu
      */
     protected function normalizeItems($items, &$active)
     {
+        $requestedRoute = '/'.\Yii::$app->requestedRoute;
         foreach ($items as $i => $item) {
             if (isset($item['visible']) && !$item['visible']) {
                 unset($items[$i]);
@@ -147,6 +148,8 @@ class Menu extends \yii\widgets\Menu
             }
             if (!isset($item['active'])) {
                 if ($this->activateParents && $hasActiveChild || $this->activateItems && $this->isItemActive($item)) {
+                    $active = $items[$i]['active'] = true;
+                } elseif ($requestedRoute == $items[$i]['url']) {
                     $active = $items[$i]['active'] = true;
                 } else {
                     $items[$i]['active'] = false;
