@@ -84,4 +84,65 @@ class <?= $searchModelClass ?> extends <?= isset($modelAlias) ? $modelAlias : $m
 
         return $dataProvider;
     }
+
+    /**
+     * Creates data provider instance with search query and sql applied
+     *
+     * @param array $params
+     *
+     * @return SqlDataProvider
+     */
+    public function aqlSearch($params)
+    {
+        $this->load($params);
+
+        $where = [
+            'id' => sprintf('id = %s',$this->id),
+            // 'user_name' => sprintf('user_name like "%s%%"',$this->user_name),
+        ];
+
+        $filtedParams = array_filter($this->attributes,
+            function($val){return $val!='';});
+
+        $FiltedWhere = ['1=1'];
+        foreach ($filtedParams as $key => $value) {
+            $FiltedWhere[] = $where[$key];
+        }
+
+        $querySql = sprintf('
+            SELECT
+                %s
+            FROM
+                %s
+            WHERE
+                %s
+            ', '*', $this->tableName(), implode(' AND ', $FiltedWhere));
+
+        $countSql = sprintf('
+            SELECT
+                %s
+            FROM
+                %s
+            WHERE
+                %s
+            ', 'count(1)', $this->tableName(), implode(' AND ', $FiltedWhere));
+
+        $sqlDataProvider = new SqlDataProvider([
+            'sql' => $querySql,
+            // 'params' => [':sex' => 1],
+            'totalCount' => Yii::$app->db->createCommand($countSql)->queryScalar(),
+            //'sort' =>false,//如果为假则删除排序
+            'key' => 'id',
+            'sort' => [
+                'defaultOrder' => [
+                    'id' => SORT_DESC
+                ],
+                'attributes' => array_keys($this->attributes),
+            ],
+            'pagination' => [
+                'pageSize' => 30,
+            ],
+        ]);
+        return $sqlDataProvider;
+    }
 }
