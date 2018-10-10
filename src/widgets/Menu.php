@@ -37,12 +37,17 @@ class Menu extends \yii\widgets\Menu
      */
     protected function renderItems($items)
     {
+        $requestedRoute = '/'.\Yii::$app->requestedRoute;
         $n = count($items);
         $lines = [];
         foreach ($items as $i => $item) {
+            // var_dump($requestedRoute == $item['url']);exit;
             $options = array_merge($this->itemOptions, ArrayHelper::getValue($item, 'options', []));
             $tag = ArrayHelper::remove($options, 'tag', 'li');
             $class = [];
+            if (!isset($item['active'])) {
+                $item['active'] = $requestedRoute == $item['url'];
+            }
             if ($item['active']) {
                 $class[] = $this->activeCssClass;
             }
@@ -54,10 +59,10 @@ class Menu extends \yii\widgets\Menu
             }
 
             $menu = $this->renderItem($item);
-            if (!empty($item['items'])) {
+            if (!empty($item['children'])) {
                 $class[] = $this->treeClass;
                 $menu .= strtr($this->submenuTemplate, [
-                    '{items}' => $this->renderItems($item['items']),
+                    '{items}' => $this->renderItems($item['children']),
                 ]);
             }
 
@@ -71,7 +76,7 @@ class Menu extends \yii\widgets\Menu
 
             $lines[] = Html::tag($tag, $menu, $options);
         }
-
+// var_dump($lines);exit;
         return implode("\n", $lines);
     }
 
@@ -87,12 +92,12 @@ class Menu extends \yii\widgets\Menu
                 '{url}' => Url::to($item['url']),
                 '{label}' => $item['text'],
                 '{icon}' => '<i class="fa ' . $item['icon'] . '"></i> ',
-                '{arrow}' => !empty($item['items']) ? '<i class="fa pull-right fa-angle-left"></i>' : ''
+                '{arrow}' => !empty($item['children']) ? '<i class="fa pull-right fa-angle-left"></i>' : ''
             ] : [
                 '{url}' => Url::to($item['url']),
                 '{label}' => $item['text'],
                 '{icon}' => $item['icon'] !== false ? '<i class="fa fa-angle-double-right"></i>' : '',
-                '{arrow}' => !empty($item['items']) ? '<i class="fa pull-right fa-angle-left"></i>' : ''
+                '{arrow}' => !empty($item['children']) ? '<i class="fa pull-right fa-angle-left"></i>' : ''
             ];
 
             return strtr($template, $replace);
@@ -102,11 +107,11 @@ class Menu extends \yii\widgets\Menu
             $replace = !empty($item['icon']) ? [
                 '{label}' => $item['text'],
                 '{icon}' => '<i class="fa ' . $item['icon'] . '"></i> ',
-                '{arrow}' => !empty($item['items']) ? '<i class="fa pull-right fa-angle-left"></i>' : ''
+                '{arrow}' => !empty($item['children']) ? '<i class="fa pull-right fa-angle-left"></i>' : ''
             ] : [
                 '{label}' => $item['text'],
                 '{icon}' => $item['icon'] !== false ? '<i class="fa fa-angle-double-right"></i>' : '',
-                '{arrow}' => !empty($item['items']) ? '<i class="fa pull-right fa-angle-left"></i>' : ''
+                '{arrow}' => !empty($item['children']) ? '<i class="fa pull-right fa-angle-left"></i>' : ''
             ];
 
             return strtr($template, $replace);
@@ -130,8 +135,8 @@ class Menu extends \yii\widgets\Menu
             $items[$i]['label'] = $encodeLabel ? Html::encode($item['text']) : $item['text'];
             $items[$i]['icon'] = isset($item['icon']) ? $item['icon'] : '';
             $hasActiveChild = false;
-            if (isset($item['items'])) {
-                $items[$i]['items'] = $this->normalizeItems($item['items'], $hasActiveChild);
+            if (isset($item['children'])) {
+                $items[$i]['items'] = $this->normalizeItems($item['children'], $hasActiveChild);
                 if (empty($items[$i]['items']) && $this->hideEmptyItems) {
                     unset($items[$i]['items']);
                     if (!isset($item['url'])) {
