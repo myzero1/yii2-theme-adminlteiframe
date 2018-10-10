@@ -4,7 +4,7 @@
  */
 
 use yii\helpers\StringHelper;
-
+use yii\db\Schema;
 
 /* @var $this yii\web\View */
 /* @var $generator yii\gii\generators\crud\Generator */
@@ -18,6 +18,56 @@ $rules = $generator->generateSearchRules();
 $labels = $generator->generateSearchLabels();
 $searchAttributes = $generator->getSearchAttributes();
 $searchConditions = $generator->generateSearchConditions();
+$generateSqlSearchConditions = generateSqlSearchConditions($generator);
+
+/**
+ * Generates search conditions
+ * @return array
+ */
+function generateSqlSearchConditions($generator)
+{
+    $columns = [];
+    if (($table = $generator->getTableSchema()) === false) {
+        $class = $generator->modelClass;
+        /* @var $model \yii\base\Model */
+        $model = new $class();
+        foreach ($model->attributes() as $attribute) {
+            $columns[$attribute] = 'unknown';
+        }
+    } else {
+        foreach ($table->columns as $column) {
+            $columns[$column->name] = $column->type;
+        }
+    }
+
+    $likeConditions = [];
+    $hashConditions = [];
+    foreach ($columns as $column => $type) {
+        switch ($type) {
+            case Schema::TYPE_TINYINT:
+            case Schema::TYPE_SMALLINT:
+            case Schema::TYPE_INTEGER:
+            case Schema::TYPE_BIGINT:
+            case Schema::TYPE_BOOLEAN:
+            case Schema::TYPE_FLOAT:
+            case Schema::TYPE_DOUBLE:
+            case Schema::TYPE_DECIMAL:
+            case Schema::TYPE_MONEY:
+            case Schema::TYPE_DATE:
+            case Schema::TYPE_TIME:
+            case Schema::TYPE_DATETIME:
+            case Schema::TYPE_TIMESTAMP:
+                $hashConditions[] = "'{$column}' => sprintf('{$column} = %s',\$this->{$column}),";
+                break;
+            default:
+                $likeKeyword = \Yii::$app->db->driverName === 'pgsql' ? 'ilike' : 'like';
+                $likeConditions[] = "'{$column}' => sprintf('{$column} {$likeKeyword} \"%s%%\"',\$this->{$column}),";
+                break;
+        }
+    }
+
+    return array_merge($hashConditions, $likeConditions);
+}
 
 echo "<?php\n";
 ?>
@@ -27,6 +77,7 @@ namespace <?= StringHelper::dirname(ltrim($generator->searchModelClass, '\\')) ?
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
+use yii\data\SqlDataProvider;
 use <?= ltrim($generator->modelClass, '\\') . (isset($modelAlias) ? " as $modelAlias" : "") ?>;
 
 /**
@@ -92,14 +143,11 @@ class <?= $searchModelClass ?> extends <?= isset($modelAlias) ? $modelAlias : $m
      *
      * @return SqlDataProvider
      */
-    public function aqlSearch($params)
+    public function sqlSearch($params)
     {
         $this->load($params);
 
-        $where = [
-            'id' => sprintf('id = %s',$this->id),
-            // 'user_name' => sprintf('user_name like "%s%%"',$this->user_name),
-        ];
+        <?= '$where '."=[\n           " . implode("\n           ", $generateSqlSearchConditions) . "\n        ];\n" ?>
 
         $filtedParams = array_filter($this->attributes,
             function($val){return $val!='';});
@@ -143,6 +191,7 @@ class <?= $searchModelClass ?> extends <?= isset($modelAlias) ? $modelAlias : $m
                 'pageSize' => 30,
             ],
         ]);
+
         return $sqlDataProvider;
     }
 }
