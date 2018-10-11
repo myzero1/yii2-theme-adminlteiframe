@@ -224,7 +224,7 @@
             ];
 
             $welcomeMenu = [
-                'id' => "-1",
+                'id' => "welcomeMenu",
                 'title' => "欢迎页面",
                 'close' => false,
                 'url' => ['/gii/extension'],
@@ -246,7 +246,6 @@
                     $homeMenu = $this->context->module->params['welcomeMenu'];
                 } else {
                     $homeMenu = $welcomeMenu;
-                    // throw new \yii\web\HttpException(500, '菜单配置错误');
                 }
             }
 
@@ -254,7 +253,13 @@
                 $bootstrapClass = array_column(Yii::$app->bootstrap, 'class');
                 if (in_array('\myzero1\rbacp\Bootstrap', $bootstrapClass)) {
                     $menu = \myzero1\rbacp\components\Rbac::getMenuItems($menu);
-                    $homeMenu = \myzero1\rbacp\components\Rbac::getMenuItems($homeMenu);
+                    $homeMenuTmp = [$homeMenu];
+                    $homeMenuTmp = \myzero1\rbacp\components\Rbac::getMenuItems($homeMenuTmp);
+                    if (isset($homeMenuTmp[0])) {
+                        $homeMenu = $homeMenuTmp[0];
+                    } else {
+                        throw new \yii\web\HttpException(500, '菜单配置错误');
+                    }
                 }
             }
 
