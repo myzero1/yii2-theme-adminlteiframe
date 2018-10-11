@@ -23,14 +23,14 @@ class MainAsset extends AssetBundle
         'css/font-awesome.min.css',
         'css/ionicons.min.css',
         'css/AdminLTE.2.3.8.min.css',
-        'css/custom.css',
+        'css/adminlteiframe-custom.css',
         // 'css/skins/all-skins.min.css',
     ];
 
     public $js = [
         'js/app.js',
         'js/app_iframe.js',
-        'js/custom.js',
+        'js/adminlteiframe-custom.js',
     ];
 
     public $depends = [

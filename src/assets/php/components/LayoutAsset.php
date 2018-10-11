@@ -26,7 +26,7 @@ class LayoutAsset extends AssetBundle
         'css/font-awesome.min.css',
         'css/ionicons.min.css',
         'css/AdminLTE.2.3.8.min.css',
-        'css/custom.css',
+        'css/adminlteiframe-custom.css',
         // 'css/skins/all-skins.min.css',
     ];
 
@@ -34,7 +34,7 @@ class LayoutAsset extends AssetBundle
         'js/app.js',
         'js/app_iframe.js',
         'js/index-iframe.js', // must after app_iframe
-        'js/custom.js',
+        'js/adminlteiframe-custom.js',
     ];
 
     public $depends = [
