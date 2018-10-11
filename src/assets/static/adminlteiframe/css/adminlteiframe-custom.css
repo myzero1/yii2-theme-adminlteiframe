@@ -10,3 +10,7 @@
     bottom: -7px;
     left: 5%;
 }
+.list-content .adminlteiframe-alert{
+    width: 100%;
+    position: relative;
+}
