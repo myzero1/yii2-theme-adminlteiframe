@@ -249,6 +249,15 @@
                     // throw new \yii\web\HttpException(500, '菜单配置错误');
                 }
             }
+
+            if (class_exists('\myzero1\rbacp\components\Rbac')) {
+                $bootstrapClass = array_column(Yii::$app->bootstrap, 'class');
+                if (in_array('\myzero1\rbacp\Bootstrap', $bootstrapClass)) {
+                    $menu = \myzero1\rbacp\components\Rbac::getMenuItems($menu);
+                    $homeMenu = \myzero1\rbacp\components\Rbac::getMenuItems($homeMenu);
+                }
+            }
+
         ?>
         <div id="index-iframe-left-menu" style="height: 0;width: 0;overflow: hidden;">
             <?= json_encode($menu);?>

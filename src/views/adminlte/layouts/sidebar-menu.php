@@ -56,6 +56,13 @@
         $menu = $menuDefault;
     }
 
+    if (class_exists('\myzero1\rbacp\components\Rbac')) {
+        $bootstrapClass = array_column(Yii::$app->bootstrap, 'class');
+        if (in_array('\myzero1\rbacp\Bootstrap', $bootstrapClass)) {
+            $menu = \myzero1\rbacp\components\Rbac::getMenuItems($menu);
+        }
+    }
+
     echo Menu::widget(
         [
             'options' => [
