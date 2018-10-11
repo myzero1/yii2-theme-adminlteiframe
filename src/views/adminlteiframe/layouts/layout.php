@@ -185,35 +185,50 @@
         <?php
             $menuDefault = [
                 [
-                    'id' => "-2",
-                    'text' => "header",
-                    'icon' => "",
-                    'isHeader' => true,
-                ],
-                [
-                    'id' => "-1",
-                    'text' => "首页",
+                    'id' => "Gii首页",
+                    'text' => "Gii首页",
+                    'title'=>"Gii首页",
                     'icon' => "fa fa-dashboard",
                     'targetType' => 'iframe-tab',
                     'urlType' => 'abosulte',
-                    'url' => "/site/home",
+                    'url' => ['/gii'],
                     'isHome' => true,
                 ],
                 [
-                    'id' => "系统管理",
-                    'text' => "系统管理",
+                    'id' => "Gii",
+                    'text' => "Gii",
+                    'title'=>"Gii",
                     'icon' => "fa fa-laptop",
-                    'items' => [
+                    'url' => '#',
+                    'children' => [
                         [
-                            'id' => "设置页面",
-                            'text' => "设置页面",
-                            'icon' => "fa fa-circle-o",
+                            'id' => "model",
+                            'text' => "model",
+                            'title'=>"model",
+                            'icon' => "fa fa-angle-double-right",
                             'targetType' => 'iframe-tab',
                             'urlType' => 'abosulte',
-                            'url' => "/site/setting",
+                            'url' => ['/gii/model'],
+                        ],
+                        [
+                            'id' => "crud",
+                            'text' => "crud",
+                            'title'=>"crud",
+                            'icon' => "fa fa-angle-double-right",
+                            'targetType' => 'iframe-tab',
+                            'urlType' => 'abosulte',
+                            'url' => ['/gii/crud'],
                         ],
                     ],
                 ],
+            ];
+
+            $welcomeMenu = [
+                'id' => "-1",
+                'title' => "欢迎页面",
+                'close' => false,
+                'url' => ['/gii/extension'],
+                'urlType' => "abosulte",
             ];
 
             if (isset($this->context->module->params['menu'])) {
@@ -230,7 +245,8 @@
                 if (isset($this->context->module->params['welcomeMenu'])) {
                     $homeMenu = $this->context->module->params['welcomeMenu'];
                 } else {
-                    throw new \yii\web\HttpException(500, '菜单配置错误');
+                    $homeMenu = $welcomeMenu;
+                    // throw new \yii\web\HttpException(500, '菜单配置错误');
                 }
             }
         ?>

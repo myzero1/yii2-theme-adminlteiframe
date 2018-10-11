@@ -10,75 +10,43 @@
     use yii\helpers\Url;
     use myzero1\rbacp\helper\Helper;
 
-    $sUri = \myzero1\rbacp\helper\Helper::getUri();
-
-    // var_dump($sUri);exit;
-
-    $sRbacpModuleName = Helper::getRbacpModuleName();
-    $menuDefault = [
+    $menuDefault =  [
         [
-            'text' => Yii::t('app', 'rbacp首页'),
-            // 'url' => sprintf('/admin/%s/default/index', $sRbacpModuleName),
-            'url' => [sprintf('/%s/default/index', $sRbacpModuleName)],
-            'icon' => 'fa-dashboard',
-            'active' => $sUri === sprintf('%s/%s/default/index', \Yii::$app->homeUrl, $sRbacpModuleName)
+            'id' => "Gii首页",
+            'text' => "Gii首页",
+            'title'=>"Gii首页",
+            'icon' => "fa fa-dashboard",
+            'targetType' => 'iframe-tab',
+            'urlType' => 'abosulte',
+            'url' => ['/gii'],
+            'isHome' => true,
         ],
         [
-            'text' => Yii::t('app', 'rbacp数据库'),
+            'id' => "Gii",
+            'text' => "Gii",
+            'title'=>"Gii",
+            'icon' => "fa fa-laptop",
             'url' => '#',
-            'icon' => 'fa-database',
-            'items' => [
+            'children' => [
                 [
-                    'text' => Yii::t('app', 'rbacp添加数据'),
-                    'url' => [sprintf('/%s/default/migrate-up', $sRbacpModuleName)],
+                    'id' => "model",
+                    'text' => "model",
+                    'title'=>"model",
+                    'icon' => "fa fa-angle-double-right",
+                    'targetType' => 'iframe-tab',
+                    'urlType' => 'abosulte',
+                    'url' => ['/gii/model'],
                 ],
                 [
-                    'text' => Yii::t('app', 'rbacp删除数据'),
-                    'url' => [sprintf('/%s/default/migrate-down', $sRbacpModuleName)],
+                    'id' => "crud",
+                    'text' => "crud",
+                    'title'=>"crud",
+                    'icon' => "fa fa-angle-double-right",
+                    'targetType' => 'iframe-tab',
+                    'urlType' => 'abosulte',
+                    'url' => ['/gii/crud'],
                 ],
-            ]
-        ],
-        [
-            'text' => Yii::t('app', 'rbacp权限管理'),
-            'url' => '#',
-            'icon' => ' fa-cubes',
-            'items' => [
-                [
-                    'text' => Yii::t('app', '角色管理'),
-                    'url' => [sprintf('/%s/rbacp-role/index', $sRbacpModuleName)],
-                    'active' => in_array($sUri, [
-                        sprintf('%s/%s/rbacp-role/index', \Yii::$app->homeUrl, $sRbacpModuleName),
-                        sprintf('%s/%s/rbacp-role/create', \Yii::$app->homeUrl, $sRbacpModuleName),
-                        sprintf('%s/%s/rbacp-role/update', \Yii::$app->homeUrl, $sRbacpModuleName),
-                    ]),
-                ],
-                [
-                    'text' => Yii::t('app', '授权管理'),
-                    'url' => [sprintf('/%s/rbacp-user-view/index', $sRbacpModuleName)],
-                    'active' => in_array($sUri, [
-                        sprintf('%s/%s/rbacp-user-view/index', \Yii::$app->homeUrl, $sRbacpModuleName),
-                        sprintf('%s/%s/rbacp-user-view/update', \Yii::$app->homeUrl, $sRbacpModuleName),
-                    ]),
-                ],
-                [
-                    'text' => Yii::t('app', '功能权限'),
-                    'url' => [sprintf('/%s/rbacp-privilege/index', $sRbacpModuleName)],
-                    'active' => in_array($sUri, [
-                        sprintf('%s/%s/rbacp-privilege/index', \Yii::$app->homeUrl, $sRbacpModuleName),
-                        sprintf('%s/%s/rbacp-privilege/create', \Yii::$app->homeUrl, $sRbacpModuleName),
-                        sprintf('%s/%s/rbacp-privilege/update', \Yii::$app->homeUrl, $sRbacpModuleName),
-                    ]),
-                ],
-                [
-                    'text' => Yii::t('app', '数据策略'),
-                    'url' => [sprintf('/%s/rbacp-policy/index', $sRbacpModuleName)],
-                    'active' => in_array($sUri, [
-                        sprintf('%s/%s/rbacp-policy/index', \Yii::$app->homeUrl, $sRbacpModuleName),
-                        sprintf('%s/%s/rbacp-policy/create', \Yii::$app->homeUrl, $sRbacpModuleName),
-                        sprintf('%s/%s/rbacp-policy/update', \Yii::$app->homeUrl, $sRbacpModuleName),
-                    ]),
-                ],
-            ]
+            ],
         ],
     ];
 
@@ -87,8 +55,7 @@
     } else {
         $menu = $menuDefault;
     }
-    // $menu = $menuDefault;
-// var_dump($menu);exit;
+
     echo Menu::widget(
         [
             'options' => [
