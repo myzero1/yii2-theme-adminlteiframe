@@ -41,12 +41,11 @@ class Menu extends \yii\widgets\Menu
         $n = count($items);
         $lines = [];
         foreach ($items as $i => $item) {
-            // var_dump($requestedRoute == $item['url']);exit;
             $options = array_merge($this->itemOptions, ArrayHelper::getValue($item, 'options', []));
             $tag = ArrayHelper::remove($options, 'tag', 'li');
             $class = [];
             if (!isset($item['active'])) {
-                $item['active'] = $requestedRoute == $item['url'];
+                $item['active'] = $requestedRoute == $item['url'][0];
             }
             if ($item['active']) {
                 $class[] = $this->activeCssClass;
