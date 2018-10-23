@@ -45,15 +45,17 @@ myzero1\adminlteiframe\gii\GiiAsset::register($this);
         <!-- /.content -->
         <?php
             $js = "
-                var t=setTimeout(function(){
-                        clearTimeout(t);
-                        $('.adminlteiframe-alert').slideUp(1000);
-                        var t2=setTimeout(function(){
-                            clearTimeout(t2);
-                            $('.adminlteiframe-alert').remove();
-                            $(window).resize();
-                        },1000);
-                    },3000);
+                if($('.adminlteiframe-alert').length > 0){
+                    var t=setTimeout(function(){
+                            clearTimeout(t);
+                            $('.adminlteiframe-alert').slideUp(1000);
+                            var t2=setTimeout(function(){
+                                clearTimeout(t2);
+                                $('.adminlteiframe-alert').remove();
+                                $(window).resize();
+                            },1000);
+                        },3000);
+                }
             ";
 
             $this->registerJs($js);
