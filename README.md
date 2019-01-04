@@ -60,22 +60,23 @@ return [
         ],
         'assetManager' => [
             'class' => 'yii\web\AssetManager',
-            'forceCopy' => false,
-            // 'linkAssets' => true,//link to assets,no cache.used in develop.
-            'bundles'=> [
+            'forceCopy' => true,// true/false
+            /*'bundles'=> [
                 'myzero1\adminlteiframe\assets\php\components\LayoutAsset' => [
-                    'skin' => 'skin-blue-light',// skin-{blue|black|purple|green|red|yellow}[-light],example skin-blue,skin-blue-light,
-                    // 'menuRefreshTab' => false, // true,false
-                    // 'jsVersion' => '1.7',
-                    // 'cssVersion' => '1.7',
-
+                    'skin' => 'skin-red',// skin-{blue|black|purple|green|red|yellow}[-light],example skin-blue,skin-blue-light,
+                    'menuRefreshTab' => false, // true,false
+                    'jsVersion' => '1.7',
+                    'cssVersion' => '1.7',
                 ],
-                // 'myzero1\adminlteiframe\assets\php\components\AdminLteAsset' => [
-                //     'skin' => 'skin-red',// skin-{blue|black|purple|green|red|yellow}[-light],example skin-blue,skin-blue-light,
-                    // 'jsVersion' => '1.7',
-                    // 'cssVersion' => '1.7',
-                // ],
-            ],
+                'myzero1\adminlteiframe\assets\php\components\AdminLteAsset' => [
+                    'skin' => 'skin-red',// skin-{blue|black|purple|green|red|yellow}[-light],example skin-blue,skin-blue-light,
+                    'jsVersion' => '1.7',
+                    'cssVersion' => '1.7',
+                ],
+                'myzero1\adminlteiframe\assets\php\components\MainAsset' => [
+                    'showJParticle' => 'false', // 'false'/'true', default 'true'
+                ],
+            ],*/
         ],
         ......
     ],

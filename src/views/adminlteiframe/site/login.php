@@ -68,7 +68,12 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
 </div>
 
-<div id="jParticle" show="<?=\Yii::$app->assetManager->bundles["myzero1\adminlteiframe\assets\php\components\LayoutAsset"]['showJParticle']?>" ></div>
+<?php
+    $showJParticle = isset(\Yii::$app->assetManager->bundles["myzero1\adminlteiframe\assets\php\components\LayoutAsset"]) && \Yii::$app->assetManager->bundles["myzero1\adminlteiframe\assets\php\components\LayoutAsset"]['showJParticle'] ? \Yii::$app->assetManager->bundles["myzero1\adminlteiframe\assets\php\components\LayoutAsset"]['showJParticle'] : 'true';
+?>
+
+<div id="jParticle" show="<?=$showJParticle?>" ></div>
+
 <?php
 
 $bundle = \myzero1\adminlteiframe\assets\php\components\MainAsset::register(Yii::$app->view);
