@@ -68,7 +68,7 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
 </div>
 
-
+<div id="jParticle" show="<?=\Yii::$app->assetManager->bundles["myzero1\adminlteiframe\assets\php\components\LayoutAsset"]['showJParticle']?>" ></div>
 <?php
 
 $bundle = \myzero1\adminlteiframe\assets\php\components\MainAsset::register(Yii::$app->view);
