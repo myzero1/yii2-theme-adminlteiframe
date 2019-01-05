@@ -48,13 +48,19 @@ Once the extension is installed, simply modify your application configuration as
 ```php
 return [
     ......
+    // 'defaultRoute' => '/adminlteiframe/layout', // for adminlteiframe theme
+    // 'controllerMap' => [
+    //     'adminlteiframe' => [ // for adminlteiframe theme
+    //         'class' => 'myzero1\adminlteiframe\controllers\SiteController'
+    //     ]
+    // ],
     'components' => [
         ......
         'view' => [
             'theme' => [
                 'pathMap' => [
-                    // '@app/views' => '@vendor/myzero1/yii2-theme-adminlteiframe/src/views/adminlte', // using the adminlte theme
-                    '@app/views' => '@vendor/myzero1/yii2-theme-adminlteiframe/src/views/adminlteiframe', // using the adminlteiframe theme
+                    '@app/views' => '@vendor/myzero1/yii2-theme-adminlteiframe/src/views/adminlte', // using the adminlte theme
+                    // '@app/views' => '@vendor/myzero1/yii2-theme-adminlteiframe/src/views/adminlteiframe', // using the adminlteiframe theme
                 ],
             ],
         ],
@@ -67,15 +73,15 @@ return [
                     'menuRefreshTab' => false, // true,false
                     'jsVersion' => '1.7',
                     'cssVersion' => '1.7',
-                ],
+                ], // for adminlteiframe theme
                 'myzero1\adminlteiframe\assets\php\components\AdminLteAsset' => [
                     'skin' => 'skin-red',// skin-{blue|black|purple|green|red|yellow}[-light],example skin-blue,skin-blue-light,
                     'jsVersion' => '1.7',
                     'cssVersion' => '1.7',
-                ],
+                ], // for adminlte theme
                 'myzero1\adminlteiframe\assets\php\components\MainAsset' => [
-                    'showJParticle' => 'false', // 'false'/'true', default 'true'
-                ],
+                    'showJParticle' => 'false', // 'false'/'true', default 'true',required
+                ], // for all theme
             ],*/
         ],
         ......
@@ -85,13 +91,13 @@ return [
         ......
         'menu' => [
             [
-                'id' => "Gii首页",
-                'text' => "Gii首页",
-                'title'=>"Gii首页",
+                'id' => "平台首页",
+                'text' => "平台首页",
+                'title'=>"平台首页",
                 'icon' => "fa fa-dashboard",
                 'targetType' => 'iframe-tab',
                 'urlType' => 'abosulte',
-                'url' => ['/gii'],
+                'url' => ['/site/index'],
                 'isHome' => true,
             ],
             [
@@ -121,13 +127,6 @@ return [
                     ],
                 ],
             ],
-        ],
-        'welcomeMenu' => [
-            'id' => "-1",
-            'title' => "欢迎页面",
-            'close' => false,
-            'url' => ['/gii/extension'],
-            'urlType' => "abosulte",
         ],
         ......
     ],
