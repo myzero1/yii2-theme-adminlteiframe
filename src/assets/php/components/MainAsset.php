@@ -12,6 +12,7 @@ class MainAsset extends AssetBundle
 {
     public $jsVersion = '1.735.1';
     public $cssVersion = '1.735.1';
+    public $showJParticle = 'true';
     function init(){
         parent::init();
         \myzero1\adminlteiframe\assets\php\components\LayoutAsset::addVersion($this->js, $this->jsVersion, $this->css, $this->cssVersion);
