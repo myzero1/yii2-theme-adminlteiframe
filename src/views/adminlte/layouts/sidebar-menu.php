@@ -10,45 +10,9 @@
     use yii\helpers\Url;
     use myzero1\rbacp\helper\Helper;
 
-    $menuDefault =  [
-        [
-            'id' => "Gii首页",
-            'text' => "Gii首页",
-            'title'=>"Gii首页",
-            'icon' => "fa fa-dashboard",
-            'targetType' => 'iframe-tab',
-            'urlType' => 'abosulte',
-            'url' => ['/gii'],
-            'isHome' => true,
-        ],
-        [
-            'id' => "Gii",
-            'text' => "Gii",
-            'title'=>"Gii",
-            'icon' => "fa fa-laptop",
-            'url' => '#',
-            'children' => [
-                [
-                    'id' => "model",
-                    'text' => "model",
-                    'title'=>"model",
-                    'icon' => "fa fa-angle-double-right",
-                    'targetType' => 'iframe-tab',
-                    'urlType' => 'abosulte',
-                    'url' => ['/gii/model'],
-                ],
-                [
-                    'id' => "crud",
-                    'text' => "crud",
-                    'title'=>"crud",
-                    'icon' => "fa fa-angle-double-right",
-                    'targetType' => 'iframe-tab',
-                    'urlType' => 'abosulte',
-                    'url' => ['/gii/crud'],
-                ],
-            ],
-        ],
-    ];
+    $main = require __DIR__ . '/../../../config/main.php';
+
+    $menuDefault = $main['menuDefault'];
 
     if (isset($this->context->module->params['menu'])) {
         $menu = $this->context->module->params['menu'];
