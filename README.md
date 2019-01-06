@@ -49,11 +49,14 @@ Once the extension is installed, simply modify your application configuration as
 return [
     ......
     // 'defaultRoute' => '/adminlteiframe/layout', // for adminlteiframe theme
-    // 'controllerMap' => [
-    //     'adminlteiframe' => [ // for adminlteiframe theme
-    //         'class' => 'myzero1\adminlteiframe\controllers\SiteController'
-    //     ]
-    // ],
+    'controllerMap' => [
+        // 'adminlteiframe' => [ // for adminlteiframe theme
+        //     'class' => 'myzero1\adminlteiframe\controllers\SiteController'
+        // ],
+        'demo' => [ // for the menu of demo
+            'class' => 'myzero1\adminlteiframe\controllers\DemoController'
+        ]
+    ],
     'components' => [
         ......
         'view' => [
@@ -100,30 +103,39 @@ return [
                 'url' => ['/site/index'],
                 'isHome' => true,
             ],
-            [ // You should turn on gii
-                'id' => "Gii",
-                'text' => "Gii",
-                'title'=>"Gii",
+            [
+                'id' => "level1",
+                'text' => "level1",
+                'title'=>"level1",
+                'icon' => "fa fa-dashboard",
+                'targetType' => 'iframe-tab',
+                'urlType' => 'abosulte',
+                'url' => ['/demo/level1'],
+            ],
+            [
+                'id' => "level2",
+                'text' => "level2",
+                'title'=>"level2",
                 'icon' => "fa fa-laptop",
                 'url' => ['#'],
                 'children' => [
                     [
-                        'id' => "model",
-                        'text' => "model",
-                        'title'=>"model",
+                        'id' => "level21",
+                        'text' => "level21",
+                        'title'=>"level21",
                         'icon' => "fa fa-angle-double-right",
                         'targetType' => 'iframe-tab',
                         'urlType' => 'abosulte',
-                        'url' => ['/gii/model'],
+                        'url' => ['/demo/level21'],
                     ],
                     [
-                        'id' => "crud",
-                        'text' => "crud",
-                        'title'=>"crud",
+                        'id' => "level22",
+                        'text' => "level22",
+                        'title'=>"level22",
                         'icon' => "fa fa-angle-double-right",
                         'targetType' => 'iframe-tab',
                         'urlType' => 'abosulte',
-                        'url' => ['/gii/crud'],
+                        'url' => ['/demo/level22'],
                     ],
                 ],
             ],
