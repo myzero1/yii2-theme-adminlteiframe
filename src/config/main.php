@@ -11,12 +11,12 @@ return [
             'url' => ['/site/index'],
             'isHome' => true,
         ],
-        [
+        [ // You should turn on gii
             'id' => "Gii",
             'text' => "Gii",
             'title'=>"Gii",
             'icon' => "fa fa-laptop",
-            'url' => '#',
+            'url' => ['#'],
             'children' => [
                 [
                     'id' => "model",
