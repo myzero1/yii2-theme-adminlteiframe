@@ -183,53 +183,11 @@
             </footer>
         </div>
         <?php
-            $menuDefault = [
-                [
-                    'id' => "Gii首页",
-                    'text' => "Gii首页",
-                    'title'=>"Gii首页",
-                    'icon' => "fa fa-dashboard",
-                    'targetType' => 'iframe-tab',
-                    'urlType' => 'abosulte',
-                    'url' => ['/gii'],
-                    'isHome' => true,
-                ],
-                [
-                    'id' => "Gii",
-                    'text' => "Gii",
-                    'title'=>"Gii",
-                    'icon' => "fa fa-laptop",
-                    'url' => '#',
-                    'children' => [
-                        [
-                            'id' => "model",
-                            'text' => "model",
-                            'title'=>"model",
-                            'icon' => "fa fa-angle-double-right",
-                            'targetType' => 'iframe-tab',
-                            'urlType' => 'abosulte',
-                            'url' => ['/gii/model'],
-                        ],
-                        [
-                            'id' => "crud",
-                            'text' => "crud",
-                            'title'=>"crud",
-                            'icon' => "fa fa-angle-double-right",
-                            'targetType' => 'iframe-tab',
-                            'urlType' => 'abosulte',
-                            'url' => ['/gii/crud'],
-                        ],
-                    ],
-                ],
-            ];
+            $main = require __DIR__ . '/../../../config/main.php';
 
-            $welcomeMenu = [
-                'id' => "welcomeMenu",
-                'title' => "欢迎页面",
-                'close' => false,
-                'url' => ['/gii/extension'],
-                'urlType' => "abosulte",
-            ];
+            $menuDefault = $main['menuDefault'];
+
+            $loginedHome = $main['loginedHome'];
 
             if (isset($this->context->module->params['menu'])) {
                 $menu = $this->context->module->params['menu'];
@@ -242,10 +200,10 @@
             } elseif (count($menu) && isset($menu[1]['isHome']) && $menu[1]['isHome']) {
                 $homeMenu = $menu[1];
             } else {
-                if (isset($this->context->module->params['welcomeMenu'])) {
-                    $homeMenu = $this->context->module->params['welcomeMenu'];
+                if (isset($this->context->module->params['loginedHome'])) {
+                    $homeMenu = $this->context->module->params['loginedHome'];
                 } else {
-                    $homeMenu = $welcomeMenu;
+                    $homeMenu = $loginedHome;
                 }
             }
 
