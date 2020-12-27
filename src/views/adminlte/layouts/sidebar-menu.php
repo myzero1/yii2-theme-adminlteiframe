@@ -16,6 +16,8 @@
 
     if (isset($this->context->module->params['menu'])) {
         $menu = $this->context->module->params['menu'];
+    } if (isset(\Yii::$app->params['menu'])) {
+        $menu = \Yii::$app->params['menu'];
     } else {
         $menu = $menuDefault;
     }

@@ -1,8 +1,7 @@
-    
 .ali-form-layout {
     padding: 0 20px;
-    width: 300px;
-    height: 250;
+    width: 300px !important;
+    height: 250px !important;
     position: absolute;
     left: 50%;
     top: 50%;
@@ -17,12 +16,14 @@
     border-radius: 5px;
     box-shadow: 0 0 50px #00a65a;
 }
+
 .ali-form-header-layout {
     margin: -40px auto 0px;
     overflow: hidden;
     padding: 20px;
     text-align: center;
 }
+
 .ali-form-header {
     width: auto;
     height: 38px;
@@ -35,7 +36,8 @@
     box-shadow: 0 0 30px #00a65a;
     background: #fff;
 }
-.app-name{
+
+.app-name {
     font-size: 28px;
     line-height: 28px;
     text-align: center;
@@ -43,18 +45,20 @@
     font-weight: bold;
     color: #0e3f68;
 }
-body{
+
+body {
     background: url(../img/login-bg3.jpg) no-repeat center center;
     background-color: #3c8dbc;
     min-height: 100vh;
     background-size: 100%;
 }
-.ali-form-layout .form-control{
+
+.ali-form-layout .form-control {
     border-radius: 4px;
     position: relative;
 }
 
-.ali-form-layout .form-group{
+.ali-form-layout .form-group {
     position: relative;
     margin-bottom: 20px;
 }
@@ -79,11 +83,11 @@ body{
 }
 
 .ali-form-layout .has-error .control-label,
-.ali-form-layout .has-success .control-label{
+.ali-form-layout .has-success .control-label {
     top: -10px
 }
 
-.ali-form-layout  .help-block-error{
+.ali-form-layout .help-block-error {
     top: -10px;
     position: absolute;
     left: 10px;
