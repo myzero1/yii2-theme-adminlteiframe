@@ -13,7 +13,15 @@ class MainAsset extends AssetBundle
     public $jsVersion = '1.735.1';
     public $cssVersion = '1.735.1';
     public $showJParticle = 'true';
-    function init(){
+
+    public $footer = 'yes'; // yes , no , required
+    public $version = '1.0.1'; // required
+    public $copyright = 'Copyright © 2018-2735'; // required
+    public $copyrightOwner = 'myzero1'; // required
+    public $copyrightOwnerUrl = 'https://github.com/myzero1/yii2-theme-adminlteiframe'; // required
+
+    function init()
+    {
         parent::init();
         \myzero1\adminlteiframe\assets\php\components\LayoutAsset::addVersion($this->js, $this->jsVersion, $this->css, $this->cssVersion);
     }
@@ -38,6 +46,6 @@ class MainAsset extends AssetBundle
         'yii\web\JqueryAsset',
         'yii\bootstrap\BootstrapPluginAsset',
         'myzero1\adminlteiframe\assets\php\components\plugins\LayerAsset',
-        'myzero1\adminlteiframe\assets\php\components\plugins\TableAsset', 
+        'myzero1\adminlteiframe\assets\php\components\plugins\TableAsset',
     ];
 }
