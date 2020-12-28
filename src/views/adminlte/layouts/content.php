@@ -40,3 +40,9 @@ use yii\widgets\Breadcrumbs;
 
 </html>
 <?php $this->endPage() ?>
+
+<style>
+    body .wrap .container {
+        padding: 15px;
+    }
+</style>

@@ -55,7 +55,7 @@ $(function(){
             content: 'content',
             maxmin: true,
             full: function(layero, index){
-              var heightTmp=$('.layui-layer-iframe').height()-$('.layui-layer-title').height()-42
+              var heightTmp=$('.layui-layer-iframe').height()-$('.layui-layer-title').height()-2
               $('.layui-layer-content iframe').css({"height":heightTmp+"px"})
             },
             restore: function(layero, index){
