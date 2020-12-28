@@ -8,7 +8,7 @@ $(function(){
     });
 
     function layerOpen(target){
-        /*        
+        /*
           //弹出一个iframe层
           $('#parentIframe').on('click', function(){
           layer.open({
@@ -50,11 +50,17 @@ $(function(){
         var defaultConfig = {
             type: 1,
             title: 'title',
-            maxmin: true,
             shadeClose: true, //点击遮罩关闭层
             area : [width+'px' , height+'px'],
             content: 'content',
-            maxmin: false
+            maxmin: true,
+            full: function(layero, index){
+              var heightTmp=$('.layui-layer-iframe').height()-$('.layui-layer-title').height()-42
+              $('.layui-layer-content iframe').css({"height":heightTmp+"px"})
+            },
+            restore: function(layero, index){
+              $('.layui-layer-content iframe').css({"height":height+"px"})
+            }
         };
 
         $.extend(defaultConfig, config);
