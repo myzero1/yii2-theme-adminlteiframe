@@ -1,4 +1,5 @@
 <?php
+
 namespace myzero1\adminlteiframe\controllers;
 
 use Yii;
@@ -26,7 +27,7 @@ class SiteController extends Controller
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['logout', 'index','layout'],
+                        'actions' => ['logout', 'index', 'layout'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -81,7 +82,7 @@ class SiteController extends Controller
             $model->password = '';
 
             return $this->renderAjax('login', [
-            // return $this->render('login', [
+                // return $this->render('login', [
                 'model' => $model,
             ]);
         }
@@ -106,8 +107,18 @@ class SiteController extends Controller
      */
     public function actionLayout()
     {
-        // var_dump('expression');exit;
         $this->layout = '@vendor/myzero1/yii2-theme-adminlteiframe/src/views/adminlteiframe/layouts/layout';
+        return $this->render('@vendor/myzero1/yii2-theme-adminlteiframe/src/views/adminlteiframe/site/default');
+    }
+
+    /**
+     * Placeholdon layout.
+     *
+     * @return string
+     */
+    public function actionLayui()
+    {
+        $this->layout = '@vendor/myzero1/yii2-theme-adminlteiframe/src/views/layui/layouts/layout';
         return $this->render('@vendor/myzero1/yii2-theme-adminlteiframe/src/views/adminlteiframe/site/default');
     }
 }
