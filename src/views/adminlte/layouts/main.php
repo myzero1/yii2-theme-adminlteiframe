@@ -159,29 +159,38 @@ $skin = \Yii::$app->assetManager->bundles['myzero1\adminlteiframe\assets\php\com
 
     <!-- /.content-wrapper -->
 
-    <?php if (isset(\Yii::$app->assetManager->bundles["myzero1\adminlteiframe\assets\php\components\MainAsset"])) {
-      $footer = \Yii::$app->assetManager->bundles["myzero1\adminlteiframe\assets\php\components\MainAsset"]['footer'];
-      $version = \Yii::$app->assetManager->bundles["myzero1\adminlteiframe\assets\php\components\MainAsset"]['version'];
-      $copyright = \Yii::$app->assetManager->bundles["myzero1\adminlteiframe\assets\php\components\MainAsset"]['copyright'];
-      $copyrightOwner = \Yii::$app->assetManager->bundles["myzero1\adminlteiframe\assets\php\components\MainAsset"]['copyrightOwner'];
-      $copyrightOwnerUrl = \Yii::$app->assetManager->bundles["myzero1\adminlteiframe\assets\php\components\MainAsset"]['copyrightOwnerUrl'];
-    } else {
-      $footer = 'yes'; // yes , no , required
-      $version = '1.0.1'; // required
-      $copyright = 'Copyright © 2018-2735'; // required
-      $copyrightOwner = 'myzero1'; // required
-      $copyrightOwnerUrl = 'https://github.com/myzero1/yii2-theme-adminlteiframe'; // required
-    }
-    ?>
+    <?php
 
+    $footerHtml = '
     <footer class="main-footer">
-      <?php if ('yes' == $footer) { ?>
         <div class="pull-right hidden-xs">
-          <b>Version</b> <?= $version ?>
+            <b>Version</b> 1.0.2
         </div>
-        <strong><?= $copyright ?><a href="<?= $copyrightOwnerUrl ?>"><?= $copyrightOwner ?></a>.</strong> All rights reserved.
-      <?php } ?>
+        <strong>
+            Copyright © 2018-2736 &nbsp;<a href="https://github.com/myzero1/yii2-theme-adminlteiframe">myzero1</a>.
+        </strong>
+        All rights reserved.
     </footer>
+    ';
+
+    if (isset(\Yii::$app->assetManager->bundles["myzero1\adminlteiframe\assets\php\components\MainAsset"])) {
+      if (isset(\Yii::$app->assetManager->bundles["myzero1\adminlteiframe\assets\php\components\MainAsset"]['footer'])) {
+        $footerNew = \Yii::$app->assetManager->bundles["myzero1\adminlteiframe\assets\php\components\MainAsset"]['footer'];
+
+        if ($footerNew == '') {
+          $footerHtml = '<footer class="main-footer" style="height:0px;padding:0"></footer>';
+        } else {
+          $footerHtml = sprintf(
+            '<footer class="main-footer">%s</footer>',
+            \Yii::$app->assetManager->bundles["myzero1\adminlteiframe\assets\php\components\MainAsset"]['footer']
+          );
+        }
+      }
+    }
+
+    echo $footerHtml;
+
+    ?>
 
     <?php $this->endBody(); ?>
 </body>

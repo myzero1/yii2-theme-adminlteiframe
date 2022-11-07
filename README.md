@@ -84,6 +84,19 @@ return [
                 ], // for adminlte theme
                 'myzero1\adminlteiframe\assets\php\components\MainAsset' => [
                     'showJParticle' => 'false', // 'false'/'true', default 'true',required
+                    'footer' => '',
+                    'footer' => '
+                        <div class="pull-right hidden-xs">
+                            <b>Version</b> 1.0.2
+                        </div>
+                        <strong>
+                            Copyright © 2018-2736 &nbsp;
+                            <a href="https://github.com/myzero1/yii2-theme-adminlteiframe">
+                                myzero1
+                            </a>.
+                        </strong>
+                        All rights reserved.
+                    ',
                 ], // for all theme
             ],*/
         ],
