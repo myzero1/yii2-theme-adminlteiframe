@@ -7,6 +7,7 @@
 
 $bundle = myzero1\adminlteiframe\assets\php\components\ImgAsset::register($this);
 $xkbg = sprintf('%s/img/xkbg.png', $bundle->baseUrl);
+$showJParticle = isset(\Yii::$app->assetManager->bundles["myzero1\adminlteiframe\assets\php\components\MainAsset"]) && \Yii::$app->assetManager->bundles["myzero1\adminlteiframe\assets\php\components\MainAsset"]['showJParticle'] ? \Yii::$app->assetManager->bundles["myzero1\adminlteiframe\assets\php\components\MainAsset"]['showJParticle'] : 'true';
 
 use yii\helpers\Html;
 
@@ -15,7 +16,7 @@ $this->title = $name;
 
 ?>
 
-
+<div id="jParticle" show="<?= $showJParticle ?>"></div>
 <div class="landscape"></div>
 <div class="filter"></div>
 <canvas id="canvas" width="1440" height="763"></canvas>
@@ -26,11 +27,11 @@ $this->title = $name;
 		<h1 style="padding-left: 30px">页面提示信息</h1>
 
 		<ol>
-			<li>错误信息：<code><?= Html::encode($this->title) . nl2br(Html::encode($message)) ?></code></li>
-			<li>当前url：<code><?= Yii::$app->request->getHostInfo() . Yii::$app->request->url ?></code></li>
-			<li>当前视图路径：<code><?= __FILE__ ?></code></li>
-			<li>若在主题的视图目录（<code><?= Yii::getAlias("@vendor/myzero1/yii2-theme-adminlteiframe/src/views/adminlteiframe") ?></code>）下没有找到对应视图就会在应用的视图目录（<code><?= Yii::getAlias("@app/views") ?></code>）下找视图</li>
-			<li>若在主题的视图目录和应用的视图目录中都有相应的视图，则先使用主题视图目录中的视图。若要使用应用视图目录中的视图，需要手动在控制器中指定。</li>
+			<li>错误信息：<code><?= Html::encode($this->title) . nl2br(Html::encode($message)) ?></code></br></br></li>
+			<li>当前url：<code><?= Yii::$app->request->getHostInfo() . Yii::$app->request->url ?></code></br></br></li>
+			<li>当前视图路径：<code><?= __FILE__ ?></code></br></br></li>
+			<li>若在主题的视图目录（<code><?= Yii::getAlias("@vendor/myzero1/yii2-theme-adminlteiframe/src/views/adminlteiframe") ?></code>）下没有找到对应视图就会在应用的视图目录（<code><?= Yii::getAlias("@app/views") ?></code>）下找视图</br></br></li>
+			<li>若在主题的视图目录和应用的视图目录中都有相应的视图，则先使用主题视图目录中的视图。若要使用应用视图目录中的视图，需要手动在控制器中指定。</br></br></li>
 		</ol>
 	</div>
 
@@ -49,7 +50,7 @@ $this->title = $name;
 		overflow: hidden;
 		width: 100%;
 		height: 100%;
-		cursor: none;
+		/* cursor: none; */
 		background: black;
 		background: linear-gradient(to bottom, #000000 0%, #5788fe 100%);
 	}
@@ -204,7 +205,10 @@ $this->title = $name;
 		maxDistFromCursor = 50;
 
 	setCanvasSize();
-	init();
+
+	if (document.getElementById('jParticle').getAttribute('show') !== 'false') {
+		init();
+	}
 
 	window.onresize = function() {
 		location.reload();
