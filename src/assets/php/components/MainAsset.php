@@ -14,11 +14,9 @@ class MainAsset extends AssetBundle
     public $cssVersion = '1.735.1';
     public $showJParticle = 'true';
 
-    public $footer = 'yes'; // yes , no , required
-    public $version = '1.0.1'; // required
-    public $copyright = 'Copyright © 2018-2735'; // required
-    public $copyrightOwner = 'myzero1'; // required
-    public $copyrightOwnerUrl = 'https://github.com/myzero1/yii2-theme-adminlteiframe'; // required
+    public $footer = ''; // yes , no , required
+    public $loginBg = '';
+    public $errBg = '';
 
     function init()
     {
