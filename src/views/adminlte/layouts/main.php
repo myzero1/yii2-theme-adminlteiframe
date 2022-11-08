@@ -150,7 +150,49 @@ $skin = \Yii::$app->assetManager->bundles['myzero1\adminlteiframe\assets\php\com
 
       <!-- Main content -->
       <section class="content">
-        <?= Alert::widget(); ?>
+        <?php //echo Alert::widget(); 
+        ?>
+
+        <?php
+
+        $session = \Yii::$app->getSession();
+        $flashes = $session->getAllFlashes();
+        $flashesJson = json_encode($flashes);
+        $session->removeAllFlashes();
+
+        $js = "
+          var flashesJson = $flashesJson
+
+          for (let key in flashesJson) {
+              if(key=='success'){
+                  title='成功'
+                  icon=1
+              }else if(key=='fail'){
+                  title='失败'
+                  icon=2
+              } else {
+                  title=key
+                  icon=0
+              }
+
+              layer.open({
+                  icon: icon,
+                  area: ['500px', '200px'],
+                  type: 0,
+                  title: title,
+                  content: flashesJson[key],
+                  shadeClose: false,
+                  btn: ['确定'],
+                  yes: function(index, layero) {
+                      layer.close(index);
+                  }
+              });
+          }
+        ";
+
+        $this->registerJs($js);
+        ?>
+
         <?= $content ?>
       </section>
       <!-- /.content -->
