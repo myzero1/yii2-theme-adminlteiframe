@@ -11,9 +11,20 @@ myzero1\adminlteiframe\assets\php\components\plugins\SwitchAsset::register($this
 
 $this->title = \Yii::$app->name;
 $this->params['breadcrumbs'][] = $this->title;
+
+$bundle = myzero1\adminlteiframe\assets\php\components\ImgAsset::register($this);
+$bg = sprintf('%s/img/login-bg32.jpg', $bundle->baseUrl);
+$loginBg = sprintf('url(%s) #3c8dbc no-repeat center center', $bg);
+
+if (isset(\Yii::$app->assetManager->bundles["myzero1\adminlteiframe\assets\php\components\MainAsset"])) {
+    if (isset(\Yii::$app->assetManager->bundles["myzero1\adminlteiframe\assets\php\components\MainAsset"]['loginBg'])) {
+        $loginBg = \Yii::$app->assetManager->bundles["myzero1\adminlteiframe\assets\php\components\MainAsset"]['loginBg'];
+    }
+}
+
 ?>
 
-<div class="larry-canvas" id="canvas" style="width: 100vw; height: 100vh;position: absolute;top: 0;left: 0;overflow: hidden;"></div>
+<div class="larry-canvas" id="canvas" style="width: 100vw; height: 100vh;position: absolute;top: 0;left: 0;overflow: hidden;<?php echo $loginBg; ?>"></div>
 
 <div class="ali-form-layout">
     <div class="ali-form-header-layout">
@@ -24,55 +35,58 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="ali-form-body">
         <?php $form = ActiveForm::begin(['id' => 'login-form', 'enableClientValidation' => true]); ?>
 
-            <?= $form->field($model, 'username')->textInput([
-                    'placeholder' => '请输入',
-                    'readonly' => true,
-                    'onfocus'=>"this.removeAttribute('readonly');",
-                ]) ?>
+        <?= $form->field($model, 'username')->textInput([
+            'placeholder' => '请输入',
+            'readonly' => true,
+            'onfocus' => "this.removeAttribute('readonly');",
+        ]) ?>
 
-            <?= $form->field($model, 'password')->passwordInput([
-                    'placeholder' => '请输入',
-                    'readonly' => true,
-                    'onfocus'=>"this.removeAttribute('readonly');",
-                ]) ?>
+        <?= $form->field($model, 'password')->passwordInput([
+            'placeholder' => '请输入',
+            'readonly' => true,
+            'onfocus' => "this.removeAttribute('readonly');",
+        ]) ?>
 
-            <?php $model->rememberMe = 0; ?>
+        <?php $model->rememberMe = 0; ?>
 
-            <?= $form->field($model, 'rememberMe', [
-                'labelOptions' => [
-                    'style' => '
+        <?= $form->field($model, 'rememberMe', [
+            'labelOptions' => [
+                'style' => '
                         padding:0;
                     ',
-                ],
-                'options' => [
-                    'style' => '
+            ],
+            'options' => [
+                'style' => '
                         width:400px;
                     ',
-                ],
-            ])->checkbox([
-                'id' => 'mywitch',
-                'data-handle-width' => '105',
-                'data-on-color' => 'primary',
-                'data-on-text' => '要记住密码',
-                'data-off-color' => 'info',
-                'data-off-text' => '不记住密码',
-                'data-label-text' => '要记住密码',
-                'checked' => $model->rememberMe == '1' ? true : false,
-            ])->label('') ?>
+            ],
+        ])->checkbox([
+            'id' => 'mywitch',
+            'data-handle-width' => '105',
+            'data-on-color' => 'primary',
+            'data-on-text' => '要记住密码',
+            'data-off-color' => 'info',
+            'data-off-text' => '不记住密码',
+            'data-label-text' => '要记住密码',
+            'checked' => $model->rememberMe == '1' ? true : false,
+        ])->label('') ?>
 
-            <div class="form-group">
-                <?= Html::submitButton('登录', ['class' => 'btn btn-primary', 'name' => 'login-button','style' => 'width:260px;']) ?>
-            </div>
+        <div class="form-group">
+            <?= Html::submitButton('登录', ['class' => 'btn btn-primary', 'name' => 'login-button', 'style' => 'width:260px;']) ?>
+        </div>
 
         <?php ActiveForm::end(); ?>
     </div>
 </div>
 
 <?php
-    $showJParticle = isset(\Yii::$app->assetManager->bundles["myzero1\adminlteiframe\assets\php\components\MainAsset"]) && \Yii::$app->assetManager->bundles["myzero1\adminlteiframe\assets\php\components\MainAsset"]['showJParticle'] ? \Yii::$app->assetManager->bundles["myzero1\adminlteiframe\assets\php\components\MainAsset"]['showJParticle'] : 'true';
+$showJParticle = 'false';
+if (isset(\Yii::$app->assetManager->bundles["myzero1\adminlteiframe\assets\php\components\MainAsset"]['showJParticle'])) {
+    $showJParticle = \Yii::$app->assetManager->bundles["myzero1\adminlteiframe\assets\php\components\MainAsset"]['showJParticle'];
+}
 ?>
 
-<div id="jParticle" show="<?=$showJParticle?>" ></div>
+<div id="jParticle" show="<?= $showJParticle ?>"></div>
 
 <?php
 
