@@ -150,7 +150,49 @@ $skin = \Yii::$app->assetManager->bundles['myzero1\adminlteiframe\assets\php\com
 
       <!-- Main content -->
       <section class="content">
-        <?= Alert::widget(); ?>
+        <?php //echo Alert::widget(); 
+        ?>
+
+        <?php
+
+        $session = \Yii::$app->getSession();
+        $flashes = $session->getAllFlashes();
+        $flashesJson = json_encode($flashes);
+        $session->removeAllFlashes();
+
+        $js = "
+          var flashesJson = $flashesJson
+
+          for (let key in flashesJson) {
+              if(key=='success'){
+                  title='成功'
+                  icon=1
+              }else if(key=='fail'){
+                  title='失败'
+                  icon=2
+              } else {
+                  title=key
+                  icon=0
+              }
+
+              layer.open({
+                  icon: icon,
+                  area: ['500px', '200px'],
+                  type: 0,
+                  title: title,
+                  content: flashesJson[key],
+                  shadeClose: false,
+                  btn: ['确定'],
+                  yes: function(index, layero) {
+                      layer.close(index);
+                  }
+              });
+          }
+        ";
+
+        $this->registerJs($js);
+        ?>
+
         <?= $content ?>
       </section>
       <!-- /.content -->
@@ -159,29 +201,22 @@ $skin = \Yii::$app->assetManager->bundles['myzero1\adminlteiframe\assets\php\com
 
     <!-- /.content-wrapper -->
 
-    <?php if (isset(\Yii::$app->assetManager->bundles["myzero1\adminlteiframe\assets\php\components\MainAsset"])) {
-      $footer = \Yii::$app->assetManager->bundles["myzero1\adminlteiframe\assets\php\components\MainAsset"]['footer'];
-      $version = \Yii::$app->assetManager->bundles["myzero1\adminlteiframe\assets\php\components\MainAsset"]['version'];
-      $copyright = \Yii::$app->assetManager->bundles["myzero1\adminlteiframe\assets\php\components\MainAsset"]['copyright'];
-      $copyrightOwner = \Yii::$app->assetManager->bundles["myzero1\adminlteiframe\assets\php\components\MainAsset"]['copyrightOwner'];
-      $copyrightOwnerUrl = \Yii::$app->assetManager->bundles["myzero1\adminlteiframe\assets\php\components\MainAsset"]['copyrightOwnerUrl'];
-    } else {
-      $footer = 'yes'; // yes , no , required
-      $version = '1.0.1'; // required
-      $copyright = 'Copyright © 2018-2735'; // required
-      $copyrightOwner = 'myzero1'; // required
-      $copyrightOwnerUrl = 'https://github.com/myzero1/yii2-theme-adminlteiframe'; // required
-    }
-    ?>
+    <?php
 
-    <footer class="main-footer">
-      <?php if ('yes' == $footer) { ?>
-        <div class="pull-right hidden-xs">
-          <b>Version</b> <?= $version ?>
-        </div>
-        <strong><?= $copyright ?><a href="<?= $copyrightOwnerUrl ?>"><?= $copyrightOwner ?></a>.</strong> All rights reserved.
-      <?php } ?>
-    </footer>
+    $footerHtml = '<footer class="main-footer" style="height:0px;padding:0"></footer>';
+
+    if (isset(\Yii::$app->assetManager->bundles["myzero1\adminlteiframe\assets\php\components\MainAsset"])) {
+      if (isset(\Yii::$app->assetManager->bundles["myzero1\adminlteiframe\assets\php\components\MainAsset"]['footer'])) {
+        $footerHtml = sprintf(
+          '<footer class="main-footer">%s</footer>',
+          \Yii::$app->assetManager->bundles["myzero1\adminlteiframe\assets\php\components\MainAsset"]['footer']
+        );
+      }
+    }
+
+    echo $footerHtml;
+
+    ?>
 
     <?php $this->endBody(); ?>
 </body>

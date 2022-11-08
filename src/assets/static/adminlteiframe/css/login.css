@@ -50,7 +50,9 @@ body {
     background: url(../img/login-bg3.jpg) no-repeat center center;
     background-color: #3c8dbc;
     min-height: 100vh;
-    background-size: 100%;
+    -moz-background-size: cover;
+    background-size: cover;
+    height: 100vh !important;
 }
 
 .ali-form-layout .form-control {
