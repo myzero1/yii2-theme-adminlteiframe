@@ -463,3 +463,31 @@ http://localhost/path/to/index.php/gii
     
     ```
     ![](https://github.com/myzero1/show-time/blob/master/yii2-theme-adminlteiframe/screenshot/1.png)
+
+
+
+#### with rbacp ####
+
+```
+
+1、install yii2-app-advanced,you can use this script  https://gitee.com/myzero1/yii2-app-advanced-aliyun-shell/blob/master/yii2-advanced_env_cn_install-update.sh
+
+2、add  "myzero1/yii2-theme-adminlteiframe": "1.3.0" and "myzero1/yii2-rbacp": "1.1.6" to composer.json
+
+3、composer update -vvv
+
+4、setting yii2-rbacp,   https://packagist.org/packages/myzero1/yii2-rbacp
+
+5、set bootstrap>rbacp>params>rbacp>model = everyone, go http://localhost//rbacp, click rbacp添加数据 to migration
+
+6、set yii2-theme-adminlteiframe, https://packagist.org/packages/myzero1/yii2-theme-adminlteiframe
+
+7、set bootstrap>rbacp>params>rbacp>model = logined, go http://localhost/site/login , to login with root and 123456
+
+8、go http://localhost/gii/adminlteiframe_crud, use "default" Code Template to generate curd
+
+9、adjust the subtraction1 in path/to/backend/views/user(action name)/index.php,to adjust the table of index.
+
+10、 add site/contact and site/change-pw
+
+````
