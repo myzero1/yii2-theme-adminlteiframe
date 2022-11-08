@@ -5,9 +5,21 @@
 /* @var $message string */
 /* @var $exception Exception */
 
+
 $bundle = myzero1\adminlteiframe\assets\php\components\ImgAsset::register($this);
-$xkbg = sprintf('%s/img/xkbg.png', $bundle->baseUrl);
-$showJParticle = isset(\Yii::$app->assetManager->bundles["myzero1\adminlteiframe\assets\php\components\MainAsset"]) && \Yii::$app->assetManager->bundles["myzero1\adminlteiframe\assets\php\components\MainAsset"]['showJParticle'] ? \Yii::$app->assetManager->bundles["myzero1\adminlteiframe\assets\php\components\MainAsset"]['showJParticle'] : 'true';
+$bg = sprintf('%s/img/xkbg.png', $bundle->baseUrl);
+$errBg = sprintf('background:url(%s) repeat-x center bottom;', $bg);
+
+if (isset(\Yii::$app->assetManager->bundles["myzero1\adminlteiframe\assets\php\components\MainAsset"])) {
+    if (isset(\Yii::$app->assetManager->bundles["myzero1\adminlteiframe\assets\php\components\MainAsset"]['errBg'])) {
+        $errBg = \Yii::$app->assetManager->bundles["myzero1\adminlteiframe\assets\php\components\MainAsset"]['errBg'];
+    }
+}
+
+$showJParticle = 'false';
+if (\Yii::$app->assetManager->bundles["myzero1\adminlteiframe\assets\php\components\MainAsset"]['showJParticle']) {
+    $showJParticle = \Yii::$app->assetManager->bundles["myzero1\adminlteiframe\assets\php\components\MainAsset"]['showJParticle'];
+}
 
 use yii\helpers\Html;
 
@@ -89,10 +101,7 @@ $this->title = $name;
         left: 0;
         width: 100%;
         height: 100%;
-        background-image: url('<?= $xkbg; ?>');
-        background-size: 1000px 250px;
-        background-repeat: repeat-x;
-        background-position: center bottom;
+        <?php echo $errBg; ?>
     }
 </style>
 

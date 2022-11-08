@@ -161,30 +161,14 @@ $skin = \Yii::$app->assetManager->bundles['myzero1\adminlteiframe\assets\php\com
 
     <?php
 
-    $footerHtml = '
-    <footer class="main-footer">
-        <div class="pull-right hidden-xs">
-            <b>Version</b> 1.0.2
-        </div>
-        <strong>
-            Copyright © 2018-2736 &nbsp;<a href="https://github.com/myzero1/yii2-theme-adminlteiframe">myzero1</a>.
-        </strong>
-        All rights reserved.
-    </footer>
-    ';
+    $footerHtml = '<footer class="main-footer" style="height:0px;padding:0"></footer>';
 
     if (isset(\Yii::$app->assetManager->bundles["myzero1\adminlteiframe\assets\php\components\MainAsset"])) {
       if (isset(\Yii::$app->assetManager->bundles["myzero1\adminlteiframe\assets\php\components\MainAsset"]['footer'])) {
-        $footerNew = \Yii::$app->assetManager->bundles["myzero1\adminlteiframe\assets\php\components\MainAsset"]['footer'];
-
-        if ($footerNew == '') {
-          $footerHtml = '<footer class="main-footer" style="height:0px;padding:0"></footer>';
-        } else {
-          $footerHtml = sprintf(
-            '<footer class="main-footer">%s</footer>',
-            \Yii::$app->assetManager->bundles["myzero1\adminlteiframe\assets\php\components\MainAsset"]['footer']
-          );
-        }
+        $footerHtml = sprintf(
+          '<footer class="main-footer">%s</footer>',
+          \Yii::$app->assetManager->bundles["myzero1\adminlteiframe\assets\php\components\MainAsset"]['footer']
+        );
       }
     }
 
