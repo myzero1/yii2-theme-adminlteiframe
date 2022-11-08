@@ -83,17 +83,13 @@ return [
                     'cssVersion' => '1.7',
                 ], // for adminlte theme
                 'myzero1\adminlteiframe\assets\php\components\MainAsset' => [
-                    'showJParticle' => 'false', // 'false'/'true', default 'true',required
-                    'footer' => '',
+                    'showJParticle' => 'true', // 'false'/'true', default 'true',required
+                    'loginBg' => 'background:url(/login-bg32-1.jpg) no-repeat center center;background-color:#3c8dbc;background-size:cover;', // path/to/web//login-bg32.jpg
+                    'errBg' => 'background:url(/xkbg-1.png) repeat-x center bottom;', // path/to/web//login-bg32.jpg
                     'footer' => '
-                        <div class="pull-right hidden-xs">
-                            <b>Version</b> 1.0.2
-                        </div>
-                        <strong>
-                            Copyright © 2018-2736 &nbsp;
-                            <a href="https://github.com/myzero1/yii2-theme-adminlteiframe">
-                                myzero1
-                            </a>.
+                        <div class="pull-right hidden-xs"><b>Version</b> 1.0.2</div>
+                        <strong>Copyright © 2018-2736 &nbsp;
+                            <a href="https://github.com/myzero1/yii2-theme-adminlteiframe">myzero1</a>.
                         </strong>
                         All rights reserved.
                     ',
