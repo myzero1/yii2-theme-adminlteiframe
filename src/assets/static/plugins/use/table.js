@@ -47,13 +47,22 @@ function getTableHeight(defaultConfig) {
 
 function fixTable(target, defaultConfig) {
     if (!(target.find(".empty").length > 0 || target.find("tbody").find("tr").length == 0)) {
-        if (typeof mybootstrapTable != "undefined") {
-            mybootstrapTable.bootstrapTable('destroy');
-        }
-
-        mybootstrapTable = target.bootstrapTable('destroy').bootstrapTable({
+        target.bootstrapTable('destroy').bootstrapTable({
             height: getTableHeight(defaultConfig),
             fixedColumns: defaultConfig.fixedColumns
         });
+
+        setTimeout(function () {
+            var heightTmp = $(".adminlteiframe-gridview .fixed-table-header .gridview-table").height()
+            if (typeof heightTmp != "undefined") {
+                setTimeout(function () {
+                    var heightTmp = $(".adminlteiframe-gridview .fixed-table-header .gridview-table").height()
+                    heightTmp = parseInt(heightTmp) + 1
+                    if (heightTmp < 100 && heightTmp > 0) {
+                        $(".adminlteiframe-gridview .fixed-table-body .gridview-table").css('margin-top', "-" + heightTmp + "px")
+                    }
+                }, 10);
+            }
+        }, 10);
     }
 }
