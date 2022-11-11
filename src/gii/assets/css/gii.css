@@ -82,8 +82,15 @@
     color: #fff;
 }
 
+.admlteiframe-gv-pagination li.active a:hover {
+    color: #fff;
+}
+
 .admlteiframe-gv-pagination li a:hover {
-    color: #3c8dbc;
+    color: #fff;
+    background-color: #00a65a;
+    border-color: #008d4c;
+    border-radius: 3px;
 }
 
 .admlteiframe-gv-pagination li a {
