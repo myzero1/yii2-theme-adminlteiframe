@@ -44,11 +44,12 @@
 
 .adminlteiframe-gridview .table-bordered {
     margin-bottom: 0;
+    border: none;
 }
 
 .admlteiframe-gv-footer {
     margin-bottom: 0px;
-    border: 2px solid #ddd;
+    border: 1px solid #ddd;
     border-top: none;
     overflow: hidden;
     padding: 5px 0px;
@@ -225,6 +226,7 @@
 
 .fixed-table-container {
     -webkit-border-radius: 0px;
+    border: 1px solid #ddd;
 }
 
 .list-content .adminlteiframe-alert {
@@ -312,4 +314,12 @@
     width: 100% !important;
     border-top: 1px solid #e6e6e6;
     padding-top: 10px;
+}
+
+.adminlteiframe-gridview .fixed-table-container {
+    background-color: rgba(242, 242, 242);
+}
+
+.adminlteiframe-gridview .fixed-table-container tbody {
+    background-color: #fff;
 }
