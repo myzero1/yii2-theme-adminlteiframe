@@ -326,7 +326,38 @@
 .adminlteiframe-gridview .fixed-table-body {
     margin-top: -1px;
 }
+
 .adminlteiframe-gridview .fixed-table-header-columns.header-left,
-.adminlteiframe-gridview .fixed-table-header-columns.header-right{
+.adminlteiframe-gridview .fixed-table-header-columns.header-right {
     height: auto !important;
+}
+
+.adminlteiframe-gridview .table-bordered>thead>tr>th:last-child,
+.adminlteiframe-gridview .table-bordered>tbody>tr>th:last-child,
+.adminlteiframe-gridview .table-bordered>tfoot>tr>th:last-child,
+.adminlteiframe-gridview .table-bordered>thead>tr>td:last-child,
+.adminlteiframe-gridview .table-bordered>tbody>tr>td:last-child,
+.adminlteiframe-gridview .table-bordered>tfoot>tr>td:last-child,
+.adminlteiframe-gridview .table-bordered {
+    border-right: 0px !important;
+}
+
+.adminlteiframe-gridview .table-bordered>thead>tr>th:first-child,
+.adminlteiframe-gridview .table-bordered>tbody>tr>th:first-child,
+.adminlteiframe-gridview .table-bordered>tfoot>tr>th:first-child,
+.adminlteiframe-gridview .table-bordered>thead>tr>td:first-child,
+.adminlteiframe-gridview .table-bordered>tbody>tr>td:first-child,
+.adminlteiframe-gridview .table-bordered>tfoot>tr>td:first-child,
+.adminlteiframe-gridview .table-bordered {
+    border-left: 0px !important;
+}
+
+.adminlteiframe-gridview .fixed-table-header-columns.header-left table tr th,
+.adminlteiframe-gridview .fixed-table-body-columns.body-left {
+    border-right: 1px solid #dee2e6 !important
+}
+
+.adminlteiframe-gridview .fixed-table-header-columns.header-right table tr th,
+.adminlteiframe-gridview .fixed-table-body-columns.body-right {
+    border-left: 1px solid #dee2e6 !important
 }
