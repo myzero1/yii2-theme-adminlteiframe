@@ -490,4 +490,6 @@ http://localhost/path/to/index.php/gii
 
 10、 add site/contact and site/change-pw
 
+11、 use https://github.com/myzero1/yii2-captcha for captcha
+
 ````
