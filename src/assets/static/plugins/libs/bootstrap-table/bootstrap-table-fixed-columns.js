@@ -233,7 +233,7 @@
             top = -(parseInt(this.$el.css('margin-top')) - 1),
             // the fixed height should reduce the scorll-x height
             // height = this.$tableBody.height() - 18;
-            height = this.$tableBody.height() + 1;
+            height = this.$tableBody.height() + 1 - BootstrapTable.prototype.scrollbarWidth;
         // console.log("fitBodyColumns" + height);
 
         if (!this.$body.find('> tr[data-index]').length) {
@@ -285,6 +285,11 @@
             that.$body.find('> tr[data-index="' + index + '"]').removeClass('hover');
         });
         fixFixedRightColumnsEvents.call(this);
+
+        var rightTmp = parseInt(this.$fixedHeader.last().css('right'))
+        var widthTmp = parseInt(this.$fixedHeader.last().width())
+        this.$fixedHeader.last().css('width', rightTmp + widthTmp + "px")
+        this.$fixedHeader.last().css('right', 0)
     };
 
     function fixFixedRightColumnsEvents() {
