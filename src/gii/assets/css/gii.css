@@ -48,7 +48,7 @@
 
 .admlteiframe-gv-footer {
     margin-bottom: 0px;
-    border: 2px solid #ddd;
+    border: 1px solid #ddd;
     border-top: none;
     overflow: hidden;
     padding: 5px 0px;
@@ -82,8 +82,15 @@
     color: #fff;
 }
 
+.admlteiframe-gv-pagination li.active a:hover {
+    color: #fff;
+}
+
 .admlteiframe-gv-pagination li a:hover {
-    color: #3c8dbc;
+    color: #fff;
+    background-color: #3c8dbc75;
+    border-color: #367fa973;
+    border-radius: 3px;
 }
 
 .admlteiframe-gv-pagination li a {
@@ -312,4 +319,52 @@
     width: 100% !important;
     border-top: 1px solid #e6e6e6;
     padding-top: 10px;
+}
+
+.adminlteiframe-gridview .fixed-table-container.fixed-height {
+    border-left: 1px solid #ddd !important;
+    border-right: 1px solid #ddd !important;
+}
+
+.adminlteiframe-gridview .bootstrap-table .fixed-table-container.fixed-height .fixed-table-border {
+    border: none;
+}
+
+.adminlteiframe-gridview .fixed-table-body {
+    margin-top: -1px;
+}
+
+.adminlteiframe-gridview .fixed-table-header-columns.header-left,
+.adminlteiframe-gridview .fixed-table-header-columns.header-right {
+    height: auto !important;
+}
+
+.adminlteiframe-gridview .table-bordered>thead>tr>th:last-child,
+.adminlteiframe-gridview .table-bordered>tbody>tr>th:last-child,
+.adminlteiframe-gridview .table-bordered>tfoot>tr>th:last-child,
+.adminlteiframe-gridview .table-bordered>thead>tr>td:last-child,
+.adminlteiframe-gridview .table-bordered>tbody>tr>td:last-child,
+.adminlteiframe-gridview .table-bordered>tfoot>tr>td:last-child,
+.adminlteiframe-gridview .table-bordered {
+    border-right: 0px !important;
+}
+
+.adminlteiframe-gridview .table-bordered>thead>tr>th:first-child,
+.adminlteiframe-gridview .table-bordered>tbody>tr>th:first-child,
+.adminlteiframe-gridview .table-bordered>tfoot>tr>th:first-child,
+.adminlteiframe-gridview .table-bordered>thead>tr>td:first-child,
+.adminlteiframe-gridview .table-bordered>tbody>tr>td:first-child,
+.adminlteiframe-gridview .table-bordered>tfoot>tr>td:first-child,
+.adminlteiframe-gridview .table-bordered {
+    border-left: 0px !important;
+}
+
+.adminlteiframe-gridview .fixed-table-header-columns.header-left table tr th,
+.adminlteiframe-gridview .fixed-table-body-columns.body-left {
+    border-right: 1px solid #dee2e6 !important
+}
+
+.adminlteiframe-gridview .fixed-table-header-columns.header-right table tr th,
+.adminlteiframe-gridview .fixed-table-body-columns.body-right {
+    border-left: 1px solid #dee2e6 !important
 }

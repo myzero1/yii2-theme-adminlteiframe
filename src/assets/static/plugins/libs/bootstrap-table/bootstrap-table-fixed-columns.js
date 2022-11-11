@@ -30,7 +30,7 @@
             '<thead></thead>',
             '</table>',
             '</div>'
-            ].join(''));
+        ].join(''));
 
         this.timeoutHeaderColumns_ = 0;
 
@@ -54,7 +54,7 @@
             '<tbody></tbody>',
             '</table>',
             '</div>'
-            ].join(''));
+        ].join(''));
 
         this.timeoutBodyColumns_ = 0;
 
@@ -65,26 +65,9 @@
 
         this.$tableBody.before(this.$fixedBody);
 
-        // set rightPostion
-        function getScrollbarWidth() {
-            var odiv = document.createElement('div'),//创建一个div
-                styles = {
-                    width: '100px',
-                    height: '100px',
-                    overflowY: 'scroll'//让他有滚动条
-                }, i, scrollbarWidth;
-            odiv.id = 'getScrollbarWidth';
-            for (i in styles) odiv.style[i] = styles[i];
-            document.body.appendChild(odiv);//把div添加到body中
-            scrollbarWidth = odiv.offsetWidth - odiv.clientWidth;//相减
-            // odiv.remove();//移除创建的div
-            $('#getScrollbarWidth').remove();
-            return scrollbarWidth;//返回滚动条宽度
-        }
-
-        function rightPostion(fixed){
+        function rightPostion(fixed) {
             if ($(".fixed-table-body").height() > fixed.options.height) {//有垂直滚动条
-                return getScrollbarWidth();
+                return BootstrapTable.prototype.scrollbarWidth;
             } else {
                 return 0;
             }
@@ -108,9 +91,9 @@
         var that = this;
         var $trsLeft = this.$header.find('tr').clone();
         var $trsRight = this.$header.find('tr').clone();
-        
+
         $trsLeft.each(function () {
-            $(this).find('th:gt(' + (that.options.leftFixedNumber-1) + ')').remove();
+            $(this).find('th:gt(' + (that.options.leftFixedNumber - 1) + ')').remove();
         });
         this.$fixedHeaderLeftColumns.html('').append($trsLeft);
 
@@ -144,7 +127,7 @@
                 --end;
                 --rowspan;
             }
-            
+
             for (var i = 0; i < end; i++) {
                 $tr.append($tds.eq(i).clone());
             }
@@ -221,7 +204,7 @@
             rightHeaderWidth += $this.outerWidth();
         });
         that.$header.find('> tr').each(function (i) {
-          that.$fixedHeader.height($(this).height());
+            that.$fixedHeader.height($(this).height());
         });
 
         this.$fixedHeader.last().width(rightHeaderWidth + 1).show();
@@ -247,10 +230,11 @@
 
     BootstrapTable.prototype.fitBodyColumns = function () {
         var that = this,
-            top = -(parseInt(this.$el.css('margin-top')) - 2),
+            top = -(parseInt(this.$el.css('margin-top')) - 1),
             // the fixed height should reduce the scorll-x height
-            height = this.$tableBody.height() - 18;
-            // console.log("fitBodyColumns" + height);
+            // height = this.$tableBody.height() - 18;
+            height = this.$tableBody.height() + 1 - BootstrapTable.prototype.scrollbarWidth;
+        // console.log("fitBodyColumns" + height);
 
         if (!this.$body.find('> tr[data-index]').length) {
             this.$fixedBody.hide();
@@ -268,14 +252,14 @@
         this.$fixedBody.first().css({
             width: this.$fixedHeader.first().width(),
             height: height,
-            top: top-1
+            top: top - 1
         }).show();
 
         // right
         this.$fixedBody.last().css({
             width: this.$fixedHeader.last().width(),
             height: height,
-            top: top-1
+            top: top - 1
         }).show();
 
         this.$body.find('> tr').each(function (i) {
@@ -301,6 +285,11 @@
             that.$body.find('> tr[data-index="' + index + '"]').removeClass('hover');
         });
         fixFixedRightColumnsEvents.call(this);
+
+        var rightTmp = parseInt(this.$fixedHeader.last().css('right'))
+        var widthTmp = parseInt(this.$fixedHeader.last().width())
+        this.$fixedHeader.last().css('width', rightTmp + widthTmp + "px")
+        this.$fixedHeader.last().css('right', 0)
     };
 
     function fixFixedRightColumnsEvents() {
@@ -351,5 +340,24 @@
         });
 
     }
+
+    // set rightPostion
+    function getScrollbarWidth() {
+        var odiv = document.createElement('div'),//创建一个div
+            styles = {
+                width: '100px',
+                height: '100px',
+                overflowY: 'scroll'//让他有滚动条
+            }, i, scrollbarWidth;
+        odiv.id = 'getScrollbarWidth';
+        for (i in styles) odiv.style[i] = styles[i];
+        document.body.appendChild(odiv);//把div添加到body中
+        scrollbarWidth = odiv.offsetWidth - odiv.clientWidth;//相减
+        // odiv.remove();//移除创建的div
+        $('#getScrollbarWidth').remove();
+        return scrollbarWidth;//返回滚动条宽度
+    }
+
+    BootstrapTable.prototype.scrollbarWidth = getScrollbarWidth()
 
 })(jQuery);
