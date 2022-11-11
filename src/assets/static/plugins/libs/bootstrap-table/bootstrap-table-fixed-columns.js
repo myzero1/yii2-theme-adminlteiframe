@@ -65,26 +65,9 @@
 
         this.$tableBody.before(this.$fixedBody);
 
-        // set rightPostion
-        function getScrollbarWidth() {
-            var odiv = document.createElement('div'),//创建一个div
-                styles = {
-                    width: '100px',
-                    height: '100px',
-                    overflowY: 'scroll'//让他有滚动条
-                }, i, scrollbarWidth;
-            odiv.id = 'getScrollbarWidth';
-            for (i in styles) odiv.style[i] = styles[i];
-            document.body.appendChild(odiv);//把div添加到body中
-            scrollbarWidth = odiv.offsetWidth - odiv.clientWidth;//相减
-            // odiv.remove();//移除创建的div
-            $('#getScrollbarWidth').remove();
-            return scrollbarWidth;//返回滚动条宽度
-        }
-
         function rightPostion(fixed) {
             if ($(".fixed-table-body").height() > fixed.options.height) {//有垂直滚动条
-                return getScrollbarWidth();
+                return BootstrapTable.prototype.scrollbarWidth;
             } else {
                 return 0;
             }
@@ -352,5 +335,24 @@
         });
 
     }
+
+    // set rightPostion
+    function getScrollbarWidth() {
+        var odiv = document.createElement('div'),//创建一个div
+            styles = {
+                width: '100px',
+                height: '100px',
+                overflowY: 'scroll'//让他有滚动条
+            }, i, scrollbarWidth;
+        odiv.id = 'getScrollbarWidth';
+        for (i in styles) odiv.style[i] = styles[i];
+        document.body.appendChild(odiv);//把div添加到body中
+        scrollbarWidth = odiv.offsetWidth - odiv.clientWidth;//相减
+        // odiv.remove();//移除创建的div
+        $('#getScrollbarWidth').remove();
+        return scrollbarWidth;//返回滚动条宽度
+    }
+
+    BootstrapTable.prototype.scrollbarWidth = getScrollbarWidth()
 
 })(jQuery);
