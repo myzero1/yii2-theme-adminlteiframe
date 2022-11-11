@@ -3,7 +3,7 @@
  * @version: v1.0.1
  */
 
-(function ($) {
+ (function ($) {
     'use strict';
 
     $.extend($.fn.bootstrapTable.defaults, {
@@ -229,12 +229,21 @@
     };
 
     BootstrapTable.prototype.fitBodyColumns = function () {
-        var that = this,
-            top = -(parseInt(this.$el.css('margin-top')) - 1),
-            // the fixed height should reduce the scorll-x height
-            // height = this.$tableBody.height() - 18;
-            height = this.$tableBody.height() + 1 - BootstrapTable.prototype.scrollbarWidth;
+        var that = this;
+        var top = -(parseInt(this.$el.css('margin-top')) - 1);
+        // the fixed height should reduce the scorll-x height
+        // height = this.$tableBody.height() - 18;
+        // height = this.$tableBody.height() + 1 - BootstrapTable.prototype.scrollbarWidth;
+        var height = this.$tableBody.height() + 1 - BootstrapTable.prototype.scrollbarWidth;
         // console.log("fitBodyColumns" + height);
+
+        var w1 = $(".adminlteiframe-gridview .fixed-table-body").width()
+        var w2 = $(".adminlteiframe-gridview .fixed-table-body .gridview-table").width()
+        if (w2 > w1) {
+            height = this.$tableBody.height() + 1 - BootstrapTable.prototype.scrollbarWidth;
+        } else {
+            height = this.$tableBody.height() + 1;
+        }
 
         if (!this.$body.find('> tr[data-index]').length) {
             this.$fixedBody.hide();
