@@ -326,3 +326,7 @@
 .adminlteiframe-gridview .fixed-table-body {
     margin-top: -1px;
 }
+.adminlteiframe-gridview .fixed-table-header-columns.header-left,
+.adminlteiframe-gridview .fixed-table-header-columns.header-right{
+    height: auto !important;
+}
