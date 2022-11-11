@@ -150,7 +150,7 @@
 }
 
 .fixed-table-header-columns tr {
-    height: 44px;
+    /* height: 44px; */
 }
 
 .fixed-table-header-columns-background {
