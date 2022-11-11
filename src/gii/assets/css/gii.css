@@ -44,7 +44,6 @@
 
 .adminlteiframe-gridview .table-bordered {
     margin-bottom: 0;
-    border: none;
 }
 
 .admlteiframe-gv-footer {
@@ -226,7 +225,6 @@
 
 .fixed-table-container {
     -webkit-border-radius: 0px;
-    border: 1px solid #ddd;
 }
 
 .list-content .adminlteiframe-alert {
@@ -316,10 +314,15 @@
     padding-top: 10px;
 }
 
-.adminlteiframe-gridview .fixed-table-container {
-    background-color: rgba(242, 242, 242);
+.adminlteiframe-gridview .fixed-table-container.fixed-height {
+    border-left: 1px solid #ddd !important;
+    border-right: 1px solid #ddd !important;
 }
 
-.adminlteiframe-gridview .fixed-table-container tbody {
-    background-color: #fff;
+.adminlteiframe-gridview .bootstrap-table .fixed-table-container.fixed-height .fixed-table-border {
+    border: none;
+}
+
+.adminlteiframe-gridview .fixed-table-body {
+    margin-top: -1px;
 }
