@@ -25,8 +25,6 @@
             '<thead></thead>',
             '</table>',
             '</div>',
-            '<div class="fixed-table-header-columns-background">',
-            '</div>',
             '<div class="fixed-table-header-columns header-right">',
             '<table>',
             '<thead></thead>',
