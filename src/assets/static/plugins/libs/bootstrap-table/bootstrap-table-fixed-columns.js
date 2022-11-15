@@ -3,7 +3,7 @@
  * @version: v1.0.1
  */
 
- (function ($) {
+(function ($) {
     'use strict';
 
     $.extend($.fn.bootstrapTable.defaults, {
@@ -266,7 +266,7 @@
 
         // right
         this.$fixedBody.last().css({
-            width: this.$fixedHeader.last().width()-1,
+            width: this.$fixedHeader.last().width(),
             height: height,
             top: top - 1
         }).show();
