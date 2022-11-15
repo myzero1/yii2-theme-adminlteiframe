@@ -23,11 +23,12 @@
     cursor: pointer;
     position: relative;
     padding-right: 20px;
+    line-height: 16px;
 }
 
 .table-bordered th a::after {
     position: absolute;
-    top: 0px;
+    top: 2px;
     right: 0px;
     display: block;
     opacity: 0.2;
