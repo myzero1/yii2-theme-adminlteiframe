@@ -266,7 +266,7 @@
 
         // right
         this.$fixedBody.last().css({
-            width: this.$fixedHeader.last().width(),
+            width: this.$fixedHeader.last().width()-1,
             height: height,
             top: top - 1
         }).show();
