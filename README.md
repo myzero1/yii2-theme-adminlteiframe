@@ -492,4 +492,30 @@ http://localhost/path/to/index.php/gii
 
 11、 use https://github.com/myzero1/yii2-captcha for captcha
 
+12、 custom layout. eg:
+
+12.1、modify   'defaultRoute' => '/adminlteiframe/layout',   to   'defaultRoute' => '/site/layout',     in main.php
+12.2、cp -rf vendor/myzero1/yii2-theme-adminlteiframe/src/views/adminlteiframe backend/views/adminlteiframe
+12.3、add   public function actionLayout()  in  \backend\controllers\SiteController.php  as follow:
+
+    public function actionLayout()
+    {
+        // var_dump('expression');exit;
+        // $this->layout = '@vendor/myzero1/yii2-theme-adminlteiframe/src/views/adminlteiframe/layouts/layout';
+        $this->layout = '@app/views/adminlteiframe/layouts/layout';
+        return $this->render('@vendor/myzero1/yii2-theme-adminlteiframe/src/views/adminlteiframe/site/default');
+    }
+
+12.4、adjust backend/views/adminlteiframe/layouts/layout.php to for your
+
+13、custom action view,just adjust it in app/views. It will override the the view of theme.
+
+14、you can use the follow template.
+vendor/myzero1/yii2-theme-adminlteiframe/src/views/adminlteiframe/site/change-pw.php
+vendor/myzero1/yii2-theme-adminlteiframe/src/views/adminlteiframe/site/contact.php
+vendor/myzero1/yii2-theme-adminlteiframe/src/views/adminlteiframe/site/login-custom.php
+vendor/myzero1/yii2-theme-adminlteiframe/src/controllers/AppSiteController.php
+
+
+
 ````
