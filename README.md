@@ -508,5 +508,7 @@ http://localhost/path/to/index.php/gii
 
 12.4、adjust backend/views/adminlteiframe/layouts/layout.php to for your
 
+13、custom action view,just adjust it in app/views. It will override the the view of theme.
+
 
 ````
