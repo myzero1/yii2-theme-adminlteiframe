@@ -44,7 +44,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= "<?= " ?>GridView::widget([
         'dataProvider' => $dataProvider,
         <?= !empty($generator->searchModelClass) ? "// 'filterModel' => \$searchModel,\n        'columns' => [\n" : "'columns' => [\n"; ?>
-            // ['class' => 'yii\grid\SerialColumn'],
             [
                 'headerOptions' => ['width'=>'30'],
                 'class' => yii\grid\CheckboxColumn::className(),
@@ -53,6 +52,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     return ['value' => $model->id];
                 },
             ],
+			// ['class' => 'yii\grid\SerialColumn'],
 
 <?php
 $count = 0;
@@ -73,6 +73,19 @@ if (($tableSchema = $generator->getTableSchema()) === false) {
             echo "            // '" . $column->name . ($format === 'text' ? "" : ":" . $format) . "',\n";
         }
     }
+}
+?>
+
+<?php
+$names = $generator->getColumnNames();
+if (count($names)){
+	$name = $names[0];
+	echo "            [\n";
+	echo "                'label' => 'label_" . $name . "',\n";
+	echo "                // 'attribute' => '" . $name . "',\n";
+	echo "                // 'format' => 'raw',\n";
+	echo "                'value' => function (" . '$row' . ") {return 'placeholder3';},\n";
+	echo "            ],\n";
 }
 ?>
 
