@@ -27,7 +27,7 @@ function applyz1table() {
 }
 
 // applyz1table();
-setTimeout("applyz1table()", 50);
+setTimeout("applyz1table()", 100);
 
 
 function getTableHeight(defaultConfig) {

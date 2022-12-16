@@ -38,5 +38,5 @@
 input[type="radio"],
 input[type="checkbox"] {
     margin: 0 !important;
-    vertical-align: text-bottom !important;
+    vertical-align: text-top !important;
 }
