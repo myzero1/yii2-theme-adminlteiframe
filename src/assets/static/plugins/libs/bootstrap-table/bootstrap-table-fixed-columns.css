@@ -34,3 +34,9 @@
 .fixed-table-container thead tr th:first-child {
     border-left: 1px solid #e2e2e2 !important;
 }
+
+input[type="radio"],
+input[type="checkbox"] {
+    margin: 0 !important;
+    vertical-align: text-bottom !important;
+}

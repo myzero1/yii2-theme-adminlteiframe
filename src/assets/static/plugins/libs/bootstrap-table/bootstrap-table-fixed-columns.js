@@ -200,8 +200,8 @@
                 index = i - 1;
             }
             that.$fixedHeader.find('th[data-field="' + visibleFields[$trs.length - 1 + index] + '"]')
-                .find('.fht-cell').width($this.innerWidth());
-            rightHeaderWidth += $this.outerWidth();
+                .find('.fht-cell').width(parseInt($this.innerWidth()));
+            rightHeaderWidth += parseInt($this.outerWidth()) + 1;
         });
         that.$header.find('> tr').each(function (i) {
             that.$fixedHeader.height($(this).height());
@@ -221,8 +221,8 @@
                 index = i - 1;
             }
             that.$fixedHeader.find('th[data-field="' + visibleFields[index] + '"]')
-                .find('.fht-cell').width($this.innerWidth());
-            leftHeaderWidth += $this.outerWidth();
+                .find('.fht-cell').width(parseInt($this.innerWidth()));
+            leftHeaderWidth += parseInt($this.outerWidth());
         });
 
         this.$fixedHeader.first().width(leftHeaderWidth + 1).show();
