@@ -464,6 +464,13 @@ http://localhost/path/to/index.php/gii
     ```
     ![](https://github.com/myzero1/show-time/blob/master/yii2-theme-adminlteiframe/screenshot/1.png)
 
+*  ` use app block page loading `
+
+    Use It,Just add the class app-block-page-loading as flowlling, in view:
+    ```
+    <?= Html::submitButton('search', ['class' => 'btn btn-primary app-block-page-loading']) ?>
+    
+    ```
 
 
 #### with rbacp ####
