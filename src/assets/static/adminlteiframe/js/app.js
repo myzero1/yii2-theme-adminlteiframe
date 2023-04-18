@@ -763,4 +763,26 @@ function _init() {
             }
         });
     };
+
+    $('.app-block-page-loading').click(function (e) {
+        console.log($("head > link[href*='/css/adminlteiframe-custom']").attr('href'))
+
+        var flag="/css/adminlteiframe-custom"
+        var href = $("head > link[href*='"+flag+"']").attr('href')
+        var imgPre=href.split(flag)[0]
+        var imgTmp=imgPre+'/img/'
+        var oldPath=App.getbasePath()
+        var oldImg=App.getbasePath()
+        App.setbasePath('')
+        App.setGlobalImgPath(imgTmp)
+
+        App.blockUI({
+            target: 'body',
+            boxed: true,
+            message: '加载中......'
+        });
+
+        App.setbasePath(oldPath)
+        App.setGlobalImgPath(oldImg)
+    });
 }(jQuery));
