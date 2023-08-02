@@ -419,6 +419,46 @@ http://localhost/path/to/index.php/gii
     ```
     <?php echo $form->field($model, 'id')->textInput(['data-provide' =>"z1ztree",'data-z1ztree-config' => '{"checkType": "checkbox"}'])?>
 
+
+    description of data-z1ztree-config
+
+    {
+        "checkType": "checkbox",
+        "radioWithParents": true,
+        "valFieldName": "name",
+        "ztreeLayerPadding": "10px",
+        "ztreeLayerBorder": "1px solid #d2d6de",
+        "ztreeLayerSearchShow": true,
+        "setting": { // ztree settings
+            "check": {
+                "enable": true,
+                "chkStyle": "checkbox",
+                "chkboxType": {
+                    "Y": "ps",
+                    "N": "ps"
+                }
+            }
+            ...
+        },
+        "data": [{ // ztree datas
+                "id": 1,
+                "pId": 0,
+                "name": "l11",
+                "open": true,
+                "chkDisabled": true,
+                "checked": true,
+                "value": "v11"
+            },
+            {
+                "id": 2,
+                "pId": 0,
+                "name": "l12",
+                "value": "v12"
+            }
+            ...
+        ]
+    }
+
     ```
     ![](https://github.com/myzero1/show-time/blob/master/yii2-theme-adminlteiframe/screenshot/504.png)
 
