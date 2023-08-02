@@ -26,7 +26,7 @@ class ZtreeAsset extends AssetBundle
         'libs/ztree3/js/jquery.ztree.core.min.js',
         'libs/ztree3/js/jquery.ztree.excheck.min.js',
         'libs/ztree3/js/jquery.ztree.exhide.min.js',
-        'libs/ztree3/js/fuzzysearch.js',
+        'libs/ztree3/js/fuzzysearch.min.js',
         'use/ztree3.js',
     ];
 
