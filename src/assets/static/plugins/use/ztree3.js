@@ -149,7 +149,7 @@ function initInput(){
                   ztvalue = new Array();
                   ztname = new Array();
                   for (var i=0, l=nodes.length; i<l; i++) {
-                    ztvalue.push(nodes[i][defaultConfig.valFieldName]);
+                    ztvalue.push(nodes[i][config.valFieldName]);
                     // ztname.push(nodes[i].name);
                     // str.replace(/<[^>]+>/g,"");//去掉所有的html标记
                     ztname.push(nodes[i].name.replace(/<[^>]+>/g,""));
@@ -158,7 +158,7 @@ function initInput(){
                     if (defaultConfig.setting.check.chkStyle == 'radio' && config.radioWithParents) {
                       var tmpNode = nodes[i];
                       while( tmpNode.getParentNode() != null){
-                        ztvalue.push(tmpNode.getParentNode()[defaultConfig.valFieldName]);
+                        ztvalue.push(tmpNode.getParentNode()[config.valFieldName]);
                         ztname.push(tmpNode.getParentNode().name.replace(/<[^>]+>/g,""));
                         tmpNode = tmpNode.getParentNode();
                       }
