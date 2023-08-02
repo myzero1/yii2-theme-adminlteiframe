@@ -410,7 +410,7 @@ http://localhost/path/to/index.php/gii
     
     use ztree without parents,in input.Just add code  as flowlling, in view:
     ```
-    <?php echo $form->field($model, 'id')->textInput(['data-provide' =>"z1ztree",'data-z1ztree-config' => '{"withParents": false}'])?>
+    <?php echo $form->field($model, 'id')->textInput(['data-provide' =>"z1ztree",'data-z1ztree-config' => '{"radioWithParents": false}'])?>
 
     ```
     ![](https://github.com/myzero1/show-time/blob/master/yii2-theme-adminlteiframe/screenshot/503.png)
