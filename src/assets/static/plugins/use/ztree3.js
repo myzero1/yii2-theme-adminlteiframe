@@ -101,21 +101,25 @@ function initInput(){
         var checkboxCheck = {
           enable: true,
           chkStyle: 'checkbox',
-          chkboxType: { "Y": "s", "N": "s" }
+          chkboxType: { "Y": "ps", "N": "ps" }
         };
 
         /*
           {"withParents": true,"checkType": "radio"}
         */
         var defaultConfig = {
-            "withParents": true,
-            "checkType": "radio", // checkbox
+          "checkType": "checkbox", // checkbox radio
+          // "withParents": true,
+            "radioWithParents": true,
+            "valFieldName": 'name',
+            "ztreeLayerPadding": "10px",
+            "ztreeLayerBorder": "1px solid #d2d6de",
+            "ztreeLayerSearchShow": true,
             "setting": {
               check: {
                 enable: true,
-                chkStyle: 'radio',
-                chkboxType: { "Y": "", "N": "" },
-                radioType: 'all'
+                chkStyle: 'checkbox',
+                chkboxType: { "Y": "ps", "N": "ps" }
               },
               view: {
                 dblClickExpand: true
@@ -145,16 +149,16 @@ function initInput(){
                   ztvalue = new Array();
                   ztname = new Array();
                   for (var i=0, l=nodes.length; i<l; i++) {
-                    ztvalue.push(nodes[i].value);
+                    ztvalue.push(nodes[i][defaultConfig.valFieldName]);
                     // ztname.push(nodes[i].name);
                     // str.replace(/<[^>]+>/g,"");//去掉所有的html标记
                     ztname.push(nodes[i].name.replace(/<[^>]+>/g,""));
 
                     // just for radio
-                    if (defaultConfig.setting.check.chkStyle == 'radio' && config.withParents) {
+                    if (defaultConfig.setting.check.chkStyle == 'radio' && config.radioWithParents) {
                       var tmpNode = nodes[i];
                       while( tmpNode.getParentNode() != null){
-                        ztvalue.push(tmpNode.getParentNode().value);
+                        ztvalue.push(tmpNode.getParentNode()[defaultConfig.valFieldName]);
                         ztname.push(tmpNode.getParentNode().name.replace(/<[^>]+>/g,""));
                         tmpNode = tmpNode.getParentNode();
                       }
@@ -165,10 +169,10 @@ function initInput(){
                     ztvalue.reverse();
                     ztname.reverse();
                     target.attr("value", ztvalue.join('>'));
-                    target.next(".ztreeShowInput").attr("value", ztname.join('>'));
+                    target.next(".ztreeShowInput").attr(config.valFieldName, ztname.join('>'));
                   } else {
                     target.attr("value", ztvalue.join(','));
-                    target.next(".ztreeShowInput").attr("value", ztname.join(','));
+                    target.next(".ztreeShowInput").attr(config.valFieldName, ztname.join(','));
                   }
                 }
               }
@@ -177,8 +181,8 @@ function initInput(){
               {id:1, pId:0, name:"l11", value:"v11"},
               {id:2, pId:0, name:"l12", value:"v12"},
               {id:3, pId:0, name:"l13", value:"v13", open:true},
-              {id:4, pId:3, name:"l21", value:"v21"},
-              {id:5, pId:3, name:"l22", value:"v22"},
+              {id:4, pId:3, name:"l21", value:"v21", chkDisabled:true},
+              {id:5, pId:3, name:"l22", value:"v22", checked:true},
               {id:6, pId:3, name:"l23", value:"v23"},
               {id:7, pId:6, name:"l31", value:"v31"}
             ]
@@ -199,13 +203,20 @@ function initInput(){
           var setting = config.setting;
           var data = config.data;
 
+          var ztreeLayerPadding=config.ztreeLayerPadding
+          var ztreeLayerBorder=config.ztreeLayerBorder
+          var ztreeLayerSearch='\
+          <div class="ztreeLayer-search">\
+            <input type="text" id="'+ztreeSearchId+'" placeholder="请输入" class="ztreeLayer-search-name" style="width: 100%;padding-left:5px;border:'+ztreeLayerBorder+'" />\
+          </div>'
+          if (!config.ztreeLayerSearchShow) {
+            ztreeLayerSearch=''
+          }
+
           var ztreeLayer = '\
-          <div class="ztree-input-layout" style="display:none; background: #fff;z-index: 9999;position: absolute;width:'+target.outerWidth()+'px">\
-            <div class="ztreeLayer-layout" style="padding: 10px;border: 1px solid #d2d6de;margin-top: 2px;overflow: auto;">\
-              <div class="ztreeLayer-search">\
-                <input type="text" id="'+ztreeSearchId+'" placeholder="请输入关键词" class="ztreeLayer-search-name" style="width: 100%;padding-left:5px;" />\
-              </div>\
-              <div id="ztreeLayer-body">\
+          <div class="ztree-input-layout">\
+            <div class="ztreeLayer-layout" style="padding: '+ztreeLayerPadding+';border: '+ztreeLayerBorder+';">\
+              '+ztreeLayerSearch+'<div id="ztreeLayer-body">\
               <ul id="'+ztreeId+'" class="ztree ztree-content" style="margin-top:0; width:100%; height: max-200px;overflow: auto;"></ul>\
               </div>\
             </div>\
@@ -218,7 +229,7 @@ function initInput(){
           var ztreeShow = '<input type="text" readonly value="" onclick="showMenu($(this));" class="ztreeShowInput" style="padding-left: 10px;position: absolute;top: 1px;left:1px;border: 0;width:'+width+'px;height:'+height+'px" />';
 
           target.after(ztreeLayer);
-          target.after(ztreeShow);
+          // target.after(ztreeShow);
 
           $.fn.zTree.init($("#"+ztreeId), setting, data);
           fuzzySearch(ztreeId,"#"+ztreeSearchId,null,true); //initialize fuzzysearch function
