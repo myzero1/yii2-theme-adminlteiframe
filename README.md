@@ -512,6 +512,21 @@ http://localhost/path/to/index.php/gii
     
     ```
 
+*  ` use z1password `
+
+    Use It,Just add the data-provide and rsa-key-public as flowlling, in view:
+    ```
+    <?= $form->field($model, 'password')->passwordInput([
+        'placeholder' => '请输入',
+        'readonly' => true,
+        'onfocus' => "this.removeAttribute('readonly');",
+        'data-provide' => 'z1password',
+        'rsa-key-public' => 'MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC3oSDe9Gu6AcoNU0NYQRBi3Pidwqlet/PpMddqlqnUO4sP4R0/ABOHbf/1byVbfKsbpEQqan2+v8x7MvrjZtzl6cAqrGkp3zmfvMHSkYBaQFZym0Hc49sMCbygCy77Hw9PnXsFIFayTsT97Whd6U8HzKg51wHoSW+eq2QmjZUCsQIDAQAB',
+    ]) ?>
+
+    Reference: https://gitee.com/z1gotool/z1crypto/blob/master/test/rs/rs.html
+    ```
+
 
 #### with rbacp ####
 
