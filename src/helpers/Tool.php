@@ -20,4 +20,19 @@ class Tool
     public static function redirectParent(array $params){
         return sprintf('<script type="text/javascript">parent.location.href="%s"</script>',\yii\helpers\Url::to($params));
     }
+
+    /**
+     * redirect parent window.
+     * @param array ['user/delete',['id'=>1]]
+     * @return string
+     */
+    public static function CheckZ1password($encrypted,$privateKey){
+        // https://www.yii666.com/blog/129530.html
+
+        $bs64=base64_decode($encrypted);
+        openssl_private_decrypt($bs64, $decrypted, $privateKey);
+
+        return $decrypted;
+    }
+
 }
