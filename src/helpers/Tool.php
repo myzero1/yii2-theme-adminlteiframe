@@ -49,7 +49,9 @@ class Tool
             $ret2 = self::retryRequest($username,$ret,$encrypted,$privateKey,$expires=30);
 
             if (!$ret2['ok']) {
+                // var_dump($ret2);exit;
                 $data['err']='Request replay';
+                // $data['err']=$ret2['err'];
             } else {
                 $data['password']=$ret2['password'];
             }
@@ -148,12 +150,14 @@ class Tool
             'err'=>'',
         ];
 
-        if (strpos($info['token'],$encrypted)!==false) {
+        $flag=md5($encrypted);
+        if (strpos($info['token'],$flag)!==false) {
             $data['ok']=false;
+            $data['err']='Encrypted duplicate';
         } else {
             $tokens=explode('|',$info['token']);
             $tokensNew=array_slice($tokens, -10);
-            $tokensNew[]=$encrypted;
+            $tokensNew[]=$flag;
             $info['token'] = implode('|',$tokensNew);
 
             $decrypted='';
