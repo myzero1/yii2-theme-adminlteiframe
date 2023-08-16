@@ -96,4 +96,77 @@ class Tool
         return $data;
     }
 
+    
+    /**
+     * ReTry request
+     * @param array $info from CheckRequestCount's $data
+     * @param string $encrypted rsa encrypted
+     * @param string $privateKey rsa privateKey
+     * @param int $expires the unit is second
+     * @return array $data 
+     */
+    public static function retryRequest($info,$encrypted,$privateKey,$expires=30){
+        $data=[
+            'ok'=>false,
+            'password'=>'',
+            'err'=>'',
+        ];
+
+        if (strpos($encrypted,$info['token'])!==false) {
+            $data['ok']=false;
+        } else {
+            $tokens=explode('|',$info['token']);
+            $tokensNew=array_slice($tokens, -10);
+            $tokensNew[]=$encrypted;
+            $info['token'] = implode('|',$tokensNew);
+
+            $decrypted='';
+            try {
+                $bs64=base64_decode($encrypted);
+                openssl_private_decrypt($bs64, $decrypted, $privateKey);
+            } catch (\Throwable $th) {
+                //throw $th;
+            }
+
+            if ($decrypted=='') {
+                $data['ok']=false;
+                $data['err']='rsa err';
+            } else {
+                // 1692164714password
+                if (strlen($decrypted)<10) {
+                    $data['ok']=false;
+                    $data['err']='password err';
+                } else {
+                    $timeStr=substr($decrypted,0,10);
+                    $time = intval($timeStr);
+
+                    if ($time<=1692165014) {
+                        $data['ok']=false;
+                        $data['err']='initClientTime err';
+                    } else {
+                        if ($info['initClientTime']==0) {
+                            $data['ok']=true;
+                            $info['initClientTime']=$time;
+                            $info['initServerTime']=time();
+                        } else {
+                            $diffInit=$info['initServerTime']-$info['initClientTime'];
+                            $serverTime=$diffInit+$time;
+                            $diff=time()-$serverTime;
+
+                            if ($diff>0 && $diff<$expires) {
+                                $data['ok']=true;
+                            } else {
+                                $data['ok']=false;
+                                $info['initClientTime']=$time;
+                                $info['initServerTime']=time();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        return $data;
+    }
+
 }
