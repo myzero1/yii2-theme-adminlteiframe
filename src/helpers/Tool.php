@@ -42,7 +42,7 @@ class Tool
             'err'=>'',
         ];
 
-        $ret = self::CheckRequestCount($username,$expires=60,$times=6,$lockTime=300);
+        $ret = self::CheckRequestCount($username,$expires=60,$times=6,$lockTime=120);
         if (!$ret['ok']) {
             $data['err']='Request too frequently';
         } else {
@@ -81,7 +81,7 @@ class Tool
         $info=$data;
         // $t1 = microtime();
         try {
-            // clearstatcache();
+            clearstatcache();
             // $lastmod=filemtime($fileName);
             filemtime($fileName);
             $infoJson=file_get_contents($fileName);
@@ -98,17 +98,19 @@ class Tool
             $data['lastmod']=time();
         } else {
             $diff=time()-$lastmod;
+            // var_dump($diff,$lockTime,$expires,$info['times'],$times);
             if ($diff>$lockTime) {
                 $data['ok']=true;
                 $data['times']=0;
                 $data['lastmod']=time();
             } else {
                 if ($diff>$expires) {
-                    if ($data['times']<$times) {
+                    if ($info['times']<$times) {
                         $data['ok']=true;
                         $data['times']=0;
                         $data['lastmod']=time();
                     } else {
+                        $data=$info;
                         $data['ok']=false;
                     }
                 } else {
@@ -189,7 +191,7 @@ class Tool
                             $diffInit=$info['initServerTime']-$info['initClientTime'];
                             $serverTime=$diffInit+$time;
                             $diff=time()-$serverTime;
-
+                            // var_dump($diff,$expires);
                             if ($diff>0 && $diff<$expires) {
                                 $data['ok']=true;
                             } else {
@@ -203,7 +205,7 @@ class Tool
             }
 
             $fileName=sprintf('%s/login_limit_%s',\Yii::getAlias("@runtime"),$username);
-            // file_put_contents($fileName,json_encode($info));
+            file_put_contents($fileName,json_encode($info));
 
         }
 
