@@ -22,9 +22,9 @@ class Tool
     }
 
     /**
-     * redirect parent window.
-     * @param array ['user/delete',['id'=>1]]
-     * @return string
+     * Validate password
+     * @param string rsa encrypted
+     * @return string decrypted
      */
     public static function CheckZ1password($encrypted,$privateKey){
         // https://www.yii666.com/blog/129530.html
