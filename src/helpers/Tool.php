@@ -51,7 +51,7 @@ class Tool
             if (!$ret2['ok']) {
                 // var_dump($ret2);exit;
                 $data['err']='Request replay';
-                // $data['err']=$ret2['err'];
+                $data['err']=$ret2['err'];
             } else {
                 $data['password']=$ret2['password'];
             }
