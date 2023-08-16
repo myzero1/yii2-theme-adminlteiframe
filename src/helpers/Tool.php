@@ -97,7 +97,12 @@ class Tool
                 $data['times']=0;
             } else {
                 if ($diff>$expires) {
-                    $data['ok']=false;
+                    if ($data['times']<$times) {
+                        $data['ok']=true;
+                        $data['times']=0;
+                    } else {
+                        $data['ok']=false;
+                    }
                 } else {
                     $infoJson=file_get_contents($fileName);
                     $info=json_decode($infoJson,true);
@@ -112,9 +117,9 @@ class Tool
 
         if ($data['ok']) {
             $data['times']=$data['times']+1;
-
             file_put_contents($fileName,json_encode($data));
         }
+
 
         // var_dump($lastmod,$data);exit;
 
@@ -194,7 +199,7 @@ class Tool
             }
 
             $fileName=sprintf('%s/login_limit_%s',\Yii::getAlias("@runtime"),$username);
-            file_put_contents($fileName,json_encode($info));
+            // file_put_contents($fileName,json_encode($info));
 
         }
 
