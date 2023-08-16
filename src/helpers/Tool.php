@@ -14,7 +14,7 @@ class Tool
 {
     /**
      * redirect parent window.
-     * @param array ['user/delete',['id'=>1]]
+     * @param array $params ['user/delete',['id'=>1]]
      * @return string
      */
     public static function redirectParent(array $params){
@@ -23,7 +23,8 @@ class Tool
 
     /**
      * Validate password
-     * @param string rsa encrypted
+     * @param string $encrypted rsa encrypted
+     * @param string $privateKey rsa privateKey
      * @return string decrypted
      */
     public static function CheckZ1password($encrypted,$privateKey){
@@ -33,6 +34,70 @@ class Tool
         openssl_private_decrypt($bs64, $decrypted, $privateKey);
 
         return $decrypted;
+    }
+
+    /**
+     * Check request count
+     * @param string $username 
+     * @param int $expires the unit is second
+     * @param int $times
+     * @param int $lockTime the unit is second
+     * @return array $data
+     */
+    public static function CheckRequestCount($username,$expires=60,$times=6,$lockTime=300){
+        $fileName=sprintf('%s/login_limit_%s',\Yii::getAlias("@runtime"),$username);
+        $ok=false;
+        $content=[
+            'times'=>0,
+            'initClientTime'=>0,
+            'initServerTime'=>0,
+            'token'=>'',
+        ];
+
+        $lastmod=0;
+        // $t1 = microtime();
+        try {
+            $lastmod=filemtime($fileName);
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+
+        if ($lastmod==0) {
+            $ok=true;
+        } else {
+            $diff=time()-$lastmod;
+            if ($diff>$lockTime) {
+                $ok=true;
+            } else {
+                if ($diff>$expires) {
+                    $ok=false;
+                } else {
+                    $infoJson=file_get_contents($fileName);
+                    $info=json_decode($infoJson,true);
+
+                    $ok=$info['content']['times']<$times;
+                }
+            }
+        }
+
+        if ($ok) {
+            $content['times']=$info['content']['times']+1;
+
+            file_put_contents(
+                $fileName,
+                json_encode(                
+                    [
+                        'ok'=>$ok,
+                        'content'=>$content,
+                    ]
+                )
+            );
+        }
+
+        return [
+            'ok'=>$ok,
+            'content'=>$content,
+        ];
     }
 
 }
