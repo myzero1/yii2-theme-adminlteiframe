@@ -74,14 +74,19 @@ class Tool
             'initClientTime'=>0,
             'initServerTime'=>0,
             'token'=>'',
-            'lastmod'=>'',
+            'lastmod'=>0,
         ];
 
         $lastmod=0;
+        $info=$data;
         // $t1 = microtime();
         try {
-            clearstatcache();
-            $lastmod=filemtime($fileName);
+            // clearstatcache();
+            // $lastmod=filemtime($fileName);
+            filemtime($fileName);
+            $infoJson=file_get_contents($fileName);
+            $info=json_decode($infoJson,true);
+            $lastmod=$info['lastmod'];
         } catch (\Throwable $th) {
             //throw $th;
         }
@@ -90,26 +95,24 @@ class Tool
 
         if ($lastmod==0) {
             $data['ok']=true;
+            $data['lastmod']=time();
         } else {
             $diff=time()-$lastmod;
             if ($diff>$lockTime) {
                 $data['ok']=true;
                 $data['times']=0;
+                $data['lastmod']=time();
             } else {
                 if ($diff>$expires) {
                     if ($data['times']<$times) {
                         $data['ok']=true;
                         $data['times']=0;
+                        $data['lastmod']=time();
                     } else {
                         $data['ok']=false;
                     }
                 } else {
-                    $infoJson=file_get_contents($fileName);
-                    $info=json_decode($infoJson,true);
                     $data=$info;
-                    $data['lastmod']=$lastmod;
-                    $data['now']=time();
-
                     $data['ok']=$data['times']<$times;
                 }
             }
@@ -117,9 +120,10 @@ class Tool
 
         if ($data['ok']) {
             $data['times']=$data['times']+1;
-            file_put_contents($fileName,json_encode($data));
         }
 
+        $data['now']=time();
+        file_put_contents($fileName,json_encode($data));
 
         // var_dump($lastmod,$data);exit;
 
