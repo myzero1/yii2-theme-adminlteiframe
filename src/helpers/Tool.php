@@ -23,17 +23,39 @@ class Tool
 
     /**
      * Validate password
+     * 
+     * @param string $username 
      * @param string $encrypted rsa encrypted
      * @param string $privateKey rsa privateKey
-     * @return string decrypted
+     * @return array $data
      */
-    public static function CheckZ1password($encrypted,$privateKey){
+    public static function CheckZ1password($username,$encrypted,$privateKey){
         // https://www.yii666.com/blog/129530.html
 
-        $bs64=base64_decode($encrypted);
-        openssl_private_decrypt($bs64, $decrypted, $privateKey);
+        // $bs64=base64_decode($encrypted);
+        // openssl_private_decrypt($bs64, $decrypted, $privateKey);
 
-        return $decrypted;
+        // return $decrypted;
+
+        $data=[
+            'password'=>'',
+            'err'=>'',
+        ];
+
+        $ret = self::CheckRequestCount($username,$expires=60,$times=6,$lockTime=300);
+        if (!$ret['ok']) {
+            $data['err']='Request too frequently';
+        } else {
+            $ret2 = self::retryRequest($ret,$encrypted,$privateKey,$expires=30);
+
+            if (!$ret2['ok']) {
+                $data['err']='Request replay';
+            } else {
+                $data['password']=$ret2['password'];
+            }
+        }
+
+        return $data;
     }
 
     /**
