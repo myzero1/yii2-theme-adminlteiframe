@@ -94,7 +94,7 @@ class Tool
             $diff=time()-$lastmod;
             if ($diff>$lockTime) {
                 $data['ok']=true;
-                $data['times']=1;
+                $data['times']=0;
             } else {
                 if ($diff>$expires) {
                     $data['ok']=false;
