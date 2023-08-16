@@ -46,7 +46,7 @@ class Tool
         if (!$ret['ok']) {
             $data['err']='Request too frequently';
         } else {
-            $ret2 = self::retryRequest($ret,$encrypted,$privateKey,$expires=30);
+            $ret2 = self::retryRequest($username,$ret,$encrypted,$privateKey,$expires=30);
 
             if (!$ret2['ok']) {
                 $data['err']='Request replay';
@@ -113,10 +113,7 @@ class Tool
         if ($data['ok']) {
             $data['times']=$data['times']+1;
 
-            file_put_contents(
-                $fileName,
-                json_encode($data)
-            );
+            file_put_contents($fileName,json_encode($data));
         }
 
         // var_dump($lastmod,$data);exit;
@@ -133,7 +130,7 @@ class Tool
      * @param int $expires the unit is second
      * @return array $data 
      */
-    public static function retryRequest($info,$encrypted,$privateKey,$expires=30){
+    public static function retryRequest($username,$info,$encrypted,$privateKey,$expires=30){
         $data=[
             'ok'=>false,
             'password'=>'',
@@ -195,6 +192,10 @@ class Tool
                     }
                 }
             }
+
+            $fileName=sprintf('%s/login_limit_%s',\Yii::getAlias("@runtime"),$username);
+            file_put_contents($fileName,json_encode($info));
+
         }
 
         return $data;
