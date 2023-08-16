@@ -74,6 +74,7 @@ class Tool
             'initClientTime'=>0,
             'initServerTime'=>0,
             'token'=>'',
+            'lastmod'=>'',
         ];
 
         $lastmod=0;
@@ -85,12 +86,15 @@ class Tool
             //throw $th;
         }
 
+        // var_dump($data['lastmod']);exit;
+
         if ($lastmod==0) {
             $data['ok']=true;
         } else {
             $diff=time()-$lastmod;
             if ($diff>$lockTime) {
                 $data['ok']=true;
+                $data['times']=1;
             } else {
                 if ($diff>$expires) {
                     $data['ok']=false;
@@ -98,6 +102,8 @@ class Tool
                     $infoJson=file_get_contents($fileName);
                     $info=json_decode($infoJson,true);
                     $data=$info;
+                    $data['lastmod']=$lastmod;
+                    $data['now']=time();
 
                     $data['ok']=$data['times']<$times;
                 }
@@ -134,7 +140,7 @@ class Tool
             'err'=>'',
         ];
 
-        if (strpos($encrypted,$info['token'])!==false) {
+        if (strpos($info['token'],$encrypted)!==false) {
             $data['ok']=false;
         } else {
             $tokens=explode('|',$info['token']);
@@ -154,6 +160,9 @@ class Tool
                 $data['ok']=false;
                 $data['err']='rsa err';
             } else {
+                // var_dump($decrypted,substr($decrypted,0,10));exit;
+                $data['password']=substr($decrypted,10);
+
                 // 1692164714password
                 if (strlen($decrypted)<10) {
                     $data['ok']=false;

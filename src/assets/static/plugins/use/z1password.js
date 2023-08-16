@@ -11,7 +11,7 @@ function applyz1password(){
             
             var encrypt = new JSEncrypt();
             encrypt.setPublicKey(itemKey);
-            var encrypted = encrypt.encrypt(targer.val());
+            var encrypted = encrypt.encrypt(Math.round(new Date().getTime()/1000)+targer.val());
             targer.val(encrypted)
         });
     });
