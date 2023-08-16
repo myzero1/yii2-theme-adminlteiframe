@@ -46,8 +46,8 @@ class Tool
      */
     public static function CheckRequestCount($username,$expires=60,$times=6,$lockTime=300){
         $fileName=sprintf('%s/login_limit_%s',\Yii::getAlias("@runtime"),$username);
-        $ok=false;
-        $content=[
+        $data=[
+            'ok'=>false,
             'times'=>0,
             'initClientTime'=>0,
             'initServerTime'=>0,
@@ -57,47 +57,43 @@ class Tool
         $lastmod=0;
         // $t1 = microtime();
         try {
+            clearstatcache();
             $lastmod=filemtime($fileName);
         } catch (\Throwable $th) {
             //throw $th;
         }
 
         if ($lastmod==0) {
-            $ok=true;
+            $data['ok']=true;
         } else {
             $diff=time()-$lastmod;
             if ($diff>$lockTime) {
-                $ok=true;
+                $data['ok']=true;
             } else {
                 if ($diff>$expires) {
-                    $ok=false;
+                    $data['ok']=false;
                 } else {
                     $infoJson=file_get_contents($fileName);
                     $info=json_decode($infoJson,true);
+                    $data=$info;
 
-                    $ok=$info['content']['times']<$times;
+                    $data['ok']=$data['times']<$times;
                 }
             }
         }
 
-        if ($ok) {
-            $content['times']=$info['content']['times']+1;
+        if ($data['ok']) {
+            $data['times']=$data['times']+1;
 
             file_put_contents(
                 $fileName,
-                json_encode(                
-                    [
-                        'ok'=>$ok,
-                        'content'=>$content,
-                    ]
-                )
+                json_encode($data)
             );
         }
 
-        return [
-            'ok'=>$ok,
-            'content'=>$content,
-        ];
+        // var_dump($lastmod,$data);exit;
+
+        return $data;
     }
 
 }
