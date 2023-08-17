@@ -512,6 +512,58 @@ http://localhost/path/to/index.php/gii
     
     ```
 
+*  ` use z1password `
+
+    Use It,Just add the data-provide and rsa-key-public as flowlling, in view:
+    ```
+    
+    ...
+    myzero1\adminlteiframe\assets\php\components\plugins\Z1passwordAsset::register($this);
+    ...
+    <?= $form->field($model, 'password')->passwordInput([
+        'placeholder' => '请输入',
+        'readonly' => true,
+        'onfocus' => "this.removeAttribute('readonly');",
+        'data-provide' => 'z1password',
+        'rsa-key-public' => 'MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC3oSDe9Gu6AcoNU0NYQRBi3Pidwqlet/PpMddqlqnUO4sP4R0/ABOHbf/1byVbfKsbpEQqan2+v8x7MvrjZtzl6cAqrGkp3zmfvMHSkYBaQFZym0Hc49sMCbygCy77Hw9PnXsFIFayTsT97Whd6U8HzKg51wHoSW+eq2QmjZUCsQIDAQAB',
+    ]) ?>
+    ...
+
+    Reference: https://gitee.com/z1gotool/z1crypto/blob/master/test/rs/rs.html
+
+    ```
+
+    in Controller:
+
+    ```
+
+    ...
+    $ok=\myzero1\adminlteiframe\helpers\Tool::CheckPassword(
+        $model,
+        $privateKey,
+        [
+            'usernameKey'=>'username',
+            'passwordKey'=>'password',
+            'frequentlyMsg'=>'请求太频繁请稍后再试',
+            'replayMsg'=>'请不要重复提交',
+        ]
+    );
+
+    if ($ok && $model->load(Yii::$app->request->post()) && $model->login()) {
+        return $this->goBack();
+    } else {
+        $model->password = '';
+
+        // return $this->renderAjax('login-custom1', [
+        // return $this->renderAjax('login-custom', [
+        return $this->renderAjax('login', [
+        // return $this->render('login', [
+            'model' => $model,
+        ]);
+    }
+    ...
+
+    ```
 
 #### with rbacp ####
 
@@ -565,12 +617,14 @@ vendor/myzero1/yii2-theme-adminlteiframe/src/controllers/AppSiteController.php
 
 
 
-```
+****** If there is no 'login-custom.php' in directory 'vendor/myzero1/yii2-theme-adminlteiframe/src/views/adminlteiframe/site', it will be found in directory 'app/views/site'.
 
+````
 
 #### log ####
 
 ```
 2023-8-17:10:56         v1.5.0      add rsa for password
+
 
 ```
