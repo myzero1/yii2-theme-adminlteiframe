@@ -12,6 +12,23 @@ namespace myzero1\adminlteiframe\helpers;
  */
 class Tool
 {
+    public static $privateKey = '-----BEGIN RSA PRIVATE KEY-----
+MIICXwIBAAKBgQC3oSDe9Gu6AcoNU0NYQRBi3Pidwqlet/PpMddqlqnUO4sP4R0/
+ABOHbf/1byVbfKsbpEQqan2+v8x7MvrjZtzl6cAqrGkp3zmfvMHSkYBaQFZym0Hc
+49sMCbygCy77Hw9PnXsFIFayTsT97Whd6U8HzKg51wHoSW+eq2QmjZUCsQIDAQAB
+AoGBAIHnyFRR/5/gQit5GuxlYw09m9gnbSBn7HKtYuKx4UUWNoOuUr1N9YLai7f6
+wCffo0DzzZFgMsLt9t+1Kg4Tp/L/Z9n1zOIDTViETZrLChzpbaIf413d0kd7uwJd
+R4L5+adKWI7KNfHiuiJOycz7njhqQGVr30U2GNRRsL0YBhhRAkEA5BIbi10bpRnC
+ZCCM+sABXJPnoGwpJHZ5Q+Ntqsq5NbgBmQPZYisK5jgGUuDR1vuMkFnwve7IqEc1
+So9yiYQLnQJBAM4dz0SGRzhu0GkzIvbwXRxakTjQAVH2z/mF1JnRQkMelymkwb7A
+c1/N4/gWbphAoVwjnbc19YqhG2HUePPBGSUCQQDeL53R6UUTVMMCFIwDhKZO8HBI
+4tY6BYkh0CB4sMI6SSaVUSCn+FLH8XCHsSn8jFdmEZjtEAE/nw+VsaXdvlwpAkEA
+wWd5UExLUemxR7VDDsFWLT/SWqPbSUS1u+ZXKooPihmPL/U4EzxURkZUrjqmRdkH
+UATffcV1BELOBcswP1EmvQJBALpQG6QqeFzeCjFer1LyNDyhENeceyDsJ32T9X6y
+ZsfY0Y4XYNzLWsLGNsG5DT8p958wBytqZ/cnk2Kzes8RREQ=
+-----END RSA PRIVATE KEY-----
+'; 
+
     /**
      * redirect parent window.
      * @param array $params ['user/delete',['id'=>1]]
@@ -19,6 +36,74 @@ class Tool
      */
     public static function redirectParent(array $params){
         return sprintf('<script type="text/javascript">parent.location.href="%s"</script>',\yii\helpers\Url::to($params));
+    }
+
+    /**
+     * Validate password
+     * 
+     * https://www.yii666.com/blog/129530.html
+     * openssl genrsa -out private.pem 1024 //创建私钥。密钥长度，1024觉得不够安全的话可以用2048，但是代价也相应增大
+     * openssl rsa -in private.pem -pubout -out public.pem //创建公钥。这样便生产了公钥。
+     * 
+     * @param mixed $loginForm 
+     * @param string $privateKey rsa privateKey
+     * @param array $options   ['usernameKey'=>'username','passwordKey'=>'password'] 
+     * @return bool $ok
+     */
+    public static function CheckPassword(&$loginForm,$privateKey='',$options=['usernameKey'=>'username','passwordKey'=>'password','frequentlyMsg'=>'Request too frequently','replayMsg'=>'Request replay']){
+        $ok=false;
+
+        if ($privateKey=='') {
+            $privateKey = self::$privateKey;
+        } else {
+            // -----BEGIN RSA PRIVATE KEY-----
+            // MIICXwIBAAKBgQC3oSDe9Gu6AcoNU0NYQRBi3Pidwqlet/PpMddqlqnUO4sP4R0/
+            // ABOHbf/1byVbfKsbpEQqan2+v8x7MvrjZtzl6cAqrGkp3zmfvMHSkYBaQFZym0Hc
+            // 49sMCbygCy77Hw9PnXsFIFayTsT97Whd6U8HzKg51wHoSW+eq2QmjZUCsQIDAQAB
+            // AoGBAIHnyFRR/5/gQit5GuxlYw09m9gnbSBn7HKtYuKx4UUWNoOuUr1N9YLai7f6
+            // wCffo0DzzZFgMsLt9t+1Kg4Tp/L/Z9n1zOIDTViETZrLChzpbaIf413d0kd7uwJd
+            // R4L5+adKWI7KNfHiuiJOycz7njhqQGVr30U2GNRRsL0YBhhRAkEA5BIbi10bpRnC
+            // ZCCM+sABXJPnoGwpJHZ5Q+Ntqsq5NbgBmQPZYisK5jgGUuDR1vuMkFnwve7IqEc1
+            // So9yiYQLnQJBAM4dz0SGRzhu0GkzIvbwXRxakTjQAVH2z/mF1JnRQkMelymkwb7A
+            // c1/N4/gWbphAoVwjnbc19YqhG2HUePPBGSUCQQDeL53R6UUTVMMCFIwDhKZO8HBI
+            // 4tY6BYkh0CB4sMI6SSaVUSCn+FLH8XCHsSn8jFdmEZjtEAE/nw+VsaXdvlwpAkEA
+            // wWd5UExLUemxR7VDDsFWLT/SWqPbSUS1u+ZXKooPihmPL/U4EzxURkZUrjqmRdkH
+            // UATffcV1BELOBcswP1EmvQJBALpQG6QqeFzeCjFer1LyNDyhENeceyDsJ32T9X6y
+            // ZsfY0Y4XYNzLWsLGNsG5DT8p958wBytqZ/cnk2Kzes8RREQ=
+            // -----END RSA PRIVATE KEY-----
+
+            $privateKey=str_replace(' RSA PRIVATE KEY','___RSA___PRIVATE___KEY',$privateKey);
+            $privateKey=str_replace(" ","",$privateKey);
+            $privateKey=str_replace("\t","",$privateKey);
+            $privateKey=str_replace('___RSA___PRIVATE___KEY',' RSA PRIVATE KEY',$privateKey);
+        }
+
+        if (\Yii::$app->request->isPost) {
+            $post=\Yii::$app->request->post();
+            $className=$loginForm::className();
+            $info=explode('\\',$className);
+            $className=end($info);
+            $loginForm->load(\Yii::$app->request->post());
+
+            $ret = self::CheckZ1password(
+                $post[$className][$options['usernameKey']],
+                $post[$className][$options['passwordKey']],
+                $privateKey
+            );
+            if ($ret['err']=='') {
+                $_POST[$className][$options['passwordKey']]=$ret['password'];
+                \Yii::$app->request->setBodyParams($_POST);
+                $ok=true;
+            } else {
+                if ($ret['err']=='Request too frequently') {
+                    $loginForm->addError('password',$options['frequentlyMsg']);
+                } else {
+                    $loginForm->addError('password',$options['replayMsg']);
+                }
+            }
+        }
+        
+        return $ok;
     }
 
     /**
@@ -42,7 +127,7 @@ class Tool
             'err'=>'',
         ];
 
-        $ret = self::CheckRequestCount($username,$expires=60,$times=6,$lockTime=120);
+        $ret = self::CheckRequestCount($username,$expires=60,$times=6,$lockTime=300);
         if (!$ret['ok']) {
             $data['err']='Request too frequently';
         } else {
