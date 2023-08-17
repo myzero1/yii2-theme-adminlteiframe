@@ -8,6 +8,7 @@ use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
 myzero1\adminlteiframe\assets\php\components\plugins\SwitchAsset::register($this);
+myzero1\adminlteiframe\assets\php\components\plugins\Z1passwordAsset::register($this);
 
 $this->title = \Yii::$app->name;
 $this->params['breadcrumbs'][] = $this->title;
@@ -45,6 +46,8 @@ if (isset(\Yii::$app->assetManager->bundles["myzero1\adminlteiframe\assets\php\c
             'placeholder' => '请输入',
             'readonly' => true,
             'onfocus' => "this.removeAttribute('readonly');",
+            'data-provide' => 'z1password',
+            'rsa-key-public' => 'MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC3oSDe9Gu6AcoNU0NYQRBi3Pidwqlet/PpMddqlqnUO4sP4R0/ABOHbf/1byVbfKsbpEQqan2+v8x7MvrjZtzl6cAqrGkp3zmfvMHSkYBaQFZym0Hc49sMCbygCy77Hw9PnXsFIFayTsT97Whd6U8HzKg51wHoSW+eq2QmjZUCsQIDAQAB',
         ]) ?>
 
         <?php $model->rememberMe = 0; ?>
