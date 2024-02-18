@@ -287,10 +287,16 @@ ZsfY0Y4XYNzLWsLGNsG5DT8p958wBytqZ/cnk2Kzes8RREQ=
                                 $data['ok']=false;
                                 $info['initClientTime']=$time;
                                 $info['initServerTime']=time();
+                                $data['err']='timeout';
                             }
                         }
                     }
                 }
+            }
+
+            if ($data['ok']) {
+                $info['lastmod']=0;
+                $info['initClientTime']=$info['lastmod'];
             }
 
             $fileName=sprintf('%s/login_limit_%s',\Yii::getAlias("@runtime"),$username);
