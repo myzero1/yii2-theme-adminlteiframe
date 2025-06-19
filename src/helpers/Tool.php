@@ -154,7 +154,7 @@ ZsfY0Y4XYNzLWsLGNsG5DT8p958wBytqZ/cnk2Kzes8RREQ=
      * @return array $data
      */
     public static function CheckRequestCount($username,$expires=60,$times=6,$lockTime=300){
-        $fileName=sprintf('%s/login_limit_%s',\Yii::getAlias("@runtime"),$username);
+        $fileName=sprintf('%s%slogin_limit_%s',\Yii::getAlias("@runtime"),DIRECTORY_SEPARATOR,$username);
         $data=[
             'ok'=>false,
             'times'=>0,
@@ -166,16 +166,10 @@ ZsfY0Y4XYNzLWsLGNsG5DT8p958wBytqZ/cnk2Kzes8RREQ=
 
         $lastmod=0;
         $info=$data;
-        // $t1 = microtime();
-        try {
-            clearstatcache();
-            // $lastmod=filemtime($fileName);
-            filemtime($fileName);
+        if (is_file($fileName)) {
             $infoJson=file_get_contents($fileName);
-            $info=json_decode($infoJson,true);
-            $lastmod=$info['lastmod'];
-        } catch (\Throwable $th) {
-            //throw $th;
+            $info2=json_decode($infoJson,true);
+            $lastmod=$info2['lastmod'];
         }
 
         // var_dump($data['lastmod']);exit;
@@ -287,13 +281,19 @@ ZsfY0Y4XYNzLWsLGNsG5DT8p958wBytqZ/cnk2Kzes8RREQ=
                                 $data['ok']=false;
                                 $info['initClientTime']=$time;
                                 $info['initServerTime']=time();
+                                $data['err']='timeout';
                             }
                         }
                     }
                 }
             }
 
-            $fileName=sprintf('%s/login_limit_%s',\Yii::getAlias("@runtime"),$username);
+            if ($data['ok']) {
+                $info['lastmod']=0;
+                $info['initClientTime']=$info['lastmod'];
+            }
+
+            $fileName=sprintf('%s%slogin_limit_%s',\Yii::getAlias("@runtime"),DIRECTORY_SEPARATOR,$username);
             file_put_contents($fileName,json_encode($info));
 
         }
